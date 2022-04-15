@@ -1,12 +1,14 @@
 import React from 'react';
-import mainPageStyles from './mainPage.module.css';
+import styles from './mainPage.module.css';
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
+import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 
 
 const MainPage = () => {
     return (
-        <section className={mainPageStyles.main}>
+        <section className={styles.main}>
             <BurgerIngredients />
+            <BurgerConstructor />
         </section>
     );
 };

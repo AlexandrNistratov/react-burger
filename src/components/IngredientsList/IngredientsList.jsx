@@ -1,5 +1,5 @@
 import React from 'react';
-import ingredientsListStyles from './ingredientsList.module.css';
+import styles from './ingredientsList.module.css';
 import IngredientsItem from "../IngredientsItem/IngredientsItem";
 import {data} from "../../utils/data";
 
@@ -8,17 +8,17 @@ const IngredientsList = () => {
     const sauce = data.filter(item => item.type === 'sauce');
     const main = data.filter(item => item.type === 'main');
     return (
-        <section className={ingredientsListStyles.main}>
-            <h2 className={`${ingredientsListStyles.subtitle} text_type_main-large`}>Булки</h2>
-            <ul className={ingredientsListStyles.ulList}>
+        <section className={styles.main}>
+            <h2 className={`${styles.subtitle} text_type_main-large`}>Булки</h2>
+            <ul className={styles.ulList}>
                 {buns.map(item => <IngredientsItem data={item} key={item._id}/>)}
             </ul>
-            <h2 className={`${ingredientsListStyles.subtitle} text_type_main-large`}>Соусы</h2>
-            <ul className={ingredientsListStyles.ulList}>
+            <h2 className={`${styles.subtitle} text_type_main-large`}>Соусы</h2>
+            <ul className={styles.ulList}>
                 {sauce.map(item => <IngredientsItem data={item} key={item._id}/>)}
             </ul>
-            <h2 className={`${ingredientsListStyles.subtitle} text_type_main-large`}>Начинки</h2>
-            <ul className={ingredientsListStyles.ulList}>
+            <h2 className={`${styles.subtitle} text_type_main-large`}>Начинки</h2>
+            <ul className={styles.ulList}>
                 {main.map(item => <IngredientsItem data={item} key={item._id}/>)}
             </ul>
         </section>

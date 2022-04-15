@@ -1,0 +1,42 @@
+.main {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 40px 0 52px;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    padding: 14px 0;
+    margin-right: 40px;
+}
+
+.sum {
+    margin: 0 8px 0 0;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon > svg {
+    width: 36px;
+    height: 36px;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+}
+
+div > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+}
