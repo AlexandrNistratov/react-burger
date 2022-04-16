@@ -1,12 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './ingredientsItem.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
+import {dataPropTypes} from "../../utils/proptypes";
 
 const IngredientsItem = ({data}) => {
     return (
         <li className={styles.main}>
-            <img src={data.image} alt="Картинка"/>
+            <img src={data.image} alt="Картинка ингридиента"/>
             <div className={styles.main__price}>
                 <p className={`text_type_digits-default ${styles.price}`}>{data.price}</p>
                 <CurrencyIcon type="primary" />
@@ -18,11 +18,7 @@ const IngredientsItem = ({data}) => {
 };
 
 IngredientsItem.propTypes = {
-    data: PropTypes.shape({
-        image: PropTypes.string,
-        price: PropTypes.number,
-        name: PropTypes.string
-    })
+    data: dataPropTypes.isRequired
 }
 
 export default IngredientsItem;
