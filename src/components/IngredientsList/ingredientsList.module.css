@@ -1,0 +1,19 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    height: 74vh;
+    overflow-y: scroll;
+}
+
+.subtitle {
+    margin: 40px 0 24px;
+}
+
+.ulList {
+    padding: 0 16px;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 272px);
+    grid-column-gap: 24px;
+    grid-row-gap: 32px;
+}
