@@ -15,7 +15,7 @@ const MainPage = ({ data }) => {
 };
 
 MainPage.propTypes = {
-    data: PropTypes.arrayOf(dataPropTypes.isRequired)
+    data: PropTypes.arrayOf(dataPropTypes).isRequired
 }
 
 export default MainPage;

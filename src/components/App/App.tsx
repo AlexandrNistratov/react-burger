@@ -8,7 +8,7 @@ const App = () => {
     return (
         <section className={styles.main}>
             <AppHeader />
-            <MainPage data={data}/>
+            <MainPage data={ data }/>
         </section>
     );
 };

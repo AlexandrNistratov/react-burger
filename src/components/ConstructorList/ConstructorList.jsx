@@ -1,12 +1,13 @@
 import React from 'react';
 import styles from './constructorList.module.css';
-import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import {dataPropTypes} from "../../utils/proptypes";
+import { dataPropTypes } from "../../utils/proptypes";
 
 const ConstructorList = ({ data }) => {
     const firstItem = data[1];
     const lastItem = data[data.length - 1];
+    const buns = data.filter(item => item.type === 'bun')[1];
 
     //Закреплена карточка?
     const isLocked = true;
@@ -17,9 +18,9 @@ const ConstructorList = ({ data }) => {
                <ConstructorElement
                    type="top"
                    isLocked={true}
-                   text='Краторная булка N-200i (верх)'
-                   price={firstItem.price}
-                   thumbnail={firstItem.image}/>
+                   text={`${buns.name} (верх)`}
+                   price={buns.price}
+                   thumbnail={buns.image}/>
            </li>
             <div className={styles.scroll}>
                 {data.map(item => {
@@ -40,16 +41,16 @@ const ConstructorList = ({ data }) => {
                 <ConstructorElement
                     type="bottom"
                     isLocked={true}
-                    text='Краторная булка N-200i (низ)'
-                    price={lastItem.price}
-                    thumbnail={lastItem.image}/>
+                    text={`${buns.name} (низ)`}
+                    price={buns.price}
+                    thumbnail={buns.image}/>
             </li>
         </ul>
     );
 };
 
 ConstructorList.propTypes = {
-    data: PropTypes.arrayOf(dataPropTypes.isRequired)
+    data: PropTypes.arrayOf(dataPropTypes).isRequired
 }
 
 export default ConstructorList;
