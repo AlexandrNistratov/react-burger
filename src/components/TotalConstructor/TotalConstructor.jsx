@@ -12,7 +12,7 @@ const TotalConstructor = () => {
                 </div>
             </div>
             <div className={styles.button}>
-                <Button size='large'>Оформить заказ</Button>
+                <Button size='large' type='primary'>Оформить заказ</Button>
             </div>
 
         </section>
