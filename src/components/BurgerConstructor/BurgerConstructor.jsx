@@ -9,7 +9,7 @@ const BurgerConstructor = ({ data }) => {
 
     return (
         <section className={styles.main}>
-            <ConstructorList  data={ data }/>
+            <ConstructorList  data={ data } />
             <TotalConstructor />
         </section>
     );

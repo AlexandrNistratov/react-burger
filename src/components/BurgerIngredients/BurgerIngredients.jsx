@@ -5,7 +5,7 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsList from "../IngredientsList/IngredientsList";
 import {dataPropTypes} from "../../utils/proptypes";
 
-const BurgerIngredients = ({ data }) => {
+const BurgerIngredients = ({ data, isOpen, toggleModal }) => {
     const [current, setCurrent] = React.useState('Булки')
     return (
         <section className={styles.main}>
@@ -15,7 +15,7 @@ const BurgerIngredients = ({ data }) => {
                 <Tab active={current === 'Соусы'} value='Соусы' onClick={setCurrent}>Соусы</Tab>
                 <Tab active={current === 'Начинки'} value='Начинки' onClick={setCurrent}>Начинки</Tab>
             </div>
-            <IngredientsList data={ data }/>
+            <IngredientsList data={ data } />
         </section>
     );
 };

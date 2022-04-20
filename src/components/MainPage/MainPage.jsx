@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './mainPage.module.css';
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 const MainPage = ({ data }) => {
     return (
         <section className={styles.main}>
-            <BurgerIngredients data={ data }/>
+            <BurgerIngredients data={ data } />
             <BurgerConstructor data={ data } />
         </section>
     );

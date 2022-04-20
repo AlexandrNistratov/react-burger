@@ -34,7 +34,9 @@ const ConstructorList = ({ data }) => {
                         <ConstructorElement
                             text={item.name}
                             price={item.price}
-                            thumbnail={item.image}/>
+                            thumbnail={item.image}>
+                        </ConstructorElement>
+
                     </li>
                 })}
             </div>
