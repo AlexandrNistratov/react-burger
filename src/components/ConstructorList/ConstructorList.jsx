@@ -6,15 +6,15 @@ import { dataPropTypes } from "../../utils/proptypes";
 
 const ConstructorList = ({ data }) => {
     const buns = data.filter(item => item.type === 'bun');
-    const firstBuns = buns[0]
-    const lustBuns = buns[buns.length - 1];
+    const firstBuns = buns[0];
+    const lustBuns = buns[ buns.length - 1 ];
     const notBuns = data.filter(item => item.type !== 'bun');
 
     //Закреплена карточка?
     const isLocked = true;
 
     return (
-        <ul className={styles.main}>
+        <ul className={ styles.main }>
             <li className={styles.item__top} key={firstBuns._id}>
                 <ConstructorElement
                     type="top"

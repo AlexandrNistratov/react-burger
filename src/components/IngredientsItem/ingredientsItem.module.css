@@ -26,3 +26,7 @@
     text-align: center;
     margin: 0 auto 20px;
 }
+
+.img {
+    cursor: pointer;
+}

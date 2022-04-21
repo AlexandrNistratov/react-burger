@@ -3,16 +3,17 @@ import ReactDOM from "react-dom";
 import styles from './modal.module.css';
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import clsx from "clsx";
 
-const Modal = ({children, isOpen, toggleModal, header}) => {
+const Modal = ({children, isOpen, closePopup, header}) => {
     const reactModals = document.getElementById('modals');
 
     return ReactDOM.createPortal(
-        <ModalOverlay isOpen={isOpen}>
+        <ModalOverlay isOpen={isOpen} closePopup={closePopup}>
             <section className={styles.main}>
                 <div className={styles.header}>
-                    <h1 className={`${styles.title} text_type_main-large`}>{header}</h1>
-                    <CloseIcon type="primary" onClick={toggleModal}/>
+                    <h1 className={clsx(styles.title, 'text_type_main-large')}>{header}</h1>
+                    <CloseIcon type="primary" onClick={closePopup}/>
                 </div>
                 {children}
             </section>

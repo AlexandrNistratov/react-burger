@@ -8,7 +8,7 @@ import {dataPropTypes} from "../../utils/proptypes";
 const BurgerConstructor = ({ data }) => {
 
     return (
-        <section className={styles.main}>
+        <section className={ styles.main }>
             <ConstructorList  data={ data } />
             <TotalConstructor />
         </section>
@@ -17,6 +17,6 @@ const BurgerConstructor = ({ data }) => {
 
 BurgerConstructor.propTypes = {
     data: PropTypes.arrayOf(dataPropTypes).isRequired
-}
+};
 
 export default BurgerConstructor;
