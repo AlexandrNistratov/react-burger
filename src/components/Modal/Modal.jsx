@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import styles from './modal.module.css';
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
@@ -20,5 +21,12 @@ const Modal = ({children, isOpen, closePopup, header}) => {
         </ModalOverlay>, reactModals
         )
 };
+
+Modal.proptypes = {
+    children: PropTypes.node.isRequired,
+    isOpen: PropTypes.bool.isRequired,
+    closePopup: PropTypes.func.isRequired,
+    header: PropTypes.string
+}
 
 export default Modal;

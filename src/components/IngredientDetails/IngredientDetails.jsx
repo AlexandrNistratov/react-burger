@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './ingredientDetails.module.css';
+import { dataPropTypes } from "../../utils/proptypes";
 import clsx from "clsx";
 
 const IngredientDetails = ({data}) => {
@@ -28,6 +29,10 @@ const IngredientDetails = ({data}) => {
 
         </section>
     );
+};
+
+IngredientDetails.propTypes = {
+    data: dataPropTypes.isRequired
 };
 
 export default IngredientDetails;
