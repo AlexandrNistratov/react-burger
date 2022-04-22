@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import styles from './modal.module.css';
@@ -8,6 +8,13 @@ import clsx from "clsx";
 
 const Modal = ({children, isOpen, closePopup, header}) => {
     const reactModals = document.getElementById('modals');
+
+    useEffect(() => {
+        document.addEventListener('keydown', closePopup)
+
+        return () => document.removeEventListener('keydown', closePopup)
+
+    })
 
     return ReactDOM.createPortal(
         <>
