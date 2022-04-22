@@ -13,8 +13,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-left: -360px;
-    margin-top: -260px;
+    transform:translateX(-50%)translateY(-50%)
 
 }
 

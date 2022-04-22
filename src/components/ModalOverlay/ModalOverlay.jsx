@@ -9,17 +9,11 @@ const ModalOverlay = ({ isOpen, closePopup }) => {
 
     const closeOverlay = (event) => {
         if(isOpen && overlayRef.current && overlayRef.current.contains(event.target)){
-            closePopup();
-       }
+            closePopup();}
     }
 
-    useEffect(() => {
-        isOpen && document.addEventListener('click', closeOverlay)
-        return () => document.removeEventListener('click', closeOverlay)
-    })
-
     return (
-        <section className={ clsx(styles.main, {[styles.hidden] : !isOpen}) } ref={ overlayRef } />
+        <section className={ clsx(styles.main, {[styles.hidden] : !isOpen}) } ref={ overlayRef } onClick={closeOverlay}/>
 
     );
 };

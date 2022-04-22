@@ -9,11 +9,16 @@ import clsx from "clsx";
 const Modal = ({ children, isOpen, closePopup, header }) => {
     const reactModals = document.getElementById('modals');
 
+    const closePopupEsc = (e) => {
+        if (e.key ==='Escape') {
+            closePopup()
+        }
+    }
+
     useEffect(() => {
-        document.addEventListener('keydown', closePopup)
+        document.addEventListener('keydown', closePopupEsc)
 
-        return () => document.removeEventListener('keydown', closePopup)
-
+        return () => document.removeEventListener('keydown', closePopupEsc)
     })
 
     return ReactDOM.createPortal(

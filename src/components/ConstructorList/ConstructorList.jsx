@@ -7,7 +7,6 @@ import { dataPropTypes } from "../../utils/proptypes";
 const ConstructorList = ({ data }) => {
     const buns = data.filter(item => item.type === 'bun');
     const firstBuns = buns[0];
-    const lustBuns = buns[ buns.length - 1 ];
     const notBuns = data.filter(item => item.type !== 'bun');
 
     //Закреплена карточка?
@@ -40,13 +39,13 @@ const ConstructorList = ({ data }) => {
                     </li>
                 })}
             </div>
-            <li className={ styles.item__bottom } key={ lustBuns._id }>
+            <li className={ styles.item__bottom } key={ `${firstBuns._id} 111` }>
                 <ConstructorElement
                     type="bottom"
                     isLocked={true}
-                    text={ `${lustBuns.name} (низ)` }
-                    price={ lustBuns.price }
-                    thumbnail={ lustBuns.image }/>
+                    text={ `${firstBuns.name} (низ)` }
+                    price={ firstBuns.price }
+                    thumbnail={ firstBuns.image }/>
             </li>
         </ul>
     );
