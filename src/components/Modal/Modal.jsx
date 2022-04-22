@@ -10,15 +10,18 @@ const Modal = ({children, isOpen, closePopup, header}) => {
     const reactModals = document.getElementById('modals');
 
     return ReactDOM.createPortal(
-        <ModalOverlay isOpen={isOpen} closePopup={closePopup}>
+        <>
+            <ModalOverlay isOpen={isOpen} closePopup={closePopup} />
             <section className={styles.main}>
                 <div className={styles.header}>
                     <h1 className={clsx(styles.title, 'text_type_main-large')}>{header}</h1>
-                    <CloseIcon type="primary" onClick={closePopup}/>
+                    <div className={styles.icon}>
+                        <CloseIcon type="primary" onClick={closePopup}/>
+                    </div>
                 </div>
                 {children}
             </section>
-        </ModalOverlay>, reactModals
+        </>, reactModals
         )
 };
 

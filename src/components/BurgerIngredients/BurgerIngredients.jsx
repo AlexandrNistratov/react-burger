@@ -5,8 +5,12 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsList from "../IngredientsList/IngredientsList";
 import { dataPropTypes } from "../../utils/proptypes";
 import clsx from "clsx";
+import Modal from "../Modal/Modal";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import {useModal} from "../../hooks/useModal";
 
 const BurgerIngredients = ({ data }) => {
+    // const { isOpen, closePopupEsc, closePopup, openPopup} = useModal();
     const [ current, setCurrent ] = useState('Булки');
     return (
         <section className={ styles.main }>
@@ -17,6 +21,12 @@ const BurgerIngredients = ({ data }) => {
                 <Tab active={ current === 'Начинки' } value='Начинки' onClick={ setCurrent }>Начинки</Tab>
             </div>
             <IngredientsList data={ data }/>
+            {/*{isOpen &&*/}
+            {/*    <Modal isOpen={isOpen}*/}
+            {/*           closePopup={closePopup}*/}
+            {/*           header='Детали ингредиента'>*/}
+            {/*        <IngredientDetails data={data}/>*/}
+            {/*    </Modal>}*/}
         </section>
     );
 };

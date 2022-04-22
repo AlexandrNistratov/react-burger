@@ -9,9 +9,16 @@ const App = () => {
     const [ stateData, setStateData ] = useState([]);
 
     //Запрос к API
-    const getData =  async () => {
-        const res = await fetch(API_URL);
-        return await res.json();
+    const getData = () => {
+        return fetch(API_URL)
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+                return Promise.reject(`Ошибка ${res.status}`);
+            })
+
+
     };
 
     useEffect(() => {

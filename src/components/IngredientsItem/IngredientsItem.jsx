@@ -13,6 +13,7 @@ const IngredientsItem = ({ data }) => {
     return (
         <>
             <li className={styles.main} onClick={openPopup} onKeyDown={closePopupEsc}>
+            {/*<li className={styles.main}>*/}
                 <img className={styles.img} src={data.image} alt="Картинка ингридиента"/>
                 <div className={styles.main__price}>
                     <p className={clsx(styles.price, 'text_type_digits-default')}>{data.price}</p>
