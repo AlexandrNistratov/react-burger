@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const Icon = ({ icon }) => {
     return (
-        <img className={styles.icon} src={ icon } alt="Иконка"/>
+        <img className={ styles.icon } src={ icon } alt="Иконка"/>
     );
 };
 

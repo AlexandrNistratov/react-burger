@@ -15,38 +15,38 @@ const ConstructorList = ({ data }) => {
 
     return (
         <ul className={ styles.main }>
-            <li className={styles.item__top} key={firstBuns._id}>
+            <li className={ styles.item__top } key={ firstBuns._id }>
                 <ConstructorElement
                     type="top"
                     isLocked={true}
-                    text={`${firstBuns.name} (верх)`}
-                    price={firstBuns.price}
-                    thumbnail={firstBuns.image}/>
+                    text={ `${firstBuns.name} (верх)` }
+                    price={ firstBuns.price }
+                    thumbnail={ firstBuns.image }/>
             </li>
-            <div className={styles.scroll}>
+            <div className={ styles.scroll }>
                 {notBuns.map(item => {
-                    return <li className={styles.item} key={item._id}>
+                    return <li className={ styles.item } key={ item._id }>
                         {isLocked &&
-                            <div className={styles.wrapper}>
+                            <div className={ styles.wrapper }>
                                 <DragIcon type="primary" />
                             </div>
                         }
                         <ConstructorElement
-                            text={item.name}
-                            price={item.price}
-                            thumbnail={item.image}>
+                            text={ item.name }
+                            price={ item.price }
+                            thumbnail={ item.image }>
                         </ConstructorElement>
 
                     </li>
                 })}
             </div>
-            <li className={styles.item__bottom} key={lustBuns._id}>
+            <li className={ styles.item__bottom } key={ lustBuns._id }>
                 <ConstructorElement
                     type="bottom"
                     isLocked={true}
-                    text={`${lustBuns.name} (низ)`}
-                    price={lustBuns.price}
-                    thumbnail={lustBuns.image}/>
+                    text={ `${lustBuns.name} (низ)` }
+                    price={ lustBuns.price }
+                    thumbnail={ lustBuns.image }/>
             </li>
         </ul>
     );

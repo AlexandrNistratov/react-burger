@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 
 export const useModal = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [ isOpen, setIsOpen ] = useState(false);
     const openPopup = () => setIsOpen(true)
     const closePopup = () => setIsOpen(false)
 
@@ -18,5 +18,5 @@ export const useModal = () => {
 
     })
 
-    return {isOpen, openPopup, closePopup, closePopupEsc};
+    return { isOpen, openPopup, closePopup, closePopupEsc };
 };
