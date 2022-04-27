@@ -55,7 +55,8 @@ const ConstructorList = ({ ingredients, calculateTotalPrice }) => {
 };
 
 ConstructorList.propTypes = {
-    ingredients: PropTypes.arrayOf(dataPropTypes).isRequired
+    ingredients: PropTypes.arrayOf(dataPropTypes).isRequired,
+    calculateTotalPrice: PropTypes.func.isRequired
 }
 
 export default ConstructorList;

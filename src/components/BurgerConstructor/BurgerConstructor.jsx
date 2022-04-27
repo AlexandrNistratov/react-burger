@@ -8,7 +8,7 @@ const BurgerConstructor = () => {
     const ingredients = useContext(ingredientsContext);
 
     // Стейт для подсчета стоимости
-    const [ totalPrice, setTotalPrice ] = useState('');
+    const [ totalPrice, setTotalPrice ] = useState(0);
 
     const calculateTotalPrice = (buns, arr) => {
         const priceBuns = Number(buns.price * 2);
@@ -17,8 +17,6 @@ const BurgerConstructor = () => {
             }, 0)
         setTotalPrice(sum + priceBuns);
     }
-    console.log(totalPrice)
-
 
     return (
         <section className={ styles.main }>

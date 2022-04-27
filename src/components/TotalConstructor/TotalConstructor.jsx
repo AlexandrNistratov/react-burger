@@ -5,6 +5,7 @@ import { useModal } from "../../hooks/useModal";
 import clsx from "clsx";
 import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
+import PropTypes from "prop-types";
 
 const TotalConstructor = ({ totalPrice }) => {
     const { isOpen, openPopup, closePopup, closePopupEsc } = useModal();
@@ -26,5 +27,9 @@ const TotalConstructor = ({ totalPrice }) => {
         </section>
     );
 };
+
+TotalConstructor.propTypes = {
+    totalPrice: PropTypes.number.isRequired
+}
 
 export default TotalConstructor;
