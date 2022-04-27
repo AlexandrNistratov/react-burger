@@ -4,7 +4,7 @@ import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burg
 import PropTypes from "prop-types";
 import { dataPropTypes } from "../../utils/proptypes";
 
-const ConstructorList = ({ ingredients, calculateTotalPrice }) => {
+const ConstructorList = ({ ingredients, calculateTotalPrice, collectIngredients}) => {
     const buns = ingredients[0];
     const notBuns = ingredients.filter(item => item.type !== 'bun');
 
@@ -12,7 +12,11 @@ const ConstructorList = ({ ingredients, calculateTotalPrice }) => {
     const isLocked = true;
 
 
-    useEffect(() => calculateTotalPrice(buns, notBuns))
+
+    useEffect(() => {
+        calculateTotalPrice(buns, notBuns)
+        collectIngredients(notBuns, buns, buns)
+    }, [])
 
 
     return (

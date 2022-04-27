@@ -10,10 +10,10 @@ import { useModal } from "../../hooks/useModal";
 const BurgerIngredients = () => {
     const { isOpen, closePopup, openPopup} = useModal();
     const [ current, setCurrent ] = useState('Булки');
-    const [ ingredients, setIngredients] = useState({});
+    const [ detail, setDetail] = useState({});
 
     const clickIngredients = (item) => {
-        setIngredients(item);
+        setDetail(item);
         openPopup();
     }
 
@@ -30,7 +30,7 @@ const BurgerIngredients = () => {
                 <Modal isOpen={ isOpen }
                        closePopup={ closePopup }
                        header='Детали ингредиента'>
-                    <IngredientDetails ingredients={ ingredients }/>
+                    <IngredientDetails ingredients={ detail }/>
                 </Modal>}
         </section>
     );

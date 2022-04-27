@@ -10,6 +10,19 @@ const BurgerConstructor = () => {
     // Стейт для подсчета стоимости
     const [ totalPrice, setTotalPrice ] = useState(0);
 
+    //Все ингридиенты в конструкторе
+    const [totalIngredients, setTotalIngredients] = useState([]);
+
+    //Собираем все элементы в массив
+    const collectIngredients = (arr, ...item) => {
+        const arrIngredients = arr.concat(...item)
+        setTotalIngredients(arrIngredients)
+    }
+
+    //Айдишки элементов в конструкторе
+    const arrIdIngredients = totalIngredients.map((item) => item._id)
+
+    //Считаем сумму заказа
     const calculateTotalPrice = (buns, arr) => {
         const priceBuns = Number(buns.price * 2);
              const sum = arr.reduce((acc, item) => {
@@ -20,8 +33,15 @@ const BurgerConstructor = () => {
 
     return (
         <section className={ styles.main }>
-            <ConstructorList ingredients={ingredients} calculateTotalPrice={ calculateTotalPrice }/>
-            <TotalConstructor totalPrice={ totalPrice }/>
+            <ConstructorList
+                ingredients={ ingredients }
+                calculateTotalPrice={ calculateTotalPrice }
+                collectIngredients={ collectIngredients }
+            />
+            <TotalConstructor
+                totalPrice={ totalPrice }
+                arrIdIngredients={ arrIdIngredients }
+            />
         </section>
     );
 };

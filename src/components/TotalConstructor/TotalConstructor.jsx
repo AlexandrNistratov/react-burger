@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import  styles from './totalConstructor.module.css';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useModal } from "../../hooks/useModal";
@@ -6,8 +6,18 @@ import clsx from "clsx";
 import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import PropTypes from "prop-types";
+import { getOrders } from "../../utils/Api";
 
-const TotalConstructor = ({ totalPrice }) => {
+const TotalConstructor = ({ totalPrice, arrIdIngredients }) => {
+    const [ orders, setOrders ] = useState(null);
+
+    useEffect(() => {
+        arrIdIngredients &&
+        getOrders(arrIdIngredients)
+            .then(res => setOrders(res))
+            .catch(err => console.log(err))
+    }, [arrIdIngredients])
+
     const { isOpen, openPopup, closePopup, closePopupEsc } = useModal();
     return (
         <section className={ styles.main } onKeyDown={ closePopupEsc }>
@@ -22,7 +32,7 @@ const TotalConstructor = ({ totalPrice }) => {
             </div>
             {isOpen &&
                 < Modal isOpen={ isOpen } closePopup={ closePopup }>
-                    <OrderDetails />
+                    <OrderDetails orders={ orders }/>
                 </Modal>}
         </section>
     );
