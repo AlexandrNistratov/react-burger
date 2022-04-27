@@ -6,7 +6,7 @@ import { ingredientsContext } from "../../context/ingredientsContext";
 
 const IngredientsList = ({ onClick }) => {
     const ingredients = useContext(ingredientsContext);
-    console.log(ingredients)
+
     const buns = ingredients.filter(item => item.type === 'bun');
     const sauce = ingredients.filter(item => item.type === 'sauce');
     const main = ingredients.filter(item => item.type === 'main');

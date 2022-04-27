@@ -1,26 +1,29 @@
-import React, { useContext } from 'react';
+import React, {useEffect} from 'react';
 import styles from './constructorList.module.css';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { ingredientsContext } from "../../context/ingredientsContext";
+import PropTypes from "prop-types";
+import { dataPropTypes } from "../../utils/proptypes";
 
-const ConstructorList = () => {
-    const ingredients = useContext(ingredientsContext);
-
-    const firstBuns = ingredients[0];
+const ConstructorList = ({ ingredients, calculateTotalPrice }) => {
+    const buns = ingredients[0];
     const notBuns = ingredients.filter(item => item.type !== 'bun');
 
     //Закреплена карточка?
     const isLocked = true;
 
+
+    useEffect(() => calculateTotalPrice(buns, notBuns))
+
+
     return (
         <ul className={ styles.main }>
-            <li className={ styles.item__top } key={ firstBuns._id }>
+            <li className={ styles.item__top } key={ buns._id } >
                 <ConstructorElement
                     type="top"
                     isLocked={true}
-                    text={ `${firstBuns.name} (верх)` }
-                    price={ firstBuns.price }
-                    thumbnail={ firstBuns.image }/>
+                    text={ `${buns.name} (верх)` }
+                    price={ buns.price }
+                    thumbnail={ buns.image }/>
             </li>
             <div className={ styles.scroll }>
                 {notBuns.map(item => {
@@ -39,17 +42,20 @@ const ConstructorList = () => {
                     </li>
                 })}
             </div>
-            <li className={ styles.item__bottom } key={ `${firstBuns._id} 111` }>
+            <li className={ styles.item__bottom } key={ `${buns._id} 111` }>
                 <ConstructorElement
                     type="bottom"
                     isLocked={true}
-                    text={ `${firstBuns.name} (низ)` }
-                    price={ firstBuns.price }
-                    thumbnail={ firstBuns.image }/>
+                    text={ `${buns.name} (низ)` }
+                    price={ buns.price }
+                    thumbnail={ buns.image }/>
             </li>
         </ul>
     );
 };
 
+ConstructorList.propTypes = {
+    ingredients: PropTypes.arrayOf(dataPropTypes).isRequired
+}
 
 export default ConstructorList;
