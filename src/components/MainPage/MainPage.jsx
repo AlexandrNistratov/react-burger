@@ -5,17 +5,13 @@ import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import {dataPropTypes} from "../../utils/proptypes";
 import PropTypes from "prop-types";
 
-const MainPage = ({ data }) => {
+const MainPage = () => {
     return (
         <section className={styles.main}>
-            <BurgerIngredients data={ data } />
-            <BurgerConstructor data={ data } />
+            <BurgerIngredients />
+            <BurgerConstructor />
         </section>
     );
 };
-
-MainPage.propTypes = {
-    data: PropTypes.arrayOf(dataPropTypes).isRequired
-}
 
 export default MainPage;

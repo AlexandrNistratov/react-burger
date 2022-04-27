@@ -3,6 +3,7 @@ import styles from './app.module.css';
 import AppHeader from "../AppHeader/AppHeader";
 import MainPage from "../MainPage/MainPage";
 import { API_URL } from "../../utils/constants";
+import {ingredientsContext} from "../../context/ingredientsContext";
 
 const App = () => {
     //стейт данных из API
@@ -28,14 +29,16 @@ const App = () => {
     }, []);
 
     return (
-        <section className={ styles.main }>
-            {stateData.length !== 0 &&
-                <>
-                    <AppHeader />
-                    <MainPage data={ stateData }/>
-                </>
-            }
-        </section>
+        <ingredientsContext.Provider value={stateData}>
+            <section className={ styles.main }>
+                {stateData.length !== 0 &&
+                    <>
+                        <AppHeader />
+                        <MainPage />
+                    </>
+                }
+            </section>
+        </ingredientsContext.Provider>
     );
 };
 

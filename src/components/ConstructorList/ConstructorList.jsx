@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './constructorList.module.css';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import { dataPropTypes } from "../../utils/proptypes";
+import { ingredientsContext } from "../../context/ingredientsContext";
 
-const ConstructorList = ({ data }) => {
-    const buns = data.filter(item => item.type === 'bun');
-    const firstBuns = buns[0];
-    const notBuns = data.filter(item => item.type !== 'bun');
+const ConstructorList = () => {
+    const ingredients = useContext(ingredientsContext);
+
+    const firstBuns = ingredients[0];
+    const notBuns = ingredients.filter(item => item.type !== 'bun');
 
     //Закреплена карточка?
     const isLocked = true;
@@ -51,8 +51,5 @@ const ConstructorList = ({ data }) => {
     );
 };
 
-ConstructorList.propTypes = {
-    data: PropTypes.arrayOf(dataPropTypes).isRequired
-}
 
 export default ConstructorList;

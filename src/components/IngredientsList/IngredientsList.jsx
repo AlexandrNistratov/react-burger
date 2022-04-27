@@ -1,14 +1,15 @@
-import React from 'react';
-import PropTypes from "prop-types";
+import React, { useContext } from 'react';
 import styles from './ingredientsList.module.css';
 import IngredientsItem from "../IngredientsItem/IngredientsItem";
-import { dataPropTypes } from "../../utils/proptypes";
 import clsx from "clsx";
+import { ingredientsContext } from "../../context/ingredientsContext";
 
-const IngredientsList = ({ data, onClick }) => {
-    const buns = data.filter(item => item.type === 'bun');
-    const sauce = data.filter(item => item.type === 'sauce');
-    const main = data.filter(item => item.type === 'main');
+const IngredientsList = ({ onClick }) => {
+    const ingredients = useContext(ingredientsContext);
+    console.log(ingredients)
+    const buns = ingredients.filter(item => item.type === 'bun');
+    const sauce = ingredients.filter(item => item.type === 'sauce');
+    const main = ingredients.filter(item => item.type === 'main');
 
     return (
         <>
@@ -32,9 +33,5 @@ const IngredientsList = ({ data, onClick }) => {
         </>
     );
 };
-
-IngredientsList.propTypes = {
-    data: PropTypes.arrayOf(dataPropTypes).isRequired
-}
 
 export default IngredientsList;
