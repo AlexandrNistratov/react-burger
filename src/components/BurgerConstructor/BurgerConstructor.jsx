@@ -2,10 +2,10 @@ import React, {useState, useContext, useEffect} from 'react';
 import styles from './burgerConstructor.module.css';
 import ConstructorList from "../ConstructorList/ConstructorList";
 import TotalConstructor from "../TotalConstructor/TotalConstructor";
-import {ingredientsContext} from "../../context/ingredientsContext";
+import { IngredientsContext } from "../../context/IngredientsContext";
 
 const BurgerConstructor = () => {
-    const ingredients = useContext(ingredientsContext);
+    const ingredients = useContext(IngredientsContext);
 
     // Стейт для подсчета стоимости
     const [ totalPrice, setTotalPrice ] = useState(0);

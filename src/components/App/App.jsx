@@ -3,7 +3,7 @@ import styles from './app.module.css';
 import AppHeader from "../AppHeader/AppHeader";
 import MainPage from "../MainPage/MainPage";
 import { getData } from "../../utils/Api";
-import {ingredientsContext} from "../../context/ingredientsContext";
+import { IngredientsContext } from "../../context/IngredientsContext";
 
 const App = () => {
     //стейт данных из API
@@ -16,7 +16,7 @@ const App = () => {
     }, []);
 
     return (
-        <ingredientsContext.Provider value={ingredients}>
+        <IngredientsContext.Provider value={ingredients}>
             <section className={ styles.main }>
                 {ingredients.length !== 0 &&
                     <>
@@ -25,7 +25,7 @@ const App = () => {
                     </>
                 }
             </section>
-        </ingredientsContext.Provider>
+        </IngredientsContext.Provider>
     );
 };
 

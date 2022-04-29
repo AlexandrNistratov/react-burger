@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import styles from './ingredientsList.module.css';
 import IngredientsItem from "../IngredientsItem/IngredientsItem";
 import clsx from "clsx";
-import { ingredientsContext } from "../../context/ingredientsContext";
+import { IngredientsContext } from "../../context/IngredientsContext";
 
 const IngredientsList = ({ onClick }) => {
-    const ingredients = useContext(ingredientsContext);
+    const ingredients = useContext(IngredientsContext);
 
     const buns = ingredients.filter(item => item.type === 'bun');
     const sauce = ingredients.filter(item => item.type === 'sauce');
