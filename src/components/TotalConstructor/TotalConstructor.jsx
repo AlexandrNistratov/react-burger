@@ -11,12 +11,15 @@ import { getOrders } from "../../utils/Api";
 const TotalConstructor = ({ totalPrice, arrIdIngredients }) => {
     const [ orders, setOrders ] = useState(null);
 
-    useEffect(() => {
+    const openOrderDetails = () => {
         arrIdIngredients &&
         getOrders(arrIdIngredients)
-            .then(res => setOrders(res))
-            .catch(err => console.log(err))
-    }, [arrIdIngredients])
+            .then(res => {
+                setOrders(res);
+                openPopup();
+            })
+            .catch(err => console.log(err));
+    };
 
     const { isOpen, openPopup, closePopup, closePopupEsc } = useModal();
     return (
@@ -28,7 +31,7 @@ const TotalConstructor = ({ totalPrice, arrIdIngredients }) => {
                 </div>
             </div>
             <div className={ styles.button }>
-                <Button size='large' type='primary' onClick={ openPopup }>Оформить заказ</Button>
+                <Button size='large' type='primary' onClick={ openOrderDetails }>Оформить заказ</Button>
             </div>
             {isOpen &&
                 < Modal isOpen={ isOpen } closePopup={ closePopup }>
