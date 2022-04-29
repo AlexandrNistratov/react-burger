@@ -3,9 +3,9 @@ import styles from './orderDetails.module.css';
 import clsx from "clsx";
 import img from '../../images/graphics.svg';
 import Icon from "../Icon/Icon";
+import PropTypes from "prop-types";
 
 const OrderDetails = ({ orders }) => {
-    console.log(orders)
     return (
         <section className={ styles.main }>
             <h1 className={ clsx(styles.header, 'text_type_digits-large ') }>{orders.order.number}</h1>
@@ -16,5 +16,9 @@ const OrderDetails = ({ orders }) => {
         </section>
     );
 };
+
+OrderDetails.propTypes = {
+    orders: PropTypes.object.isRequired
+}
 
 export default OrderDetails;

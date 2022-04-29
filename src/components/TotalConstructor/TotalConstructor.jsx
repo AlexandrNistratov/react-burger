@@ -39,7 +39,8 @@ const TotalConstructor = ({ totalPrice, arrIdIngredients }) => {
 };
 
 TotalConstructor.propTypes = {
-    totalPrice: PropTypes.number.isRequired
+    totalPrice: PropTypes.number.isRequired,
+    arrIdIngredients: PropTypes.array.isRequired
 }
 
 export default TotalConstructor;
