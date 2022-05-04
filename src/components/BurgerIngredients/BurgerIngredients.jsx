@@ -12,6 +12,8 @@ const BurgerIngredients = () => {
     const [ current, setCurrent ] = useState('Булки');
     const [ detail, setDetail] = useState({});
 
+
+
     const clickIngredients = (item) => {
         setDetail(item);
         openPopup();

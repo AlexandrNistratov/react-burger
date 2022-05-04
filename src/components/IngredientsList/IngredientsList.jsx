@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styles from './ingredientsList.module.css';
 import IngredientsItem from "../IngredientsItem/IngredientsItem";
 import clsx from "clsx";
-import { IngredientsContext } from "../../context/IngredientsContext";
+import { useSelector } from "react-redux";
 
 const IngredientsList = ({ onClick }) => {
-    const ingredients = useContext(IngredientsContext);
+    const data = useSelector(state => state.getData.ingredientsData)
 
-    const buns = ingredients.filter(item => item.type === 'bun');
-    const sauce = ingredients.filter(item => item.type === 'sauce');
-    const main = ingredients.filter(item => item.type === 'main');
+    const buns = data.filter(item => item.type === 'bun');
+    const sauce = data.filter(item => item.type === 'sauce');
+    const main = data.filter(item => item.type === 'main');
 
     return (
         <>

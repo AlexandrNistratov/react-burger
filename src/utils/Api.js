@@ -1,4 +1,5 @@
 import { API_URL } from "./constants";
+import { getIngredientsDataAction, getCurrentOrderAction } from "../services/reducers";
 
 const checkResponse = (res) => {
     if (res.ok) {
@@ -8,20 +9,28 @@ const checkResponse = (res) => {
 };
 
 export const getData = () => {
-    return fetch(`${ API_URL }/ingredients`)
-        .then((res) => checkResponse(res))
+    return dispatch => {
+        return fetch(`${ API_URL }/ingredients`)
+            .then(res =>  checkResponse(res))
+            .then(data => dispatch(getIngredientsDataAction(data.data)))
+            .catch(err => console.log(err))
+    }
 };
 
 export const getOrders = (data) => {
-    return fetch(`${ API_URL }/orders`, {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            ingredients: data
+    return dispatch => {
+        return fetch(`${ API_URL }/orders`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                ingredients: data
+            })
         })
-    })
-        .then((res) => checkResponse(res));
+            .then(res => checkResponse(res))
+            .then(data => dispatch(getCurrentOrderAction(data)))
+            .catch(err => console.log(err))
+    }
 };

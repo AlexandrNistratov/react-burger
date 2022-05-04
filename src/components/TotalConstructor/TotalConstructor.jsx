@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import  styles from './totalConstructor.module.css';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useModal } from "../../hooks/useModal";
@@ -7,18 +7,15 @@ import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import PropTypes from "prop-types";
 import { getOrders } from "../../utils/Api";
+import { useDispatch } from "react-redux";
 
 const TotalConstructor = ({ totalPrice, arrIdIngredients }) => {
-    const [ orders, setOrders ] = useState(null);
+    const dispatch = useDispatch();
 
     const openOrderDetails = () => {
         arrIdIngredients &&
-        getOrders(arrIdIngredients)
-            .then(res => {
-                setOrders(res);
-                openPopup();
-            })
-            .catch(err => console.log(err));
+        dispatch(getOrders(arrIdIngredients))
+        openPopup();
     };
 
     const { isOpen, openPopup, closePopup, closePopupEsc } = useModal();
@@ -35,7 +32,7 @@ const TotalConstructor = ({ totalPrice, arrIdIngredients }) => {
             </div>
             {isOpen &&
                 < Modal isOpen={ isOpen } closePopup={ closePopup }>
-                    <OrderDetails orders={ orders }/>
+                    <OrderDetails />
                 </Modal>}
         </section>
     );

@@ -2,10 +2,10 @@ import React, {useState, useContext, useEffect} from 'react';
 import styles from './burgerConstructor.module.css';
 import ConstructorList from "../ConstructorList/ConstructorList";
 import TotalConstructor from "../TotalConstructor/TotalConstructor";
-import { IngredientsContext } from "../../context/IngredientsContext";
+import { useSelector } from "react-redux";
 
 const BurgerConstructor = () => {
-    const ingredients = useContext(IngredientsContext);
+    const ingredients = useSelector(state => state.getData.ingredientsData)
 
     // Стейт для подсчета стоимости
     const [ totalPrice, setTotalPrice ] = useState(0);
