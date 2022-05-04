@@ -6,17 +6,23 @@ import clsx from "clsx";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useModal } from "../../hooks/useModal";
+import { useDispatch } from "react-redux";
+import { getDetailsAction, deleteDetailsAction } from "../../services/reducers";
 
 const BurgerIngredients = () => {
     const { isOpen, closePopup, openPopup} = useModal();
     const [ current, setCurrent ] = useState('Булки');
-    const [ detail, setDetail] = useState({});
 
-
+    const dispatch = useDispatch();
 
     const clickIngredients = (item) => {
-        setDetail(item);
+        dispatch(getDetailsAction(item));
         openPopup();
+    }
+
+    const closeModalDetails = () => {
+        dispatch(deleteDetailsAction());
+        closePopup();
     }
 
     return (
@@ -30,9 +36,9 @@ const BurgerIngredients = () => {
             <IngredientsList onClick={ clickIngredients }/>
             {isOpen &&
                 <Modal isOpen={ isOpen }
-                       closePopup={ closePopup }
+                       closePopup={ closeModalDetails }
                        header='Детали ингредиента'>
-                    <IngredientDetails ingredients={ detail }/>
+                    <IngredientDetails />
                 </Modal>}
         </section>
     );

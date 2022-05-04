@@ -1,10 +1,12 @@
 import React from 'react';
 import styles from './ingredientDetails.module.css';
-import { dataPropTypes } from "../../utils/proptypes";
 import clsx from "clsx";
+import { useSelector } from "react-redux";
 
-const IngredientDetails = ({ ingredients }) => {
+const IngredientDetails = () => {
+    const ingredients = useSelector(state => state.getData.ingredientsDetails);
     const { image, name, calories, proteins, fat, carbohydrates } = ingredients;
+
     return (
         <section className={ styles.main }>
             <img className={ styles.img } src={ image } alt="Картинка ингридиента"/>
@@ -27,13 +29,8 @@ const IngredientDetails = ({ ingredients }) => {
                     <p className={ clsx(styles.value, 'text_type_digits-default') }>{ carbohydrates }</p>
                 </div>
             </div>
-
         </section>
     );
-};
-
-IngredientDetails.propTypes = {
-    ingredients: dataPropTypes.isRequired
 };
 
 export default IngredientDetails;
