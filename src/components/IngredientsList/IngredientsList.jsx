@@ -14,17 +14,17 @@ const IngredientsList = ({ onClick }) => {
     return (
         <>
             <section className={ styles.main }>
-                <h2 className={ clsx(styles.subtitle, 'text_type_main-medium') }>Булки</h2>
+                <h2 className={ clsx(styles.subtitle, 'text_type_main-medium') } id='Булки'>Булки</h2>
                 <ul className={ styles.ulList }>
                     {buns.map(item => <IngredientsItem data={ item }
                                                        key={ item._id } onClick={ onClick }/>)}
                 </ul>
-                <h2 className={ clsx(styles.subtitle, 'text_type_main-medium') }>Соусы</h2>
+                <h2 className={ clsx(styles.subtitle, 'text_type_main-medium') } id='Соусы'>Соусы</h2>
                 <ul className={ styles.ulList }>
                     {sauce.map(item => <IngredientsItem data={ item }
                                                         key={ item._id } onClick={ onClick }/>)}
                 </ul>
-                <h2 className={ clsx(styles.subtitle, 'text_type_main-medium') }>Начинки</h2>
+                <h2 className={ clsx(styles.subtitle, 'text_type_main-medium') } id='Начинки'>Начинки</h2>
                 <ul className={ styles.ulList }>
                     {main.map(item => <IngredientsItem data={ item }
                                                        key={ item._id } onClick={ onClick }/>)}

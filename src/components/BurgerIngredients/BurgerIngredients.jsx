@@ -25,13 +25,19 @@ const BurgerIngredients = () => {
         closePopup();
     }
 
+    const onClickTab = (tab) => {
+        setCurrent(tab);
+        const element = document.getElementById(tab);
+        element && element.scrollIntoView({behavior: 'smooth'})
+    }
+
     return (
         <section className={ styles.main }>
             <h1 className={ clsx(styles.text, 'text text_type_main-large') }>Соберите бургер</h1>
             <div className={styles.tab}>
-                <Tab active={ current === 'Булки' } value='Булки' onClick={ setCurrent }>Булки</Tab>
-                <Tab active={ current === 'Соусы' } value='Соусы' onClick={ setCurrent }>Соусы</Tab>
-                <Tab active={ current === 'Начинки' } value='Начинки' onClick={ setCurrent }>Начинки</Tab>
+                <Tab active={ current === 'Булки' } value='Булки' onClick={ onClickTab }>Булки</Tab>
+                <Tab active={ current === 'Соусы' } value='Соусы' onClick={ onClickTab }>Соусы</Tab>
+                <Tab active={ current === 'Начинки' } value='Начинки' onClick={ onClickTab }>Начинки</Tab>
             </div>
             <IngredientsList onClick={ clickIngredients }/>
             {isOpen &&
