@@ -17,27 +17,15 @@ const BurgerConstructor = () => {
         setTotalIngredients(arrIngredients)
     }
 
-    //Айдишки элементов в конструкторе
-    const arrIdIngredients = totalIngredients.map((item) => item._id)
 
-    //Считаем сумму заказа
-    const calculateTotalPrice = (buns, arr) => {
-        const priceBuns = Number(buns.price * 2);
-             const sum = arr.reduce((acc, item) => {
-               return Number(acc + item.price)
-            }, 0)
-        setTotalPrice(sum + priceBuns);
-    }
 
     return (
         <section className={ styles.main }>
             <ConstructorList
-                calculateTotalPrice={ calculateTotalPrice }
                 collectIngredients={ collectIngredients }
             />
             <TotalConstructor
                 totalPrice={ totalPrice }
-                arrIdIngredients={ arrIdIngredients }
             />
         </section>
     );

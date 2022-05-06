@@ -6,11 +6,13 @@ import { dataPropTypes } from "../../utils/proptypes";
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
 import clsx from "clsx";
-import { addBunsAction, addNoBunsAction, getPriceActions, allItemsActions, deleteIngredientsActions } from "../../services/reducers/constructor";
+import { addBunsAction, addNoBunsAction, allItemsActions, deleteIngredientsActions } from "../../services/reducers/constructor";
 import { v4 as uuidv4 } from 'uuid';
 
-const ConstructorList = ({  calculateTotalPrice, collectIngredients}) => {
+const ConstructorList = ({  collectIngredients}) => {
     const dispatch = useDispatch();
+    const allItems = useSelector(state => state.constructorData.allItems)
+
 
     const onDropHandler = (item) => {
         if(item.type === 'bun') {
@@ -41,10 +43,10 @@ const ConstructorList = ({  calculateTotalPrice, collectIngredients}) => {
 
 
 
-    // useEffect(() => {
-    //     calculateTotalPrice(buns, notBuns)
-    //     collectIngredients(notBuns, buns, buns)
-    // }, [])
+    useEffect(() => {
+        // calculateTotalPrice(bun, ingredients)
+        // collectIngredients(notBuns, buns, buns)
+    }, [])
 
 
     return (
@@ -98,7 +100,6 @@ const ConstructorList = ({  calculateTotalPrice, collectIngredients}) => {
 
 ConstructorList.propTypes = {
     // ingredients: PropTypes.arrayOf(dataPropTypes).isRequired,
-    calculateTotalPrice: PropTypes.func.isRequired
 }
 
 export default ConstructorList;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import  styles from './totalConstructor.module.css';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useModal } from "../../hooks/useModal";
@@ -7,16 +7,39 @@ import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import PropTypes from "prop-types";
 import { getOrders } from "../../utils/Api";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const TotalConstructor = ({ totalPrice, arrIdIngredients }) => {
+
+const TotalConstructor = () => {
+    const [ totalPrice, setTotalPrice ] = useState(0)
     const dispatch = useDispatch();
+
+    const { bun, ingredients } = useSelector(state => state.constructorData)
+    const allItems = useSelector(state => state.constructorData.allItems);
+
+
+    //Айдишки элементов в конструкторе
+    const arrIdIngredients = allItems.map((item) => item._id)
 
     const openOrderDetails = () => {
         arrIdIngredients &&
         dispatch(getOrders(arrIdIngredients))
         openPopup();
     };
+
+    // Считаем сумму заказа
+    const calculateTotalPrice = (buns, arr) => {
+        const priceBuns = Number(buns?.price * 2);
+        const sum = arr?.reduce((acc, item) => {
+            return Number(acc + item?.price)
+        }, 0)
+        buns && arr && setTotalPrice(sum + priceBuns)
+    }
+
+    useEffect(() => {
+        calculateTotalPrice(bun, ingredients)
+    }, )
+
 
     const { isOpen, openPopup, closePopup, closePopupEsc } = useModal();
     return (
@@ -39,8 +62,8 @@ const TotalConstructor = ({ totalPrice, arrIdIngredients }) => {
 };
 
 TotalConstructor.propTypes = {
-    totalPrice: PropTypes.number.isRequired,
-    arrIdIngredients: PropTypes.array.isRequired
+    // totalPrice: PropTypes.number.isRequired,
+    // arrIdIngredients: PropTypes.array.isRequired
 }
 
 export default TotalConstructor;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './ingredientsItem.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import { dataPropTypes } from "../../utils/proptypes";
@@ -15,11 +15,11 @@ const IngredientsItem = ({ data, onClick }) => {
        type: 'ingredients',
        item: data
    });
-
-    const dat = useSelector(state => state.constructorData.allItems);
+   
+    const allItems = useSelector(state => state.constructorData.allItems);
 
     //Счетчик добавленных ингредиентов
-    const count = dat.filter(item => item._id === _id).length
+    const count = allItems.filter(item => item._id === _id).length
 
     return (
         <>
