@@ -6,14 +6,22 @@ import { dataPropTypes } from "../../utils/proptypes";
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
 import clsx from "clsx";
-import { addBunsAction, addNoBunsAction, getPriceActions } from "../../services/reducers/constructor";
+import { addBunsAction, addNoBunsAction, getPriceActions, allItemsActions } from "../../services/reducers/constructor";
 import { v4 as uuidv4 } from 'uuid';
 
 const ConstructorList = ({  calculateTotalPrice, collectIngredients}) => {
     const dispatch = useDispatch();
 
     const onDropHandler = (item) => {
-        item.type === 'bun' ? dispatch(addBunsAction(item)) : dispatch(addNoBunsAction(item)) }
+        if(item.type === 'bun') {
+            dispatch(addBunsAction(item));
+            dispatch(allItemsActions(item));
+            dispatch(allItemsActions(item));
+        } else {
+            dispatch(addNoBunsAction(item));
+            dispatch(allItemsActions(item));
+        }
+    }
 
 
 
@@ -24,8 +32,9 @@ const ConstructorList = ({  calculateTotalPrice, collectIngredients}) => {
         }
     })
 
-    const { bun, noBun } = useSelector(state => state.constructorData);
-    console.log(noBun)
+    const { bun, ingredients } = useSelector(state => state.constructorData);
+
+
 
     //Закреплена карточка?
     const isLocked = true;
@@ -52,8 +61,8 @@ const ConstructorList = ({  calculateTotalPrice, collectIngredients}) => {
                 : (<p className={clsx(styles.text, 'text_type_main-medium')}>Тащи сюда свою булку</p>)
             }
             <div className={ styles.scroll }>
-                {noBun.length > 0 ? (
-                    noBun.map(item => {
+                {ingredients.length > 0 ? (
+                        ingredients.map(item => {
                             return <li className={ styles.item } key={ uuidv4() }>
                                 {isLocked &&
                                     <div className={ styles.wrapper }>

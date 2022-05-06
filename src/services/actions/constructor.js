@@ -1,3 +1,4 @@
 export const ADD_BUNS = 'ADD_BUNS';
-export const ADD_NO_BUNS = 'ADD_NO_BUNS';
+export const ADD_INGREDIENTS = 'ADD_INGREDIENTS';
 export const GET_PRICE = 'GET_PRICE';
+export const ALL_ITEMS_CONSTRUCTOR = 'ALL_ITEMS_CONSTRUCTOR';

@@ -1,8 +1,9 @@
-import { GET_PRICE, ADD_BUNS, ADD_NO_BUNS } from "../actions/constructor";
+import { GET_PRICE, ADD_BUNS, ADD_INGREDIENTS, ALL_ITEMS_CONSTRUCTOR } from "../actions/constructor";
 
 const initialState = {
     bun: null,
-    noBun: [],
+    ingredients: [],
+    allItems: [],
     price: ''
 }
 
@@ -11,16 +12,20 @@ export const constructorReducers = (state = initialState, action) => {
         case ADD_BUNS: {
             return {...state, bun: action.payload}
         }
-        case ADD_NO_BUNS: {
-            return {...state, noBun: [...state.noBun, action.payload]}
+        case ADD_INGREDIENTS: {
+            return {...state, ingredients: [...state.ingredients, action.payload]}
         }
         case GET_PRICE: {
             return {...state, price: action.payload}
+        }
+        case ALL_ITEMS_CONSTRUCTOR: {
+            return {...state, allItems: [...state.allItems, action.payload]}
         }
         default: return state
     }
 }
 
 export const addBunsAction = payload => ({ type: ADD_BUNS, payload });
-export const addNoBunsAction = payload => ({ type: ADD_NO_BUNS, payload });
+export const addNoBunsAction = payload => ({ type: ADD_INGREDIENTS, payload });
 export const getPriceActions = payload => ({ type: GET_PRICE, payload })
+export const allItemsActions = payload => ({ type: ALL_ITEMS_CONSTRUCTOR, payload })
