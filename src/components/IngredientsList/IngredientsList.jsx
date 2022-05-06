@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { useSelector } from "react-redux";
 
 const IngredientsList = ({ onClick }) => {
-    const data = useSelector(state => state.getData.ingredientsData)
+    const data = useSelector(state => state.data.ingredientsData)
 
     const buns = data.filter(item => item.type === 'bun');
     const sauce = data.filter(item => item.type === 'sauce');

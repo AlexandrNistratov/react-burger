@@ -1,5 +1,5 @@
 import { API_URL } from "./constants";
-import { getIngredientsDataAction, getCurrentOrderAction } from "../services/reducers";
+import { getIngredientsDataAction, getCurrentOrderAction } from "../services/reducers/data";
 
 const checkResponse = (res) => {
     if (res.ok) {

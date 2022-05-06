@@ -5,9 +5,10 @@ import MainPage from "../MainPage/MainPage";
 import { getData } from "../../utils/Api";
 import { useDispatch, useSelector } from 'react-redux';
 
+
 const App = () => {
     const dispatch = useDispatch();
-    const data = useSelector(state => state.getData.ingredientsData)
+    const data = useSelector(state => state.data.ingredientsData)
 
     useEffect(() => {
         dispatch(getData())

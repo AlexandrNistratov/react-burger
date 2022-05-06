@@ -48,3 +48,9 @@
 .wrapper {
     margin-right: 8px;
 }
+
+.text {
+    display: flex;
+    justify-content: center;
+    padding: 100px 0;
+}
