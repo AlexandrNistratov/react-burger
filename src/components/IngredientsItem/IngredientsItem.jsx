@@ -16,9 +16,10 @@ const IngredientsItem = ({ data, onClick }) => {
        item: data
    });
 
-    const dat = useSelector(state => state.constructorData.allItems)
+    const dat = useSelector(state => state.constructorData.allItems);
+
+    //Счетчик добавленных ингредиентов
     const count = dat.filter(item => item._id === _id).length
-    console.log(count)
 
     return (
         <>

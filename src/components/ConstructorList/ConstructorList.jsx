@@ -6,7 +6,7 @@ import { dataPropTypes } from "../../utils/proptypes";
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
 import clsx from "clsx";
-import { addBunsAction, addNoBunsAction, getPriceActions, allItemsActions } from "../../services/reducers/constructor";
+import { addBunsAction, addNoBunsAction, getPriceActions, allItemsActions, deleteIngredientsActions } from "../../services/reducers/constructor";
 import { v4 as uuidv4 } from 'uuid';
 
 const ConstructorList = ({  calculateTotalPrice, collectIngredients}) => {
@@ -22,8 +22,7 @@ const ConstructorList = ({  calculateTotalPrice, collectIngredients}) => {
             dispatch(allItemsActions(item));
         }
     }
-
-
+    const { bun, ingredients } = useSelector(state => state.constructorData);
 
     const [, ref] = useDrop({
         accept: 'ingredients',
@@ -32,9 +31,10 @@ const ConstructorList = ({  calculateTotalPrice, collectIngredients}) => {
         }
     })
 
-    const { bun, ingredients } = useSelector(state => state.constructorData);
-
-
+    //Удаление ингридиента по клику на кнопку
+    const deleteHandler = (item) => {
+        dispatch(deleteIngredientsActions(item))
+    }
 
     //Закреплена карточка?
     const isLocked = true;
@@ -56,7 +56,8 @@ const ConstructorList = ({  calculateTotalPrice, collectIngredients}) => {
                         isLocked={true}
                         text={`${bun.name} (верх)`}
                         price={bun.price}
-                        thumbnail={bun.image}/>
+                        thumbnail={bun.image}
+                    />
                 </li>)
                 : (<p className={clsx(styles.text, 'text_type_main-medium')}>Тащи сюда свою булку</p>)
             }
@@ -72,7 +73,8 @@ const ConstructorList = ({  calculateTotalPrice, collectIngredients}) => {
                                 <ConstructorElement
                                     text={ item.name }
                                     price={ item.price }
-                                    thumbnail={ item.image }>
+                                    thumbnail={ item.image }
+                                    handleClose={() => deleteHandler(item._id)}>
                                 </ConstructorElement>
                             </li>
                         })
