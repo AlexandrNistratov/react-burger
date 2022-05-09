@@ -1,27 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './constructorList.module.css';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import { dataPropTypes } from "../../utils/proptypes";
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
 import clsx from "clsx";
-import { addBunsAction, addNoBunsAction, allItemsActions, deleteIngredientsActions } from "../../services/reducers/constructor";
+import { addBunsAction, addIngredientsAction, deleteIngredientsActions } from "../../services/reducers/constructor";
 import { v4 as uuidv4 } from 'uuid';
 
-const ConstructorList = ({  collectIngredients}) => {
+const ConstructorList = () => {
     const dispatch = useDispatch();
-    const allItems = useSelector(state => state.constructorData.allItems)
 
 
     const onDropHandler = (item) => {
         if(item.type === 'bun') {
             dispatch(addBunsAction(item));
-            dispatch(allItemsActions(item));
-            dispatch(allItemsActions(item));
         } else {
-            dispatch(addNoBunsAction(item));
-            dispatch(allItemsActions(item));
+            dispatch(addIngredientsAction(item));
         }
     }
     const { bun, ingredients } = useSelector(state => state.constructorData);
@@ -40,13 +34,6 @@ const ConstructorList = ({  collectIngredients}) => {
 
     //Закреплена карточка?
     const isLocked = true;
-
-
-
-    useEffect(() => {
-        // calculateTotalPrice(bun, ingredients)
-        // collectIngredients(notBuns, buns, buns)
-    }, [])
 
 
     return (
@@ -97,9 +84,5 @@ const ConstructorList = ({  collectIngredients}) => {
         </ul>
     );
 };
-
-ConstructorList.propTypes = {
-    // ingredients: PropTypes.arrayOf(dataPropTypes).isRequired,
-}
 
 export default ConstructorList;

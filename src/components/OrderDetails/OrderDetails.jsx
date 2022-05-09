@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 const OrderDetails = () => {
     const orders = useSelector(state => state.getData.currentOrder);
+    console.log(orders)
 
     return (
         <section className={ styles.main }>

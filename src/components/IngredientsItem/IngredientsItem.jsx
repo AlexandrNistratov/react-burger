@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styles from './ingredientsItem.module.css';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import { dataPropTypes } from "../../utils/proptypes";
@@ -9,17 +9,19 @@ import { useSelector } from "react-redux";
 
 const IngredientsItem = ({ data, onClick }) => {
    const { closePopupEsc } = useModal();
+
    const { image, price, name, _id } = data;
 
    const [, ref] = useDrag({
        type: 'ingredients',
        item: data
    });
-   
-    const allItems = useSelector(state => state.constructorData.allItems);
+
+
+    const allItems = useSelector( state => [state.constructorData.bun, state.constructorData.bun, ...state.constructorData.ingredients]);
 
     //Счетчик добавленных ингредиентов
-    const count = allItems.filter(item => item._id === _id).length
+    const count = allItems.filter(item => item?._id === _id).length
 
     return (
         <>
