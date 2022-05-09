@@ -6,8 +6,7 @@ import Icon from "../Icon/Icon";
 import { useSelector } from "react-redux";
 
 const OrderDetails = () => {
-    const orders = useSelector(state => state.getData.currentOrder);
-    console.log(orders)
+    const orders = useSelector(state => state.data.currentOrder);
 
     return (
         <section className={ styles.main }>

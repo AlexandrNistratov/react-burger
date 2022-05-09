@@ -6,7 +6,7 @@ import clsx from "clsx";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useModal } from "../../hooks/useModal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getDetailsAction, deleteDetailsAction } from "../../services/reducers/data";
 
 const BurgerIngredients = () => {
@@ -19,7 +19,6 @@ const BurgerIngredients = () => {
         dispatch(getDetailsAction(item));
         openPopup();
     }
-
     const closeModalDetails = () => {
         dispatch(deleteDetailsAction());
         closePopup();
