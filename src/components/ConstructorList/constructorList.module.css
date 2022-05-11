@@ -1,6 +1,7 @@
 .main {
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     max-height: 656px;
     max-width: 568px;
     width: 100%;
@@ -12,6 +13,7 @@
 .scroll {
     max-height: 490px;
     overflow-y: scroll;
+    width: 100%;
 }
 
 .item {
@@ -53,4 +55,6 @@
     display: flex;
     justify-content: center;
     padding: 100px 0;
+    /*margin-right: 30%;*/
+    width: 100%;
 }

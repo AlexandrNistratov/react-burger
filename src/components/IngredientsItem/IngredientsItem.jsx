@@ -6,6 +6,7 @@ import { useModal } from "../../hooks/useModal";
 import clsx from "clsx";
 import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 const IngredientsItem = ({ data, onClick }) => {
    const { closePopupEsc } = useModal();
@@ -16,7 +17,6 @@ const IngredientsItem = ({ data, onClick }) => {
        type: 'ingredients',
        item: data
    });
-
 
     const allItems = useSelector( state => [state.constructorData.bun, state.constructorData.bun, ...state.constructorData.ingredients]);
 
@@ -39,7 +39,8 @@ const IngredientsItem = ({ data, onClick }) => {
 };
 
 IngredientsItem.propTypes = {
-    data: dataPropTypes.isRequired
+    data: dataPropTypes.isRequired,
+    onClick : PropTypes.func.isRequired
 }
 
 export default IngredientsItem;
