@@ -3,6 +3,7 @@ import styles from './ingredientsList.module.css';
 import IngredientsItem from "../IngredientsItem/IngredientsItem";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 const IngredientsList = ({ onClick }) => {
     const data = useSelector(state => state.data.ingredientsData)
@@ -33,5 +34,9 @@ const IngredientsList = ({ onClick }) => {
         </>
     );
 };
+
+IngredientsList.propTypes ={
+    onClick: PropTypes.func.isRequired
+}
 
 export default IngredientsList;

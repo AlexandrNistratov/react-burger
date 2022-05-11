@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import styles from './constructorItem.module.css';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag, useDrop } from "react-dnd";
+import PropTypes from "prop-types";
+import {dataPropTypes} from "../../utils/proptypes";
 
 const ConstructorItem = ({ item, index, deleteHandler, isLocked, moveIngredients }) => {
     const ref = useRef(null);
@@ -59,15 +61,15 @@ const ConstructorItem = ({ item, index, deleteHandler, isLocked, moveIngredients
     dragRef(dropRef(ref));
 
     return (
-        <div className={styles.main} style={ { opacity } }  ref={ ref }>
-            <div className={styles.wrapper}>
+        <div className={ styles.main } style={ { opacity } }  ref={ ref }>
+            <div className={ styles.wrapper }>
                 <DragIcon type="primary"/>
             </div>
             <ConstructorElement
                 isLocked={ isLocked }
-                text={ item?.name}
-                price={item?.price}
-                thumbnail={item?.image}
+                text={ item?.name }
+                price={ item?.price }
+                thumbnail={ item?.image }
                 handleClose={() => deleteHandler(item._id)}>
             </ConstructorElement>
         </div>
@@ -75,7 +77,11 @@ const ConstructorItem = ({ item, index, deleteHandler, isLocked, moveIngredients
 }
 
 ConstructorItem.propTypes = {
-
+    item: dataPropTypes.isRequired,
+    index: PropTypes.number.isRequired,
+    deleteHandler: PropTypes.func.isRequired,
+    isLocked: PropTypes.bool,
+    moveIngredients: PropTypes.func.isRequired
 }
 
 export default ConstructorItem;

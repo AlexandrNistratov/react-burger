@@ -10,10 +10,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 const TotalConstructor = () => {
-    const [ totalPrice, setTotalPrice ] = useState(0)
+    const [ totalPrice, setTotalPrice ] = useState(0);
+
     const dispatch = useDispatch();
 
-    const { bun, ingredients } = useSelector(state => state.constructorData)
+    const { bun, ingredients } = useSelector(state => state.constructorData);
 
     const allItems = useSelector( state => [state.constructorData.bun, state.constructorData.bun, ...state.constructorData.ingredients]);
 
@@ -37,7 +38,7 @@ const TotalConstructor = () => {
     }
 
     useEffect(() => {
-        calculateTotalPrice(bun, ingredients)
+        calculateTotalPrice(bun, ingredients);
     }, )
 
 
@@ -60,10 +61,5 @@ const TotalConstructor = () => {
         </section>
     );
 };
-
-TotalConstructor.propTypes = {
-    // totalPrice: PropTypes.number.isRequired,
-    // arrIdIngredients: PropTypes.array.isRequired
-}
 
 export default TotalConstructor;

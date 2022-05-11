@@ -12,4 +12,5 @@ export const dataPropTypes = PropTypes.shape({
     image: PropTypes.string.isRequired,
     image_mobile: PropTypes.string,
     image_large: PropTypes.string,
+    key: PropTypes.string
 })
