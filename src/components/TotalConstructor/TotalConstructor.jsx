@@ -34,8 +34,11 @@ const TotalConstructor = () => {
         const sum = arr?.reduce((acc, item) => {
             return Number(acc + item?.price)
         }, 0)
-        buns && arr && setTotalPrice(sum + priceBuns)
+        if (buns && arr) { setTotalPrice(sum + priceBuns)
+        } else if (buns) { setTotalPrice(priceBuns) }
+        else {setTotalPrice(sum)}
     }
+
 
     useEffect(() => {
         calculateTotalPrice(bun, ingredients);
