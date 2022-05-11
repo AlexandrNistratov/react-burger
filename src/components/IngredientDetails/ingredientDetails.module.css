@@ -17,6 +17,7 @@
 
 .name {
     margin: 16px auto 32px;
+    text-align: center;
 }
 
 .energyValue {
