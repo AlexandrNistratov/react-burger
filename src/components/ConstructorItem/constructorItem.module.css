@@ -3,3 +3,7 @@
     align-items: center;
     width: 100%;
 }
+
+.wrapper {
+    margin-right: 8px;
+}

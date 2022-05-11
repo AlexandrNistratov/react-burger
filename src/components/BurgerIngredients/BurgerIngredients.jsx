@@ -6,7 +6,7 @@ import clsx from "clsx";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useModal } from "../../hooks/useModal";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getDetailsAction, deleteDetailsAction } from "../../services/reducers/data";
 
 const BurgerIngredients = () => {
@@ -18,17 +18,18 @@ const BurgerIngredients = () => {
     const clickIngredients = (item) => {
         dispatch(getDetailsAction(item));
         openPopup();
-    }
+    };
+
     const closeModalDetails = () => {
         dispatch(deleteDetailsAction());
         closePopup();
-    }
+    };
 
     const onClickTab = (tab) => {
         setCurrent(tab);
         const element = document.getElementById(tab);
-        element && element.scrollIntoView({behavior: 'smooth'})
-    }
+        element && element.scrollIntoView({behavior: 'smooth'});
+    };
 
     return (
         <section className={ styles.main }>
