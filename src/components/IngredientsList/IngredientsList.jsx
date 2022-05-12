@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
-const IngredientsList = ({ onClick }) => {
+const IngredientsList = ({ onClick, scrollHandler }) => {
     const data = useSelector(state => state.data.ingredientsData)
 
     const buns = data.filter(item => item.type === 'bun');
@@ -14,7 +14,7 @@ const IngredientsList = ({ onClick }) => {
 
     return (
         <>
-            <section className={ styles.main }>
+            <section className={ styles.main } onScroll={ scrollHandler }>
                 <h2 className={ clsx(styles.subtitle, 'text_type_main-medium') } id='Булки'>Булки</h2>
                 <ul className={ styles.ulList }>
                     {buns.map(item => <IngredientsItem data={ item }
@@ -36,7 +36,8 @@ const IngredientsList = ({ onClick }) => {
 };
 
 IngredientsList.propTypes ={
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    onScroll: PropTypes.func
 }
 
 export default IngredientsList;

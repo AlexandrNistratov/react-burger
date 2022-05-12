@@ -31,6 +31,18 @@ const BurgerIngredients = () => {
         element && element.scrollIntoView({behavior: 'smooth'});
     };
 
+    const scrollHandler = (e) => {
+        const target = e.target;
+        const scroll = target.scrollTop;
+        if(scroll > 0 && scroll < 300) {
+            setCurrent('Булки')
+        }else if ( scroll > 300 && scroll < 840) {
+            setCurrent('Соусы')
+        } else {
+            setCurrent('Начинки')
+        }
+    }
+
     return (
         <section className={ styles.main }>
             <h1 className={ clsx(styles.text, 'text text_type_main-large') }>Соберите бургер</h1>
@@ -39,7 +51,7 @@ const BurgerIngredients = () => {
                 <Tab active={ current === 'Соусы' } value='Соусы' onClick={ onClickTab }>Соусы</Tab>
                 <Tab active={ current === 'Начинки' } value='Начинки' onClick={ onClickTab }>Начинки</Tab>
             </div>
-            <IngredientsList onClick={ clickIngredients }/>
+            <IngredientsList onClick={ clickIngredients }  scrollHandler={ scrollHandler }/>
             {isOpen &&
                 <Modal isOpen={ isOpen }
                        closePopup={ closeModalDetails }
