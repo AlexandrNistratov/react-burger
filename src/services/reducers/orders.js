@@ -9,7 +9,7 @@ const initialState = {
 export const orderReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ORDERS_REQUEST: {
-            return {...state, ordersRequest: true, ordersFailed: false}
+            return {...state, ordersRequest: true, orders: null, ordersFailed: false}
         }
         case GET_ORDERS_SUCCESS: {
             return {...state, ordersRequest: false, orders: action.payload, ordersFailed: false}
