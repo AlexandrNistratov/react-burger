@@ -1,5 +1,4 @@
 import { ADD_BUNS, ADD_INGREDIENTS, DELETE_INGREDIENT, MOVE_INGREDIENT } from "../actions/constructor";
-import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
     bun: null,
@@ -13,7 +12,7 @@ export const constructorReducer = (state = initialState, action) => {
             return {...state, bun: action.payload}
         }
         case ADD_INGREDIENTS: {
-            return {...state, ingredients: [...state.ingredients, {...action.payload, key: uuidv4()}]}
+            return {...state, ingredients: [...state.ingredients, action.payload]}
         }
         case DELETE_INGREDIENT: {
             return {...state, ingredients:  state.ingredients.filter(item => item.key !== action.payload)}

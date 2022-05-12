@@ -15,7 +15,10 @@ const ConstructorList = () => {
         if(item.type === 'bun') {
             dispatch(addBunsAction(item));
         } else {
-            dispatch(addIngredientsAction(item));
+            dispatch(addIngredientsAction({
+                ...item,
+                key: uuidv4()
+            }));
         }
     };
 
