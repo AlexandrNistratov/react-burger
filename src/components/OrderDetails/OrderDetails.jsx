@@ -6,20 +6,20 @@ import Icon from "../Icon/Icon";
 import { useSelector } from "react-redux";
 
 const OrderDetails = () => {
-    const orders = useSelector(state => state.data.currentOrder);
+    const { ordersRequest, ordersFailed, orders } = useSelector(state => state.order);
+
 
     return (
         <section className={ styles.main }>
-            {orders.order &&
-                <>
-                    <h1 className={ clsx(styles.header, 'text_type_digits-large ') }>{orders.order.number}</h1>
-                    <h2 className={ clsx(styles.subtitle, 'text_type_main-medium') }>идентификатор заказа</h2>
-                    <Icon icon={ img }/>
-                    <p className={ clsx(styles.readiness, 'text_type_main-default') }>Ваш заказ начали готовить</p>
-                    <p className={ clsx(styles.text, 'text_type_main-default text_color_inactive') }>Дождитесь готовности на орбитальной станции</p>
-                </>
-
+            {
+                ordersRequest ? <p className={ clsx(styles.subtitle, 'text_type_main-medium') }>Загрузка..</p> :
+                    orders ? <h1 className={ clsx(styles.header, 'text_type_digits-large ') }>{orders.order.number}</h1> :
+                        ordersFailed ? <p className={ clsx(styles.subtitle, 'text_type_main-medium') }>Ошибка</p> : null
             }
+            <h2 className={ clsx(styles.subtitle, 'text_type_main-medium') }>идентификатор заказа</h2>
+            <Icon icon={ img }/>
+            <p className={ clsx(styles.readiness, 'text_type_main-default') }>Ваш заказ начали готовить</p>
+            <p className={ clsx(styles.text, 'text_type_main-default text_color_inactive') }>Дождитесь готовности на орбитальной станции</p>
         </section>
     );
 };

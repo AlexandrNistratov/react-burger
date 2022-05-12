@@ -1,5 +1,6 @@
 import { API_URL } from "./constants";
-import { getIngredientsDataAction, getCurrentOrderAction } from "../services/reducers/data";
+import { dataRequestAction, dataSuccessAction, dataFailedAction } from "../services/reducers/data";
+import { ordersRequestAction, ordersSuccessAction, ordersFailedAction } from "../services/reducers/orders";
 
 const checkResponse = (res) => {
     if (res.ok) {
@@ -10,16 +11,21 @@ const checkResponse = (res) => {
 
 export const getData = () => {
     return dispatch => {
-        return fetch(`${ API_URL }/ingredients`)
+        dispatch(dataRequestAction)
+        fetch(`${ API_URL }/ingredients`)
             .then(res =>  checkResponse(res))
-            .then(data => dispatch(getIngredientsDataAction(data.data)))
-            .catch(err => console.log(err))
+            .then(data => dispatch(dataSuccessAction(data.data)))
+            .catch(err => {
+                console.log(err)
+                dispatch(dataFailedAction())
+            })
     }
 };
 
 export const getOrders = (data) => {
     return dispatch => {
-        return fetch(`${ API_URL }/orders`, {
+        dispatch(ordersRequestAction())
+        fetch(`${ API_URL }/orders`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -30,7 +36,9 @@ export const getOrders = (data) => {
             })
         })
             .then(res => checkResponse(res))
-            .then(data => dispatch(getCurrentOrderAction(data)))
-            .catch(err => console.log(err))
+            .then(data => dispatch(ordersSuccessAction(data)))
+            .catch(err => {
+                console.log(err)
+                dispatch(ordersFailedAction())})
     }
 };

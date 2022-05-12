@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { useSelector } from "react-redux";
 
 const IngredientDetails = () => {
-    const ingredients = useSelector(state => state.data.ingredientsDetails);
+    const ingredients = useSelector(state => state.details.ingredientsDetails);
     const { image, name, calories, proteins, fat, carbohydrates } = ingredients;
 
     return (

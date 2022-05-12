@@ -4,24 +4,26 @@ import AppHeader from "../AppHeader/AppHeader";
 import MainPage from "../MainPage/MainPage";
 import { getData } from "../../utils/Api";
 import { useDispatch, useSelector } from 'react-redux';
+import clsx from "clsx";
 
 
 const App = () => {
     const dispatch = useDispatch();
-    const data = useSelector(state => state.data.ingredientsData)
+    const { ingredientsData, dataRequest, dataFailed } = useSelector(state => state.data)
 
     useEffect(() => {
         dispatch(getData())
-    }, []);
+    }, [dispatch]);
 
     return (
             <section className={ styles.main }>
-                {data.length !== 0 &&
-                    <>
                         <AppHeader />
-                        <MainPage />
-                    </>
+                {
+                    dataRequest ? <p className={ clsx('text_type_main-medium') }>Загрузка..</p> :
+                        ingredientsData ? <MainPage /> :
+                            dataFailed ? <p className={ clsx('text_type_main-medium') }>Ошибка</p> : null
                 }
+
             </section>
     );
 };

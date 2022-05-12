@@ -7,7 +7,7 @@ const initialState = {
     allItems: [],
 }
 
-export const constructorReducers = (state = initialState, action) => {
+export const constructorReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_BUNS: {
             return {...state, bun: action.payload}

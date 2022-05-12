@@ -1,0 +1,2 @@
+export const GET_DETAILS = 'ADD_DETAILS';
+export const DELETE_DETAILS = 'DELETE_DETAILS';

@@ -45,8 +45,7 @@ const TotalConstructor = () => {
 
     useEffect(() => {
         calculateTotalPrice(bun, ingredients);
-    }, )
-
+    }, [ bun, ingredients])
 
     const { isOpen, openPopup, closePopup, closePopupEsc } = useModal();
     return (
@@ -58,7 +57,7 @@ const TotalConstructor = () => {
                 </div>
             </div>
             <div className={ styles.button }>
-                <Button size='large' type='primary' onClick={ openOrderModal }>Оформить заказ</Button>
+                <Button size='large' type='primary' onClick={ openOrderModal } disabled={ !bun }>Оформить заказ</Button>
             </div>
             {isOpen &&
                 < Modal isOpen={ isOpen } closePopup={ closePopup }>
