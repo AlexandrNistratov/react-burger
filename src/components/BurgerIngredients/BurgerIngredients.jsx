@@ -7,7 +7,7 @@ import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useModal } from "../../hooks/useModal";
 import { useDispatch } from "react-redux";
-import { getDetailsAction, deleteDetailsAction } from "../../services/reducers/details";
+import { getDetailsAction, deleteDetailsAction } from "../../services/actions/details";
 
 const BurgerIngredients = () => {
     const { isOpen, closePopup, openPopup} = useModal();

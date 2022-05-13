@@ -15,6 +15,3 @@ export const detailsReducer = (state = initialState, action) => {
         default: return state
     }
 }
-
-export const getDetailsAction = payload => ({ type: GET_DETAILS, payload });
-export const deleteDetailsAction = payload => ({ type: DELETE_DETAILS, payload });
