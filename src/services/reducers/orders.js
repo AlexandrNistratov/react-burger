@@ -20,7 +20,3 @@ export const orderReducer = (state = initialState, action) => {
         default: return state
     }
 }
-
-export const ordersRequestAction = payload => ({ type: GET_ORDERS_REQUEST, payload });
-export const ordersSuccessAction = payload => ({ type: GET_ORDERS_SUCCESS, payload });
-export const ordersFailedAction = payload => ({ type: GET_ORDERS_FAILED, payload });

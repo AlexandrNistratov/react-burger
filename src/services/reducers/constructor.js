@@ -23,8 +23,3 @@ export const constructorReducer = (state = initialState, action) => {
         default: return state
     }
 }
-
-export const addBunsAction = payload => ({ type: ADD_BUNS, payload });
-export const addIngredientsAction = payload => ({ type: ADD_INGREDIENTS, payload });
-export const deleteIngredientsActions = payload => ({ type: DELETE_INGREDIENT, payload });
-export const moveIngredientsActions = payload => ({ type: MOVE_INGREDIENT, payload });

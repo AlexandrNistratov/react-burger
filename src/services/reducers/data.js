@@ -20,8 +20,3 @@ export const dataReducer = (state = initialState, action) => {
         default: return state
     }
 }
-
-
-export const dataRequestAction = payload => ({ type: GET_DATA_REQUEST, payload });
-export const dataSuccessAction = payload => ({ type: GET_DATA_SUCCESS, payload });
-export const dataFailedAction = payload => ({ type: GET_DATA_FAILED, payload });

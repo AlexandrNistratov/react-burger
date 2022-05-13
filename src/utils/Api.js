@@ -1,6 +1,6 @@
 import { API_URL } from "./constants";
-import { dataRequestAction, dataSuccessAction, dataFailedAction } from "../services/reducers/data";
-import { ordersRequestAction, ordersSuccessAction, ordersFailedAction } from "../services/reducers/orders";
+import { dataRequestAction, dataSuccessAction, dataFailedAction } from "../services/actions/data";
+import { ordersRequestAction, ordersSuccessAction, ordersFailedAction } from "../services/actions/orders";
 
 const checkResponse = (res) => {
     if (res.ok) {
