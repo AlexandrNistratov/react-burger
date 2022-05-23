@@ -23,7 +23,6 @@ const LoginPage = () => {
             <FormLink text='Вы — новый пользователь?' url='/register' textLink='Зарегистрироваться'/>
             <FormLink text='Забыли пароль?' url='/forgot-password' textLink='Восстановить пароль'/>
         </>
-
     );
 };
 
