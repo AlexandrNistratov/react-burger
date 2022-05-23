@@ -56,9 +56,9 @@ const TotalConstructor = () => {
                     <CurrencyIcon type="primary" />
                 </div>
             </div>
-            <div className={ styles.button }>
-                <Button size='large' type='primary' onClick={ openOrderModal } disabled={ !bun }>Оформить заказ</Button>
-            </div>
+                <div className={ styles.button }>
+                    <Button onClick={ openOrderModal } disabled={ !bun }>Оформить заказ</Button>
+                </div>
             {isOpen &&
                 < Modal isOpen={ isOpen } closePopup={ closePopup }>
                     <OrderDetails />

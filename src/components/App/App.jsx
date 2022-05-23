@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import styles from './app.module.css';
 import AppHeader from "../AppHeader/AppHeader";
-import MainPage from "../MainPage/MainPage";
+import { MainPage, LoginPage } from '../../pages/pages';
+
+
 import { getData } from "../../utils/Api";
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from "clsx";
@@ -18,12 +21,20 @@ const App = () => {
     return (
             <section className={ styles.main }>
                         <AppHeader />
-                {
-                    dataRequest ? <p className={ clsx('text_type_main-medium') }>Загрузка..</p> :
-                        ingredientsData ? <MainPage /> :
-                            dataFailed ? <p className={ clsx('text_type_main-medium') }>Ошибка</p> : null
-                }
-
+                <Router>
+                    <Switch>
+                        <Route path='/' exact>
+                            {
+                                dataRequest ? <p className={ clsx('text_type_main-medium') }>Загрузка..</p> :
+                                    ingredientsData ? <MainPage /> :
+                                        dataFailed ? <p className={ clsx('text_type_main-medium') }>Ошибка</p> : null
+                            }
+                        </Route>
+                        <Route path='/login'>
+                            <LoginPage />
+                        </Route>
+                    </Switch>
+                </Router>
             </section>
     );
 };
