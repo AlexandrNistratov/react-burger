@@ -4,9 +4,9 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
-const Form = ({ text, children, textButton }) => {
+const Form = ({ text, children, textButton, onSubmit }) => {
     return (
-        <form className={ styles.main }>
+        <form className={ styles.main } onSubmit={ onSubmit }>
             <h1 className={ clsx(styles.header, 'text_type_main-medium')}>{ text }</h1>
             { children }
             <div className={ clsx(styles.button, 'mb-20') }>
