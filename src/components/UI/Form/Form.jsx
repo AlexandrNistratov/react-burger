@@ -9,7 +9,7 @@ const Form = ({ text, children, textButton }) => {
         <form className={ styles.main }>
             <h1 className={ clsx(styles.header, 'text_type_main-medium')}>{ text }</h1>
             { children }
-            <div className={ styles.button }>
+            <div className={ clsx(styles.button, 'mb-20') }>
                 <Button type='primary' size='large'>{ textButton }</Button>
             </div>
         </form>
@@ -18,7 +18,7 @@ const Form = ({ text, children, textButton }) => {
 
 Form.propTypes = {
     text: PropTypes.string.isRequired,
-    children: PropTypes.element.isRequired,
+    children: PropTypes.node.isRequired,
     textButton: PropTypes.string.isRequired
 }
 

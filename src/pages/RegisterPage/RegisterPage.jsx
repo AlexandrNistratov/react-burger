@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import Form from "../../components/UI/Form/Form";
-import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import './index.css';
+import {Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
 
-const LoginPage = () => {
-    const [ value, setValue ] = useState({ email: '', password: ''});
+const RegisterPage = () => {
+    const [ value, setValue ] = useState({ name: '', email: '', password: ''});
 
     const onChange = e => {
         setValue({ ...value, [e.target.name]: e.target.value });
     }
     return (
         <>
-            <Form text='Вход' textButton='Войти'>
+            <Form text='Регистрация' textButton='Зарегистрироваться'>
+                <div className={'mt-6'}>
+                    <Input value={ value.name } onChange={ onChange } type='text' placeholder='Имя' name='name'/>
+                </div>
                 <div className={'mt-6'}>
                     <Input value={ value.email } onChange={ onChange } type='email' placeholder='E-mail' name='email'/>
                 </div>
@@ -20,11 +22,9 @@ const LoginPage = () => {
                     <Input value={ value.password } onChange={ onChange } type='password' placeholder='Пароль' name='password'/>
                 </div>
             </Form>
-            <FormLink text='Вы — новый пользователь?' url='/register' textLink='Зарегистрироваться'/>
-            <FormLink text='Забыли пароль?' url='/forgot-password' textLink='Восстановить пароль'/>
+            <FormLink text='Уже зарегистрированы?' url='/login' textLink='Войти'/>
         </>
-
     );
 };
 
-export default LoginPage;
+export default RegisterPage;

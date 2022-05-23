@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import styles from './app.module.css';
 import AppHeader from "../AppHeader/AppHeader";
-import { MainPage, LoginPage } from '../../pages/pages';
+import { MainPage, LoginPage, RegisterPage } from '../../pages/pages';
 
 
 import { getData } from "../../utils/Api";
@@ -32,6 +32,9 @@ const App = () => {
                         </Route>
                         <Route path='/login'>
                             <LoginPage />
+                        </Route>
+                        <Route path='/register'>
+                            <RegisterPage />
                         </Route>
                     </Switch>
                 </Router>
