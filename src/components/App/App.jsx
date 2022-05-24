@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import styles from './app.module.css';
 import AppHeader from "../AppHeader/AppHeader";
-import { MainPage, LoginPage, RegisterPage, ForgotPasswordPage, ResetPassword } from '../../pages/pages';
+import { MainPage, LoginPage, RegisterPage, ForgotPasswordPage, ResetPassword, Profile } from '../../pages/pages';
 
 
 import { getData } from "../../utils/Api";
@@ -20,8 +20,8 @@ const App = () => {
 
     return (
             <section className={ styles.main }>
-                        <AppHeader />
                 <Router>
+                    <AppHeader />
                     <Switch>
                         <Route path='/' exact>
                             {
@@ -41,6 +41,9 @@ const App = () => {
                         </Route>
                         <Route path='/reset-password'>
                             <ResetPassword />
+                        </Route>
+                        <Route path='/profile'>
+                            <Profile />
                         </Route>
                     </Switch>
                 </Router>

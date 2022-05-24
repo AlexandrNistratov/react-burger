@@ -14,11 +14,15 @@ const ForgotPasswordPage = () => {
         setValue({ ...value, [e.target.name]: e.target.value });
     }
 
-    const handleSubmit = async () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         handleForgotPassword(value.email)
-            .then(res => console.log(res))
+            .then(res => {
+                console.log(res)
+                res && history.push('/reset-password');
+            })
             .catch(err => console.log(err))
-        await history.push('/reset-password')
+
     }
 
     return (

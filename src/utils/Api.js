@@ -55,5 +55,23 @@ export const handleForgotPassword = (email) => {
         })
     })
         .then(res => checkResponse(res))
+        // .then(res => console.log(res))
+        .catch(err => console.log(err))
+}
+
+export const handleResetPassword = (password, token) => {
+    return fetch(`${ API_URL }/password-reset/reset`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            password: password,
+            token: token
+        })
+    })
+        .then(res => checkResponse(res))
+        // .then(res => console.log(res))
         .catch(err => console.log(err))
 }

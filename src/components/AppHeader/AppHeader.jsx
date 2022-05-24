@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './appHeader.module.css';
 import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import clsx from "clsx";
+import { Link } from 'react-router-dom';
 
 const AppHeader = () => {
     return (
@@ -20,10 +21,10 @@ const AppHeader = () => {
                     </nav>
                     <Logo />
                 </div>
-                <a href='#' className={ styles.item }>
+                <Link to='/login' className={ styles.item }>
                     <ProfileIcon type="secondary" />
                     <p className={ clsx('text text_type_main-default ml-2 text_color_inactive') }>Личный кабинет</p>
-                </a>
+                </Link>
             </div>
         </section>
     );
