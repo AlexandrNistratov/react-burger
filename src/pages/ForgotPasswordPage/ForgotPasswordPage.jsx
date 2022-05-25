@@ -3,7 +3,7 @@ import Form from "../../components/UI/Form/Form";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
 import { useHistory } from 'react-router-dom';
-import { handleForgotPassword } from "../../utils/Api";
+import { forgotPassword } from "../../utils/Api";
 
 const ForgotPasswordPage = () => {
     const history = useHistory();
@@ -16,7 +16,7 @@ const ForgotPasswordPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleForgotPassword(value.email)
+        forgotPassword(value.email)
             .then(res => {
                 console.log(res)
                 res && history.push('/reset-password');

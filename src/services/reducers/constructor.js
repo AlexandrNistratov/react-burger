@@ -3,7 +3,6 @@ import { ADD_BUNS, ADD_INGREDIENTS, DELETE_INGREDIENT, MOVE_INGREDIENT } from ".
 const initialState = {
     bun: null,
     ingredients: [],
-    allItems: [],
 }
 
 export const constructorReducer = (state = initialState, action) => {

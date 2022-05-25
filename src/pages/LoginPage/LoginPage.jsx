@@ -10,6 +10,7 @@ const LoginPage = () => {
     const onChange = e => {
         setValue({ ...value, [e.target.name]: e.target.value });
     }
+
     return (
         <>
             <Form text='Вход' textButton='Войти'>

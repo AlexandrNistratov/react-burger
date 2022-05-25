@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Form from "../../components/UI/Form/Form";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
-import { handleResetPassword } from "../../utils/Api";
+import { resetPassword } from "../../utils/Api";
 import { useHistory } from 'react-router-dom';
 
 const ResetPassword = () => {
@@ -16,7 +16,7 @@ const ResetPassword = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleResetPassword(password, token)
+        resetPassword(password, token)
             .then(res => {
                 console.log(res)
                 res && history.push('/');

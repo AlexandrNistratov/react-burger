@@ -1,6 +1,7 @@
 import { API_URL } from "./constants";
 import { dataRequestAction, dataSuccessAction, dataFailedAction } from "../services/actions/data";
 import { ordersRequestAction, ordersSuccessAction, ordersFailedAction } from "../services/actions/orders";
+import { registrationRequestAction, registrationSuccessAction, registrationFailedAction } from "../services/actions/registration";
 
 const checkResponse = (res) => {
     if (res.ok) {
@@ -43,7 +44,7 @@ export const getOrders = (data) => {
     }
 };
 
-export const handleForgotPassword = (email) => {
+export const forgotPassword = (email) => {
     return fetch(`${ API_URL }/password-reset`, {
         method: 'POST',
         headers: {
@@ -55,11 +56,10 @@ export const handleForgotPassword = (email) => {
         })
     })
         .then(res => checkResponse(res))
-        // .then(res => console.log(res))
         .catch(err => console.log(err))
 }
 
-export const handleResetPassword = (password, token) => {
+export const resetPassword = (password, token) => {
     return fetch(`${ API_URL }/password-reset/reset`, {
         method: 'POST',
         headers: {
@@ -72,6 +72,28 @@ export const handleResetPassword = (password, token) => {
         })
     })
         .then(res => checkResponse(res))
-        // .then(res => console.log(res))
         .catch(err => console.log(err))
 }
+
+export const register = (data) => {
+    return dispatch => {
+        dispatch(registrationRequestAction())
+        fetch(`${ API_URL }/auth/register`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: data.name,
+                email: data.email,
+             password: data.password
+            })
+        })
+            .then(res => checkResponse(res))
+            .then(data => dispatch(registrationSuccessAction(data)))
+            .catch(err => {
+                console.log(err)
+                dispatch(registrationFailedAction())})
+    }
+};
