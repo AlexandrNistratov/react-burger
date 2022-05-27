@@ -7,14 +7,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../utils/Api";
 import { setLoginAction } from "../../services/actions/login";
 import { useHistory } from "react-router-dom";
+import {getCookie} from "../../utils/cookie";
 
 const LoginPage = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const form = useSelector(state => state.login.form)
-    console.log(form)
-    const { isAuth, email, password } = form;
+    const form = useSelector(state => state.login.form);
+    const isAuth = useSelector(state => state.login.isAuth);
+    const log = useSelector(state => state.login);
+    // console.log(log)
+    const qwe = getCookie('accessToken')
+    console.log(qwe)
+    const { email, password } = form;
+
+    // console.log(isAuth, email, password)
 
     const onChange = e => {
         dispatch(setLoginAction({...form, [e.target.name]: e.target.value}))
@@ -26,7 +33,7 @@ const LoginPage = () => {
     }
 
     useEffect(() => {
-        history.push('/')
+        isAuth && history.push('/')
     },[isAuth])
 
     return (

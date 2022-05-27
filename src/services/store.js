@@ -6,7 +6,9 @@ import { constructorReducer } from "./reducers/constructor";
 import { orderReducer } from "./reducers/orders";
 import { detailsReducer } from "./reducers/details";
 import { registrationReducer } from "./reducers/registration";
-import {loginReducer} from "./reducers/login";
+import { loginReducer } from "./reducers/login";
+import { userReducer } from "./reducers/user";
+import { userUpdateReducer } from "./reducers/updateUser";
 
 const composeEnhancers =
     typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -21,7 +23,9 @@ export const rootReducer = combineReducers({
     order: orderReducer,
     details: detailsReducer,
     register: registrationReducer,
-    login: loginReducer
+    login: loginReducer,
+    user: userReducer,
+    updateUser: userUpdateReducer
 })
 
 export const store = createStore(rootReducer, enhancer)

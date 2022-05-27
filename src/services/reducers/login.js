@@ -1,4 +1,4 @@
-import { GET_LOGIN_REQUEST, GET_LOGIN_SUCCESS, GET_LOGIN_FAILED, SET_LOGIN } from "../actions/login";
+import { GET_LOGIN_REQUEST, GET_LOGIN_SUCCESS, GET_LOGIN_FAILED, SET_LOGIN, LOG_OUT } from "../actions/login";
 
 const initialState = {
     form: {
@@ -24,6 +24,9 @@ export const loginReducer = (state = initialState, action) => {
         }
         case SET_LOGIN: {
             return {...state, form: action.payload}
+        }
+        case LOG_OUT: {
+            return {...state, loginRequest: false, form: { password: '', email: '' }, loginFailed: false, token: '', isAuth: false}
         }
         default: return state
     }

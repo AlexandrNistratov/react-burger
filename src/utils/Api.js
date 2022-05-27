@@ -4,6 +4,8 @@ import { ordersRequestAction, ordersSuccessAction, ordersFailedAction } from "..
 import { registrationRequestAction, registrationSuccessAction, registrationFailedAction } from "../services/actions/registration";
 import { loginRequestAction, loginSuccessAction, loginFailedAction, setLoginAction } from "../services/actions/login";
 import { setCookie, getCookie, deleteCookie } from "./cookie";
+import { userRequestAction, userSuccessAction, userFailedAction } from "../services/actions/user";
+import {userUpdateFailedAction, userUpdateRequestAction, userUpdateSuccessAction} from "../services/actions/updateUser";
 
 const checkResponse = (res) => {
     if (res.ok) {
@@ -38,7 +40,10 @@ export const getOrders = (data) => {
                 ingredients: data
             })
         })
-            .then(res => checkResponse(res))
+            .then(res => {
+                console.log(res)
+                checkResponse(res)
+            })
             .then(data => dispatch(ordersSuccessAction(data)))
             .catch(err => {
                 console.log(err)
@@ -76,6 +81,58 @@ export const resetPassword = (password, token) => {
         .then(res => checkResponse(res))
         .catch(err => console.log(err))
 }
+
+export const getUser = () => {
+    return dispatch => {
+        dispatch(userRequestAction())
+        fetch(`${ API_URL }/auth/user`, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: getCookie("accessToken")
+            }
+        })
+            .then(res => checkResponse(res))
+            .then(res => {
+                if (res && res.success) {
+                    dispatch(userSuccessAction(res.user))
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                dispatch(userFailedAction())})
+    }
+};
+
+export const userUpdate = (data) => {
+    return dispatch => {
+        dispatch(userUpdateRequestAction())
+        fetch(`${ API_URL }/auth/user`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: getCookie("accessToken")
+            },
+            body: JSON.stringify({data})
+        })
+            .then(res => {
+                console.log(res)
+                checkResponse(res)
+            })
+            .then(res => {
+                console.log("Мы в userUpdate")
+                console.log(res)
+                if (res && res.success) {
+                    dispatch(userUpdateSuccessAction(res.user))
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                dispatch(userUpdateFailedAction())})
+    }
+};
 
 export const register = (data) => {
     return dispatch => {
@@ -119,6 +176,7 @@ export const login = (data) => {
             .then(data => {
                 setCookie('accessToken', data.accessToken);
                 setCookie('refreshToken', data.refreshToken);
+                dispatch(getUser(data.user))
                 dispatch(loginSuccessAction(data))
             })
             .catch(err => {
@@ -127,23 +185,21 @@ export const login = (data) => {
     }
 };
 
-export const logOut = (token) => {
-    return dispatch => {
-        dispatch(loginRequestAction)
-        fetch(`${ API_URL }/auth/logout`, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                token: token
-            })
+export const logOut = () => {
+    fetch(`${ API_URL }/auth/logout`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            token: getCookie("refreshToken")
         })
-            .then(res => checkResponse(res)
-                .then(data => {
-                    deleteCookie()
-                }))
-            .catch(err => console.log(err))
-    }
+    })
+        .then(res => checkResponse(res))
+        .then(res => {
+            deleteCookie('accessToken');
+            deleteCookie('refreshToken')
+        })
+        .catch(err => console.log(err))
 };

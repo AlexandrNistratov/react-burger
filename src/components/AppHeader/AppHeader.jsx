@@ -21,7 +21,7 @@ const AppHeader = () => {
                     </nav>
                     <Logo />
                 </div>
-                <Link to='/login' className={ styles.item }>
+                <Link to='/profile' className={ styles.item }>
                     <ProfileIcon type="secondary" />
                     <p className={ clsx('text text_type_main-default ml-2 text_color_inactive') }>Личный кабинет</p>
                 </Link>
