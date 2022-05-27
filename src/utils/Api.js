@@ -4,8 +4,7 @@ import { ordersRequestAction, ordersSuccessAction, ordersFailedAction } from "..
 import { registrationRequestAction, registrationSuccessAction, registrationFailedAction } from "../services/actions/registration";
 import { loginRequestAction, loginSuccessAction, loginFailedAction, setLoginAction } from "../services/actions/login";
 import { setCookie, getCookie, deleteCookie } from "./cookie";
-import { userRequestAction, userSuccessAction, userFailedAction } from "../services/actions/user";
-import {userUpdateFailedAction, userUpdateRequestAction, userUpdateSuccessAction} from "../services/actions/updateUser";
+import { getUserRequestAction, getUserSuccessAction, getUserFailedAction, userUpdateFailedAction, userUpdateRequestAction, userUpdateSuccessAction } from "../services/actions/user";
 
 const checkResponse = (res) => {
     if (res.ok) {
@@ -84,7 +83,7 @@ export const resetPassword = (password, token) => {
 
 export const getUser = () => {
     return dispatch => {
-        dispatch(userRequestAction())
+        dispatch(getUserRequestAction())
         fetch(`${ API_URL }/auth/user`, {
             method: 'GET',
             headers: {
@@ -96,12 +95,12 @@ export const getUser = () => {
             .then(res => checkResponse(res))
             .then(res => {
                 if (res && res.success) {
-                    dispatch(userSuccessAction(res.user))
+                    dispatch(getUserSuccessAction(res.user))
                 }
             })
             .catch(err => {
                 console.log(err)
-                dispatch(userFailedAction())})
+                dispatch(getUserFailedAction())})
     }
 };
 
@@ -120,8 +119,8 @@ export const userUpdate = (data) => {
             .then(res => checkResponse(res))
             .then(res => {
                 if (res && res.success) {
+                    console.log(res)
                     dispatch(userUpdateSuccessAction(res.user))
-                    getUser();
                 }
             })
             .catch(err => {
@@ -193,7 +192,7 @@ export const logOut = () => {
         })
     })
         .then(res => checkResponse(res))
-        .then(res => {
+        .then(() => {
             deleteCookie('accessToken');
             deleteCookie('refreshToken')
         })

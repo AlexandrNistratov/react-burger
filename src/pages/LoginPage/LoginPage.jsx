@@ -16,9 +16,6 @@ const LoginPage = () => {
     const { isAuth } = data;
     const { email, password } = data.form;
 
-
-    console.log(data.form)
-
     const onChange = e => {
         dispatch(setLoginAction({...data.form, [e.target.name]: e.target.value}))
     }
