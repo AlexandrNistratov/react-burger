@@ -1,29 +1,20 @@
 import React from 'react';
-import { NavLink, useLocation, useHistory } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import styles from './profile.module.css';
 import clsx from "clsx";
 import FormProfile from "../../components/UI/FormProfile/FormProfile";
 import { logOut } from "../../utils/Api";
 import { logOutAction } from "../../services/actions/login";
 import { useSelector, useDispatch } from "react-redux";
-import {getCookie} from "../../utils/cookie";
 
 const Profile = () => {
     const location = useLocation();
-    const history = useHistory();
     const dispatch = useDispatch();
     const isProfile = location.pathname === '/profile';
-    const data = useSelector(state => state.login.form)
-    const da = useSelector(state => state.login)
-    console.log(da)
-
-
 
     const handleLogOut = () => {
         dispatch(logOutAction())
-        const qwe = getCookie('accessToken');
-        console.log(qwe)
-        logOut(data.token);
+        logOut();
     }
 
     return (

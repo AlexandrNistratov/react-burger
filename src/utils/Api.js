@@ -109,7 +109,7 @@ export const userUpdate = (data) => {
     return dispatch => {
         dispatch(userUpdateRequestAction())
         fetch(`${ API_URL }/auth/user`, {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -117,15 +117,11 @@ export const userUpdate = (data) => {
             },
             body: JSON.stringify({data})
         })
+            .then(res => checkResponse(res))
             .then(res => {
-                console.log(res)
-                checkResponse(res)
-            })
-            .then(res => {
-                console.log("Мы в userUpdate")
-                console.log(res)
                 if (res && res.success) {
                     dispatch(userUpdateSuccessAction(res.user))
+                    getUser();
                 }
             })
             .catch(err => {

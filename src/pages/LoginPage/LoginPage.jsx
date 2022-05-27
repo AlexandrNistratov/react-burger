@@ -7,29 +7,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../utils/Api";
 import { setLoginAction } from "../../services/actions/login";
 import { useHistory } from "react-router-dom";
-import {getCookie} from "../../utils/cookie";
 
 const LoginPage = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const form = useSelector(state => state.login.form);
-    const isAuth = useSelector(state => state.login.isAuth);
-    const log = useSelector(state => state.login);
-    // console.log(log)
-    const qwe = getCookie('accessToken')
-    console.log(qwe)
-    const { email, password } = form;
+    const data = useSelector(state => state.login);
+    const { isAuth } = data;
+    const { email, password } = data.form;
 
-    // console.log(isAuth, email, password)
+
+    console.log(data.form)
 
     const onChange = e => {
-        dispatch(setLoginAction({...form, [e.target.name]: e.target.value}))
+        dispatch(setLoginAction({...data.form, [e.target.name]: e.target.value}))
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(login(form));
+        dispatch(login(data.form));
     }
 
     useEffect(() => {
