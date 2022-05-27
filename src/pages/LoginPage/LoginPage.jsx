@@ -1,24 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import Form from "../../components/UI/Form/Form";
-import { Input, ShowIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import './index.css';
 import FormLink from "../../components/UI/FormLink/FormLink";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../utils/Api";
+import { setLoginAction } from "../../services/actions/login";
+import { useHistory } from "react-router-dom";
 
 const LoginPage = () => {
-    const [ value, setValue ] = useState({ email: '', password: ''});
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const form = useSelector(state => state.login.form)
+    console.log(form)
+    const { isAuth, email, password } = form;
 
     const onChange = e => {
-        setValue({ ...value, [e.target.name]: e.target.value });
+        dispatch(setLoginAction({...form, [e.target.name]: e.target.value}))
     }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(login(form));
+    }
+
+    useEffect(() => {
+        history.push('/')
+    },[isAuth])
 
     return (
         <>
-            <Form text='Вход' textButton='Войти'>
+            <Form text='Вход' textButton='Войти' onSubmit={ handleSubmit }>
                 <div className={'mt-6'}>
-                    <Input value={ value.email } onChange={ onChange } type='email' placeholder='E-mail' name='email'/>
+                    <Input value={ email } onChange={ onChange } type='email' placeholder='E-mail' name='email'/>
                 </div>
                 <div className={'mt-6 mb-6'}>
-                    <Input value={ value.password } onChange={ onChange } type='password' placeholder='Пароль' name='password' icon={'ShowIcon'}/>
+                    <Input value={ password } onChange={ onChange } type='password' placeholder='Пароль' name='password' icon={'ShowIcon'}/>
                 </div>
             </Form>
             <FormLink text='Вы — новый пользователь?' url='/register' textLink='Зарегистрироваться'/>

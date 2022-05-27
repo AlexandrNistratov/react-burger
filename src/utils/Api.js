@@ -2,6 +2,8 @@ import { API_URL } from "./constants";
 import { dataRequestAction, dataSuccessAction, dataFailedAction } from "../services/actions/data";
 import { ordersRequestAction, ordersSuccessAction, ordersFailedAction } from "../services/actions/orders";
 import { registrationRequestAction, registrationSuccessAction, registrationFailedAction } from "../services/actions/registration";
+import { loginRequestAction, loginSuccessAction, loginFailedAction, setLoginAction } from "../services/actions/login";
+import { setCookie, getCookie, deleteCookie } from "./cookie";
 
 const checkResponse = (res) => {
     if (res.ok) {
@@ -95,5 +97,53 @@ export const register = (data) => {
             .catch(err => {
                 console.log(err)
                 dispatch(registrationFailedAction())})
+    }
+};
+
+export const login = (data) => {
+    return dispatch => {
+        dispatch(loginRequestAction)
+        fetch(`${ API_URL }/auth/login`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                authorization: getCookie("accessToken")
+            },
+            body: JSON.stringify({
+                email: data.email,
+                password: data.password
+            })
+        })
+            .then(res => checkResponse(res))
+            .then(data => {
+                setCookie('accessToken', data.accessToken);
+                setCookie('refreshToken', data.refreshToken);
+                dispatch(loginSuccessAction(data))
+            })
+            .catch(err => {
+                console.log(err)
+                dispatch(loginFailedAction())})
+    }
+};
+
+export const logOut = (token) => {
+    return dispatch => {
+        dispatch(loginRequestAction)
+        fetch(`${ API_URL }/auth/logout`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                token: token
+            })
+        })
+            .then(res => checkResponse(res)
+                .then(data => {
+                    deleteCookie()
+                }))
+            .catch(err => console.log(err))
     }
 };

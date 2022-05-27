@@ -6,7 +6,6 @@ const initialState = {
         email: '',
         password: '',
     },
-    isReg: false,
     registrationRequest: false,
     registrationFailed: false,
 };
@@ -17,7 +16,7 @@ export const registrationReducer = (state = initialState, action) => {
             return {...state, registrationRequest: true, registrationFailed: false}
         }
         case GET_REGISTRATION_SUCCESS: {
-            return {...state, registrationRequest: false, form: action.payload, isReg: true,  registrationFailed: false}
+            return {...state, registrationRequest: false, form: action.payload, registrationFailed: false}
         }
         case GET_REGISTRATION_FAILED: {
             return {...state, registrationRequest: false, form: { name: '', password: '', email: '' }, registrationFailed: true}

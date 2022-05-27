@@ -1,18 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Form from "../../components/UI/Form/Form";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
-import { register } from "../../utils/Api";
+import {login, register} from "../../utils/Api";
 import { setRegistrationAction } from "../../services/actions/registration";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 
 const RegisterPage = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const form = useSelector(state => state.register.form);
-    const isReg = useSelector(state => state.register.isReg)
 
     const onChange = e => {
         dispatch(setRegistrationAction({...form, [e.target.name]: e.target.value}))
@@ -21,12 +18,8 @@ const RegisterPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(register(form));
+        dispatch(login(form));
     }
-
-    useEffect(() => {
-        isReg && history.push('/');
-    }, [ isReg ])
-
 
     return (
         <>
