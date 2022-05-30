@@ -81,53 +81,96 @@ export const resetPassword = (password, token) => {
         .catch(err => console.log(err))
 }
 
+const updateToken = async (token) => {
+    return await fetch(API_URL + "auth/token", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            token: token,
+        }),
+    }).then(res => checkResponse(res))
+};
+
+const getUserRequest = async () => {
+    return await fetch(`${ API_URL }/auth/user`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: getCookie("accessToken")
+        },
+    })
+        .then(res => checkResponse(res))
+};
+
+
 export const getUser = () => {
-    return dispatch => {
+    return async dispatch => {
         dispatch(getUserRequestAction())
-        fetch(`${ API_URL }/auth/user`, {
-            method: 'GET',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: getCookie("accessToken")
-            }
-        })
-            .then(res => checkResponse(res))
-            .then(res => {
+        try {
+            const res = await getUserRequest();
+            (res && res.success) && getUserSuccessAction(res.user);
+        } catch (err) {
+            if (err.message === "jwt expired") {
+                deleteCookie("accessToken");
+                const refreshToken = getCookie("refreshToken");
+                const token = await updateToken(refreshToken);
+                if (token.success) {
+                    setCookie("accessToken", token.accessToken);
+                    setCookie("refreshToken", token.refreshToken);
+                }
+                const res = await getUserRequest();
                 if (res && res.success) {
                     dispatch(getUserSuccessAction(res.user))
                 }
-            })
-            .catch(err => {
-                console.log(err)
-                dispatch(getUserFailedAction())})
+            } else {
+                dispatch(getUserFailedAction())
+            }
+        }
     }
 };
 
+const getUserUpdateRequest = async (data) => {
+    return await fetch(`${ API_URL }/auth/user`, {
+        method: 'PATCH',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: getCookie("accessToken")
+        },
+        body: JSON.stringify(data)
+    })
+        .then(res => checkResponse(res))
+}
+
 export const userUpdate = (data) => {
-    return dispatch => {
+    return async dispatch => {
         dispatch(userUpdateRequestAction())
-        fetch(`${ API_URL }/auth/user`, {
-            method: 'PATCH',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: getCookie("accessToken")
-            },
-            body: JSON.stringify(data)
-        })
-            .then(res => checkResponse(res))
-            .then(res => {
+        try {
+            const res = await getUserUpdateRequest(data);
+            (res && res.success) && userUpdateSuccessAction(res.user);
+        } catch (err) {
+            if (err.message === "jwt expired") {
+                deleteCookie("accessToken");
+                const refreshToken = getCookie("refreshToken");
+                const token = await updateToken(refreshToken);
+                if (updateToken.success) {
+                    setCookie("accessToken", token.accessToken);
+                    setCookie("refreshToken", token.refreshToken);
+                }
+                const res = await getUserUpdateRequest(data);
                 if (res && res.success) {
-                    console.log(res)
                     dispatch(userUpdateSuccessAction(res.user))
                 }
-            })
-            .catch(err => {
-                console.log(err)
-                dispatch(userUpdateFailedAction())})
+            } else {
+                dispatch(userUpdateFailedAction())
+            }
+        }
     }
 };
+
 
 export const register = (data) => {
     return dispatch => {
@@ -167,7 +210,9 @@ export const login = (data) => {
                 password: data.password
             })
         })
-            .then(res => checkResponse(res))
+            .then(res => {
+                 return checkResponse(res)
+            })
             .then(data => {
                 setCookie('accessToken', data.accessToken);
                 setCookie('refreshToken', data.refreshToken);
