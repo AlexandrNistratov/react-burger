@@ -19,7 +19,9 @@ const AppHeader = () => {
                             <p className={ clsx('text text_type_main-default ml-2 text_color_inactive') }>Лента заказов</p>
                         </a>
                     </nav>
-                    <Logo />
+                    <Link to='/'>
+                        <Logo />
+                    </Link>
                 </div>
                 <Link to='/profile' className={ styles.item }>
                     <ProfileIcon type="secondary" />

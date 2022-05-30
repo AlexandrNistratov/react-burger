@@ -114,7 +114,7 @@ export const userUpdate = (data) => {
                 'Content-Type': 'application/json',
                 Authorization: getCookie("accessToken")
             },
-            body: JSON.stringify({data})
+            body: JSON.stringify(data)
         })
             .then(res => checkResponse(res))
             .then(res => {
