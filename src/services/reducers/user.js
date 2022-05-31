@@ -1,4 +1,4 @@
-import { GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAILED, USER_UPDATE_FAILED, USER_UPDATE_REQUEST, USER_UPDATE_SUCCESS } from "../actions/user";
+import { GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAILED, USER_UPDATE_FAILED, USER_UPDATE_REQUEST, USER_UPDATE_SUCCESS, SET_USER_UPDATE } from "../actions/user";
 
 const initialState = {
     user: {
@@ -31,6 +31,9 @@ export const userReducer = (state = initialState, action) => {
         }
         case USER_UPDATE_FAILED: {
             return {...state, userUpdateRequest: false, useUpdateFailed: true}
+        }
+        case SET_USER_UPDATE: {
+            return {...state, user: action.payload}
         }
         default: return state
     }

@@ -33,10 +33,10 @@ const LoginPage = () => {
         <>
             <Form text='Вход' textButton='Войти' onSubmit={ handleSubmit }>
                 <div className={'mt-6'}>
-                    <Input value={ email } onChange={ onChange } type='email' placeholder='E-mail' name='email'/>
+                    <Input value={ email || '' } onChange={ onChange } type='email' placeholder='E-mail' name='email'/>
                 </div>
                 <div className={'mt-6 mb-6'}>
-                    <Input value={ password } onChange={ onChange } type='password' placeholder='Пароль' name='password' icon={'ShowIcon'}/>
+                    <Input value={ password || '' } onChange={ onChange } type='password' placeholder='Пароль' name='password' icon={'ShowIcon'}/>
                 </div>
             </Form>
             <FormLink text='Вы — новый пользователь?' url='/register' textLink='Зарегистрироваться'/>

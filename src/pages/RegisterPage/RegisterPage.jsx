@@ -5,6 +5,7 @@ import FormLink from "../../components/UI/FormLink/FormLink";
 import {login, register} from "../../utils/Api";
 import { setRegistrationAction } from "../../services/actions/registration";
 import { useDispatch, useSelector } from "react-redux";
+import {setUserUpdateAction} from "../../services/actions/user";
 
 const RegisterPage = () => {
     const dispatch = useDispatch();
@@ -15,11 +16,11 @@ const RegisterPage = () => {
         dispatch(setRegistrationAction({...form, [e.target.name]: e.target.value}))
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        await dispatch(register(form));
-        console.log(form.user)
-        await dispatch(login(form));
+        dispatch(register(form));
+        dispatch(setUserUpdateAction(form))
+        dispatch(login(form));
     }
 
     return (

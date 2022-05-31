@@ -111,7 +111,7 @@ export const getUser = () => {
         dispatch(getUserRequestAction())
         try {
             const res = await getUserRequest();
-            (res && res.success) && getUserSuccessAction(res.user);
+            (res && res.success) && userUpdateSuccessAction(res.user);
         } catch (err) {
             if (err.message === "jwt expired") {
                 deleteCookie("accessToken");
@@ -122,6 +122,7 @@ export const getUser = () => {
                     setCookie("refreshToken", token.refreshToken);
                 }
                 const res = await getUserRequest();
+                console.log(res)
                 if (res && res.success) {
                     dispatch(getUserSuccessAction(res.user))
                 }
@@ -216,7 +217,7 @@ export const login = (data) => {
                 if (data) {
                     setCookie('accessToken', data.accessToken);
                     setCookie('refreshToken', data.refreshToken);
-                    dispatch(getUser(data.user))
+                    dispatch(getUser())
                     dispatch(loginSuccessAction(data))
                 }
             })
