@@ -27,7 +27,7 @@ const LoginPage = () => {
 
     useEffect(() => {
         isAuth && history.push('/')
-    },[isAuth])
+    },[isAuth, history])
 
     return (
         <>

@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Form from "../../components/UI/Form/Form";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
-import {login, register} from "../../utils/Api";
+import { login, register } from "../../utils/Api";
 import { setRegistrationAction } from "../../services/actions/registration";
 import { useDispatch, useSelector } from "react-redux";
-import {setUserUpdateAction} from "../../services/actions/user";
+import { setUserUpdateAction } from "../../services/actions/user";
+import { useHistory } from "react-router-dom";
 
 const RegisterPage = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const form = useSelector(state => state.register.form);
+    const data = useSelector(state => state.login);
+    const { isAuth } = data
 
     const onChange = e => {
         dispatch(setRegistrationAction({...form, [e.target.name]: e.target.value}))
@@ -20,8 +24,14 @@ const RegisterPage = () => {
         e.preventDefault();
         dispatch(register(form));
         dispatch(setUserUpdateAction(form))
-        dispatch(login(form));
+       setTimeout(() => {
+           dispatch(login(form));
+       }, 3000)
     }
+
+    useEffect(() => {
+        isAuth && history.push('/')
+    }, [isAuth, history])
 
     return (
         <>

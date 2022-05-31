@@ -12,7 +12,7 @@ import clsx from "clsx";
 
 const App = () => {
     const dispatch = useDispatch();
-    const { ingredientsData, dataRequest, dataFailed } = useSelector(state => state.data)
+    const { ingredientsData, dataRequest, dataFailed } = useSelector(state => state.data);
 
     useEffect(() => {
         dispatch(getData())
