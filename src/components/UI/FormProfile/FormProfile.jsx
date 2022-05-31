@@ -11,7 +11,6 @@ const FormProfile = () => {
     const dispatch = useDispatch();
 
     const user = useSelector(state => state.user.user);// стор с данными из авторизации
-    const { name, email, password } = user;
 
     const onChange = e => {
         dispatch(userUpdateSuccessAction({...user, [e.target.name]: e.target.value}))
@@ -29,13 +28,13 @@ const FormProfile = () => {
     return (
         <form className={ styles.form } onSubmit={ handleSubmit }>
             <div>
-                <Input value={ name } onChange={ onChange } type='text' placeholder='Имя' name='name' icon={ 'EditIcon' }/>
+                <Input value={ user.name } onChange={ onChange } type='text' placeholder='Имя' name='name' icon={ 'EditIcon' }/>
             </div>
             <div className={'mt-6'}>
-                <Input value={ email } onChange={ onChange } type='email' placeholder='Логин' name='email' icon={ 'EditIcon' }/>
+                <Input value={ user.email } onChange={ onChange } type='email' placeholder='Логин' name='email' icon={ 'EditIcon' }/>
             </div>
             <div className={'mt-6'}>
-                <Input value={ password } onChange={ onChange } type='password' placeholder='Пароль' name='password' icon={ 'EditIcon' }/>
+                <Input value={ user.password } onChange={ onChange } type='password' placeholder='Пароль' name='password' icon={ 'EditIcon' }/>
             </div>
             <div className={ clsx(styles.button, 'mt-6') }>
                 <Button type='secondary' size='large' onClick={ handleCloseEdit }>Отмена</Button>

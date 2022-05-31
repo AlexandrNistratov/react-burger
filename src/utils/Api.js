@@ -2,7 +2,7 @@ import { API_URL } from "./constants";
 import { dataRequestAction, dataSuccessAction, dataFailedAction } from "../services/actions/data";
 import { ordersRequestAction, ordersSuccessAction, ordersFailedAction } from "../services/actions/orders";
 import { registrationRequestAction, registrationSuccessAction, registrationFailedAction } from "../services/actions/registration";
-import { loginRequestAction, loginSuccessAction, loginFailedAction, setLoginAction } from "../services/actions/login";
+import { loginRequestAction, loginSuccessAction, loginFailedAction } from "../services/actions/login";
 import { setCookie, getCookie, deleteCookie } from "./cookie";
 import { getUserRequestAction, getUserSuccessAction, getUserFailedAction, userUpdateFailedAction, userUpdateRequestAction, userUpdateSuccessAction } from "../services/actions/user";
 
@@ -82,7 +82,7 @@ export const resetPassword = (password, token) => {
 }
 
 const updateToken = async (token) => {
-    return await fetch(API_URL + "auth/token", {
+    return await fetch(`${ API_URL }/auth/token`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -203,7 +203,6 @@ export const login = (data) => {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
-                authorization: getCookie("accessToken")
             },
             body: JSON.stringify({
                 email: data.email,
@@ -211,13 +210,15 @@ export const login = (data) => {
             })
         })
             .then(res => {
-                 return checkResponse(res)
+               return  checkResponse(res)
             })
             .then(data => {
-                setCookie('accessToken', data.accessToken);
-                setCookie('refreshToken', data.refreshToken);
-                dispatch(getUser(data.user))
-                dispatch(loginSuccessAction(data))
+                if (data) {
+                    setCookie('accessToken', data.accessToken);
+                    setCookie('refreshToken', data.refreshToken);
+                    dispatch(getUser(data.user))
+                    dispatch(loginSuccessAction(data))
+                }
             })
             .catch(err => {
                 console.log(err)

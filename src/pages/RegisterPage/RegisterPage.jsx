@@ -15,10 +15,11 @@ const RegisterPage = () => {
         dispatch(setRegistrationAction({...form, [e.target.name]: e.target.value}))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(register(form));
-        dispatch(login(form));
+        await dispatch(register(form));
+        console.log(form.user)
+        await dispatch(login(form));
     }
 
     return (
