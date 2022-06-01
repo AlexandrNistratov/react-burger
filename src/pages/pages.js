@@ -4,5 +4,6 @@ import RegisterPage from "./RegisterPage/RegisterPage";
 import ForgotPasswordPage from "./ForgotPasswordPage/ForgotPasswordPage";
 import ResetPassword from "./ResetPassword/ResetPassword";
 import Profile from "./Profile/Profile";
+import OrdersPage from "./OrdersPage/OrdersPage";
 
-export { MainPage, LoginPage, RegisterPage, ForgotPasswordPage, ResetPassword, Profile };
+export { MainPage, LoginPage, RegisterPage, ForgotPasswordPage, ResetPassword, Profile, OrdersPage };

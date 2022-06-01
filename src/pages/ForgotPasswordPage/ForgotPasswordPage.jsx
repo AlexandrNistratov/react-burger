@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import Form from "../../components/UI/Form/Form";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { forgotPassword } from "../../utils/Api";
 
 const ForgotPasswordPage = () => {
     const history = useHistory();
+    const location = useLocation();
 
     const [ value, setValue ] = useState({ email: '' });
 
@@ -19,7 +20,7 @@ const ForgotPasswordPage = () => {
         forgotPassword(value.email)
             .then(res => {
                 console.log(res)
-                res && history.push('/reset-password');
+                res && history.push({ pathname: '/reset-password', state: location});
             })
             .catch(err => console.log(err))
 

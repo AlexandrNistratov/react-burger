@@ -6,6 +6,7 @@ const initialState = {
         email: '',
         password: '',
     },
+    isUser: false,
     getUserRequest: false,
     getUserFailed: false,
     userUpdateRequest: false,
@@ -18,7 +19,7 @@ export const userReducer = (state = initialState, action) => {
             return {...state, getUserRequest: true, getUserFailed: false}
         }
         case GET_USER_SUCCESS: {
-            return {...state, getUserRequest: false, user: action.payload, getUserFailed: false}
+            return {...state, getUserRequest: false, user: action.payload, isUser: true, getUserFailed: false}
         }
         case GET_USER_FAILED: {
             return {...state, getUserRequest: false, getUserFailed: true}

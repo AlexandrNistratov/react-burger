@@ -41,7 +41,7 @@ export const getOrders = (data) => {
         })
             .then(res => {
                 console.log(res)
-                checkResponse(res)
+                return checkResponse(res)
             })
             .then(data => dispatch(ordersSuccessAction(data)))
             .catch(err => {

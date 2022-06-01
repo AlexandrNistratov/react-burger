@@ -24,9 +24,9 @@ const RegisterPage = () => {
         e.preventDefault();
         dispatch(register(form));
         dispatch(setUserUpdateAction(form))
-       setTimeout(() => {
-           dispatch(login(form));
-       }, 3000)
+        setTimeout(() => {
+            dispatch(login(form));
+        }, 3000)
     }
 
     useEffect(() => {

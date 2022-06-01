@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from "../../components/UI/Form/Form";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
 import { resetPassword } from "../../utils/Api";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const ResetPassword = () => {
     const history = useHistory();
+    const location = useLocation()
+    const isForgotPassword = location.state?.pathname === '/forgot-password';
+
     const [ value, setValue ] = useState({ password: '', token: '' });
     const { password, token } = value;
 
@@ -24,6 +27,10 @@ const ResetPassword = () => {
             .catch(err => console.log(err))
 
     }
+
+    useEffect(() => {
+        !isForgotPassword && history.push('/forgot-password')
+    }, [isForgotPassword, history])
 
     return (
         <>

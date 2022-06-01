@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import styles from './app.module.css';
 import AppHeader from "../AppHeader/AppHeader";
-import { MainPage, LoginPage, RegisterPage, ForgotPasswordPage, ResetPassword, Profile } from '../../pages/pages';
+import { ProtectedRoute } from "../Protected-route/protected-route";
+import { MainPage, LoginPage, RegisterPage, ForgotPasswordPage, ResetPassword, Profile, OrdersPage } from '../../pages/pages';
 
 
 import { getData } from "../../utils/Api";
@@ -23,14 +24,14 @@ const App = () => {
                 <Router>
                     <AppHeader />
                     <Switch>
-                        <Route path='/' exact>
+                        <ProtectedRoute path='/' exact>
                             {
                                 dataRequest ? <p className={ clsx('text_type_main-medium') }>Загрузка..</p> :
                                     ingredientsData ? <MainPage /> :
                                         dataFailed ? <p className={ clsx('text_type_main-medium') }>Ошибка</p> : null
                             }
-                        </Route>
-                        <Route path='/login'>
+                        </ProtectedRoute>
+                        <Route path='/login' >
                             <LoginPage />
                         </Route>
                         <Route path='/register'>
@@ -42,9 +43,12 @@ const App = () => {
                         <Route path='/reset-password'>
                             <ResetPassword />
                         </Route>
-                        <Route path='/profile'>
+                        <ProtectedRoute path='/profile'>
                             <Profile />
-                        </Route>
+                        </ProtectedRoute>
+                        <ProtectedRoute path='/profile/orders'>
+                            <OrdersPage />
+                        </ProtectedRoute>
                     </Switch>
                 </Router>
             </section>
