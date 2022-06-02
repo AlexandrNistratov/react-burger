@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, useLocation, useHistory } from 'react-router-dom';
+import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
 import styles from './app.module.css';
 import AppHeader from "../AppHeader/AppHeader";
 import { ProtectedRoute } from "../Protected-route/protected-route";
@@ -27,7 +27,6 @@ const App = () => {
 
     return (
             <section className={ styles.main }>
-                <Router>
                     <AppHeader />
                     <Switch location={ background || location }>
                         <ProtectedRoute path='/' exact>
@@ -59,7 +58,6 @@ const App = () => {
                             <IngredientPage />
                         </Route>
                     </Switch>
-                </Router>
             </section>
     );
 };
