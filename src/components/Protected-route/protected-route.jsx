@@ -3,6 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getUser } from "../../utils/Api";
 import { getCookie } from "../../utils/cookie";
+import PropTypes from "prop-types";
 
 export const ProtectedRoute = ({ children, ...rest }) => {
     const isUser = useSelector((state => state.user.isUser));
@@ -37,6 +38,11 @@ export const ProtectedRoute = ({ children, ...rest }) => {
                 )}
             />
         );
+    }
+
+    ProtectedRoute.propTypes ={
+        children: PropTypes.node.isRequired,
+        rest: PropTypes.object
     }
 
     return <Route {...rest} render={({ location }) => children} />;

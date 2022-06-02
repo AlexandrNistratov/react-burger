@@ -19,7 +19,8 @@ const Form = ({ text, children, textButton, onSubmit }) => {
 Form.propTypes = {
     text: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
-    textButton: PropTypes.string.isRequired
+    textButton: PropTypes.string.isRequired,
+    onSubmit: PropTypes.func.isRequired
 }
 
 export default Form;

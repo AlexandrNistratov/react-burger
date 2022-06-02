@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './ingredientDetails.module.css';
 import clsx from "clsx";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 const IngredientDetails = ({ details }) => {
     const ingredients = useSelector(state => state.details.ingredientsDetails);
@@ -32,5 +33,9 @@ const IngredientDetails = ({ details }) => {
         </section>
     );
 };
+
+IngredientDetails.propTypes = {
+    details: PropTypes.object
+}
 
 export default IngredientDetails;

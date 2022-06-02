@@ -54,7 +54,7 @@ const App = () => {
                         <ProtectedRoute path='/profile/orders'>
                             <OrdersPage />
                         </ProtectedRoute>
-                        <Route path='/ingredients/:id' exact={true}>
+                        <Route path='/ingredients/:id' exact>
                             <IngredientPage />
                         </Route>
                     </Switch>
