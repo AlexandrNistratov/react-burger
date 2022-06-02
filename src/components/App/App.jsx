@@ -29,13 +29,13 @@ const App = () => {
             <section className={ styles.main }>
                     <AppHeader />
                     <Switch location={ background || location }>
-                        <ProtectedRoute path='/' exact>
+                        <Route path='/' exact>
                             {
                                 dataRequest ? <p className={ clsx('text_type_main-medium') }>Загрузка..</p> :
                                     ingredientsData ? <MainPage /> :
                                         dataFailed ? <p className={ clsx('text_type_main-medium') }>Ошибка</p> : null
                             }
-                        </ProtectedRoute>
+                        </Route>
                         <Route path='/login' >
                             <LoginPage />
                         </Route>

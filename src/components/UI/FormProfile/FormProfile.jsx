@@ -11,7 +11,6 @@ const FormProfile = () => {
     const dispatch = useDispatch();
 
     const user = useSelector(state => state.user.user);// стор с данными из авторизации
-    console.log(user)
 
     const onChange = e => {
         dispatch(setUserUpdateAction({...user, [e.target.name]: e.target.value}))

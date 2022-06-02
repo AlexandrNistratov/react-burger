@@ -7,24 +7,30 @@ import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import { getOrders } from "../../utils/Api";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 
 const TotalConstructor = () => {
     const [ totalPrice, setTotalPrice ] = useState(0);
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const { bun, ingredients } = useSelector(state => state.constructorData);
 
     const allItems = useSelector( state => [state.constructorData.bun, state.constructorData.bun, ...state.constructorData.ingredients]);
+    const isAuth = useSelector(state => state.login.isAuth)
 
     //Айдишки элементов в конструкторе
     const arrIdIngredients = allItems.map((item) => item?._id);
 
     //Модалка с номером заказа
     const openOrderModal = () => {
-        arrIdIngredients &&
-        dispatch(getOrders(arrIdIngredients))
+        if(!isAuth) {
+            arrIdIngredients &&
+            dispatch(getOrders(arrIdIngredients))
+            history.push('login')
+        }
         openPopup();
     };
 

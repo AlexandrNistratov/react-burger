@@ -5,7 +5,8 @@ import clsx from "clsx";
 import FormProfile from "../../components/UI/FormProfile/FormProfile";
 import { logOut } from "../../utils/Api";
 import { logOutAction } from "../../services/actions/login";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { clearIngredientsActions } from "../../services/actions/constructor";
 
 const Profile = () => {
     const location = useLocation();
@@ -13,6 +14,7 @@ const Profile = () => {
     const isProfile = location.pathname === '/profile';
 
     const handleLogOut = () => {
+        dispatch(clearIngredientsActions())
         dispatch(logOutAction())
         logOut();
     }
