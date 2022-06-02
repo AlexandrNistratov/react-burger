@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useLocation, useHistory } from 'react-router-dom';
 import styles from './app.module.css';
 import AppHeader from "../AppHeader/AppHeader";
 import { ProtectedRoute } from "../Protected-route/protected-route";
@@ -9,11 +9,17 @@ import { MainPage, LoginPage, RegisterPage, ForgotPasswordPage, ResetPassword, P
 import { getData } from "../../utils/Api";
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from "clsx";
+import IngredientPage from "../../pages/IngredientPage/IngredientPage";
 
 
 const App = () => {
     const dispatch = useDispatch();
     const { ingredientsData, dataRequest, dataFailed } = useSelector(state => state.data);
+
+    const location = useLocation();
+    const history = useHistory();
+    const action = history.action === "PUSH" || history.action === "REPLACE";
+    const background = action && location.state && location.state.background;
 
     useEffect(() => {
         dispatch(getData())
@@ -23,7 +29,7 @@ const App = () => {
             <section className={ styles.main }>
                 <Router>
                     <AppHeader />
-                    <Switch>
+                    <Switch location={ background || location }>
                         <ProtectedRoute path='/' exact>
                             {
                                 dataRequest ? <p className={ clsx('text_type_main-medium') }>Загрузка..</p> :
@@ -49,6 +55,9 @@ const App = () => {
                         <ProtectedRoute path='/profile/orders'>
                             <OrdersPage />
                         </ProtectedRoute>
+                        <Route path='/ingredients/:id' exact={true}>
+                            <IngredientPage />
+                        </Route>
                     </Switch>
                 </Router>
             </section>
