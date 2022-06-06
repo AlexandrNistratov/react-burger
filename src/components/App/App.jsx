@@ -22,20 +22,20 @@ const App = () => {
     const background = action && location.state && location.state.background;
 
     useEffect(() => {
-        dispatch(getData())
+        dispatch(getData());
     }, [dispatch]);
 
     return (
             <section className={ styles.main }>
                     <AppHeader />
                     <Switch location={ background || location }>
-                        <ProtectedRoute path='/' exact>
+                        <Route path='/' exact>
                             {
                                 dataRequest ? <p className={ clsx('text_type_main-medium') }>Загрузка..</p> :
                                     ingredientsData ? <MainPage /> :
                                         dataFailed ? <p className={ clsx('text_type_main-medium') }>Ошибка</p> : null
                             }
-                        </ProtectedRoute>
+                        </Route>
                         <ProtectedRoute path='/login' exact>
                             <LoginPage />
                         </ProtectedRoute>

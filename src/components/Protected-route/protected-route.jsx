@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Redirect } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { getUser } from "../../utils/Api";
 import { getCookie } from "../../utils/cookie";
 import PropTypes from "prop-types";
 
 export const ProtectedRoute = ({ children, ...rest }) => {
-    const dispatch = useDispatch();
     const isUser = useSelector((state => state.userReducer.isUser));
     const isToken = getCookie("accessToken");
+    console.log(isToken)
+    console.log(isUser)
     const [ isUserLoaded, setUserLoaded ] = useState(false);
 
     const init = async () => {
-        await dispatch(getUser());
+        await getUser();
         setUserLoaded(true);
     };
 
@@ -41,10 +42,10 @@ export const ProtectedRoute = ({ children, ...rest }) => {
         );
     }
 
-    ProtectedRoute.propTypes ={
-        children: PropTypes.node.isRequired,
-        rest: PropTypes.object
-    }
-
     return <Route {...rest} render={({ location }) => children} />;
 };
+
+ProtectedRoute.propTypes = {
+    children: PropTypes.node.isRequired,
+    rest: PropTypes.object
+}

@@ -228,22 +228,20 @@ export const login = (data) => {
 };
 
 export const logOut = () => {
-    return dispatch => {
-        fetch(`${ API_URL }/auth/logout`, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                token: getCookie("refreshToken")
-            })
+    fetch(`${ API_URL }/auth/logout`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            token: getCookie("refreshToken")
         })
-            .then(res => checkResponse(res))
-            .then(() => {
-                deleteCookie('accessToken');
-                deleteCookie('refreshToken');
-            })
-            .catch(err => console.log(err))
-    }
+    })
+        .then(res => checkResponse(res))
+        .then(() => {
+            deleteCookie('accessToken');
+            deleteCookie('refreshToken');
+        })
+        .catch(err => console.log(err))
 };
