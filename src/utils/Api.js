@@ -114,10 +114,12 @@ export const getUser = () => {
             const res = await getUserRequest();
             (res && res.success) && await dispatch(getUserSuccessAction(res.user));
         } catch (err) {
-            if (err.message === "Ошибка 403") {
+            console.log(err)
+            if (err === "Ошибка 403") {
                 deleteCookie("accessToken");
                 const refreshToken = getCookie("refreshToken");
                 const token = await updateToken(refreshToken);
+                console.log(token)
                 if (token.success) {
                     setCookie("accessToken", token.accessToken);
                     setCookie("refreshToken", token.refreshToken);
@@ -154,7 +156,7 @@ export const userUpdate = (data) => {
             const res = await getUserUpdateRequest(data);
             (res && res.success) && dispatch(userUpdateSuccessAction(res.user));
         } catch (err) {
-            if (err.message === "Ошибка 403") {
+            if (err === "Ошибка 403") {
                 deleteCookie("accessToken");
                 const refreshToken = getCookie("refreshToken");
                 const token = await updateToken(refreshToken);

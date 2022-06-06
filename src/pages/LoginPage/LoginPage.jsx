@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Form from "../../components/UI/Form/Form";
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import './index.css';

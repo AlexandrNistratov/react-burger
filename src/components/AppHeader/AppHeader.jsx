@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 const AppHeader = () => {
     const user = useSelector(state => state.userReducer)
     const { isAuth, isUser } = user;
+
     return (
         <section className={ styles.main }>
             <div className={ styles.main__wrapper }>
