@@ -29,29 +29,29 @@ const App = () => {
             <section className={ styles.main }>
                     <AppHeader />
                     <Switch location={ background || location }>
-                        <Route path='/' exact>
+                        <ProtectedRoute path='/' exact>
                             {
                                 dataRequest ? <p className={ clsx('text_type_main-medium') }>Загрузка..</p> :
                                     ingredientsData ? <MainPage /> :
                                         dataFailed ? <p className={ clsx('text_type_main-medium') }>Ошибка</p> : null
                             }
-                        </Route>
-                        <Route path='/login' >
+                        </ProtectedRoute>
+                        <ProtectedRoute path='/login' exact>
                             <LoginPage />
-                        </Route>
-                        <Route path='/register'>
+                        </ProtectedRoute>
+                        <ProtectedRoute path='/register' exact>
                             <RegisterPage />
-                        </Route>
-                        <Route path='/forgot-password'>
+                        </ProtectedRoute>
+                        <ProtectedRoute path='/forgot-password' exact>
                             <ForgotPasswordPage />
-                        </Route>
-                        <Route path='/reset-password'>
+                        </ProtectedRoute>
+                        <ProtectedRoute path='/reset-password' exact>
                             <ResetPassword />
-                        </Route>
-                        <ProtectedRoute path='/profile'>
+                        </ProtectedRoute>
+                        <ProtectedRoute path='/profile' exact>
                             <Profile />
                         </ProtectedRoute>
-                        <ProtectedRoute path='/profile/orders'>
+                        <ProtectedRoute path='/profile/orders' exact>
                             <OrdersPage />
                         </ProtectedRoute>
                         <Route path='/ingredients/:id' exact>

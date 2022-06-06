@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from "../../components/UI/Form/Form";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
 import { useHistory, useLocation } from 'react-router-dom';
 import { forgotPassword } from "../../utils/Api";
+import { useSelector } from "react-redux";
 
 const ForgotPasswordPage = () => {
     const history = useHistory();
@@ -15,6 +16,9 @@ const ForgotPasswordPage = () => {
         setValue({ ...value, [e.target.name]: e.target.value });
     }
 
+    const data = useSelector(state => state.userReducer);
+    const { isAuth } = data
+
     const handleSubmit = (e) => {
         e.preventDefault();
         forgotPassword(value.email)
@@ -25,6 +29,10 @@ const ForgotPasswordPage = () => {
             .catch(err => console.log(err))
 
     }
+
+    useEffect(() => {
+        isAuth && history.push('/')
+    }, [isAuth, history])
 
     return (
         <>
