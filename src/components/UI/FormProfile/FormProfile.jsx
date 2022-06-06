@@ -21,12 +21,13 @@ const FormProfile = () => {
         dispatch(userUpdate(user));//обновляю тот стор с данными из авторизации
     }
 
-    const handleCloseEdit = () => {
+    const handleCloseEdit = (e) => {
+        e.preventDefault();
         dispatch(getUser());
     }
 
     return (
-        <form className={ styles.form } onSubmit={ handleSubmit }>
+        <form className={ styles.form } >
             <div>
                 <Input value={ user.name || '' } onChange={ onChange } type='text' placeholder='Имя' name='name' icon={ 'EditIcon' }/>
             </div>
@@ -38,7 +39,7 @@ const FormProfile = () => {
             </div>
             <div className={ clsx(styles.button, 'mt-6') }>
                 <Button type='secondary' size='large' onClick={ handleCloseEdit }>Отмена</Button>
-                <Button type='primary' size='large'>Сохранить</Button>
+                <Button type='primary' size='large' onClick={ handleSubmit }>Сохранить</Button>
             </div>
         </form>
     );

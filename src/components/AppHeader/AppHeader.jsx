@@ -27,7 +27,7 @@ const AppHeader = () => {
                 </div>
                 <Link to='/profile' className={ styles.item }>
                     <ProfileIcon type="secondary" />
-                    <p className={ clsx('text text_type_main-default ml-2 text_color_inactive') }>{isAuth && isUser ? user.user.name : 'Личный кабинет'}</p>
+                    <p className={ clsx('text text_type_main-default ml-2 text_color_inactive') }>{isAuth && isUser ? user.user.email : 'Личный кабинет'}</p>
                 </Link>
             </div>
         </section>
