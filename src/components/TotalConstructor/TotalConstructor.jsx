@@ -19,7 +19,7 @@ const TotalConstructor = () => {
     const { bun, ingredients } = useSelector(state => state.constructorData);
 
     const allItems = useSelector( state => [state.constructorData.bun, state.constructorData.bun, ...state.constructorData.ingredients]);
-    const isAuth = useSelector(state => state.login.isAuth)
+    const isAuth = useSelector(state => state.userReducer.isAuth)
 
     //Айдишки элементов в конструкторе
     const arrIdIngredients = allItems.map((item) => item?._id);

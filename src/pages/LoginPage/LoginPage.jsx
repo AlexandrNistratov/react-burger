@@ -5,24 +5,24 @@ import './index.css';
 import FormLink from "../../components/UI/FormLink/FormLink";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../utils/Api";
-import { setLoginAction } from "../../services/actions/login";
+import { setEditAction } from "../../services/actions/userActions";
 import { useHistory } from "react-router-dom";
 
 const LoginPage = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const data = useSelector(state => state.login);
+    const data = useSelector(state => state.userReducer);
     const { isAuth } = data;
-    const { email, password } = data.form;
+    const { email, password } = data.user;
 
     const onChange = e => {
-        dispatch(setLoginAction({...data.form, [e.target.name]: e.target.value}))
+        dispatch(setEditAction({...data.user, [e.target.name]: e.target.value}))
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(login(data.form));
+        dispatch(login(data.user));
     }
 
     useEffect(() => {

@@ -4,16 +4,16 @@ import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, userUpdate } from "../../../utils/Api";
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { setUserUpdateAction } from "../../../services/actions/user";
+import { setEditAction } from "../../../services/actions/userActions";
 import clsx from "clsx";
 
 const FormProfile = () => {
     const dispatch = useDispatch();
 
-    const user = useSelector(state => state.user.user);// стор с данными из авторизации
+    const user = useSelector(state => state.userReducer.user);// стор с данными из авторизации
 
     const onChange = e => {
-        dispatch(setUserUpdateAction({...user, [e.target.name]: e.target.value}))
+        dispatch(setEditAction({...user, [e.target.name]: e.target.value}))
     }
 
     const handleSubmit = (e) => {

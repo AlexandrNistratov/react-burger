@@ -1,10 +1,11 @@
 import { API_URL } from "./constants";
 import { dataRequestAction, dataSuccessAction, dataFailedAction } from "../services/actions/data";
 import { ordersRequestAction, ordersSuccessAction, ordersFailedAction } from "../services/actions/orders";
-import { registrationRequestAction, registrationSuccessAction, registrationFailedAction } from "../services/actions/registration";
-import { loginRequestAction, loginSuccessAction, loginFailedAction } from "../services/actions/login";
 import { setCookie, getCookie, deleteCookie } from "./cookie";
-import { getUserRequestAction, getUserSuccessAction, getUserFailedAction, userUpdateFailedAction, userUpdateRequestAction, userUpdateSuccessAction } from "../services/actions/user";
+import { registrationRequestAction, registrationSuccessAction, registrationFailedAction,
+    loginRequestAction, loginSuccessAction, loginFailedAction,
+    getUserRequestAction, getUserSuccessAction, getUserFailedAction,
+    userUpdateFailedAction, userUpdateRequestAction, userUpdateSuccessAction } from "../services/actions/userActions";
 
 const checkResponse = (res) => {
     if (res.ok) {
@@ -111,9 +112,11 @@ export const getUser = () => {
         dispatch(getUserRequestAction())
         try {
             const res = await getUserRequest();
-            (res && res.success) && userUpdateSuccessAction(res.user);
+            (res && res.success) && await dispatch(getUserSuccessAction(res.user));
         } catch (err) {
-            if (err.message === "jwt expired") {
+            console.log(err)
+            if (err.message === "Ошибка 403") {
+
                 deleteCookie("accessToken");
                 const refreshToken = getCookie("refreshToken");
                 const token = await updateToken(refreshToken);
@@ -152,11 +155,14 @@ export const userUpdate = (data) => {
         try {
             const res = await getUserUpdateRequest(data);
             (res && res.success) && userUpdateSuccessAction(res.user);
+            console.log(res)
         } catch (err) {
-            if (err.message === "jwt expired") {
+            console.log('vs')
+            if (err.message === "Ошибка 403") {
                 deleteCookie("accessToken");
                 const refreshToken = getCookie("refreshToken");
                 const token = await updateToken(refreshToken);
+                console.log(token)
                 if (updateToken.success) {
                     setCookie("accessToken", token.accessToken);
                     setCookie("refreshToken", token.refreshToken);
@@ -190,9 +196,7 @@ export const register = (data) => {
         })
             .then(res => checkResponse(res))
             .then(data => dispatch(registrationSuccessAction(data)))
-            .catch(err => {
-                console.log(err)
-                dispatch(registrationFailedAction())})
+            .catch(() => {dispatch(registrationFailedAction())})
     }
 };
 
@@ -228,20 +232,22 @@ export const login = (data) => {
 };
 
 export const logOut = () => {
-    fetch(`${ API_URL }/auth/logout`, {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            token: getCookie("refreshToken")
+    return dispatch => {
+        fetch(`${ API_URL }/auth/logout`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                token: getCookie("refreshToken")
+            })
         })
-    })
-        .then(res => checkResponse(res))
-        .then(() => {
-            deleteCookie('accessToken');
-            deleteCookie('refreshToken')
-        })
-        .catch(err => console.log(err))
+            .then(res => checkResponse(res))
+            .then(() => {
+                deleteCookie('accessToken');
+                deleteCookie('refreshToken');
+            })
+            .catch(err => console.log(err))
+    }
 };

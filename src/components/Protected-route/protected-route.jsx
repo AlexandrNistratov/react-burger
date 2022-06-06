@@ -6,7 +6,7 @@ import { getCookie } from "../../utils/cookie";
 import PropTypes from "prop-types";
 
 export const ProtectedRoute = ({ children, ...rest }) => {
-    const isUser = useSelector((state => state.user.isUser));
+    const isUser = useSelector((state => state.userReducer.isUser));
     const isToken = getCookie("accessToken");
     const [ isUserLoaded, setUserLoaded ] = useState(false);
 

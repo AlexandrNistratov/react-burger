@@ -4,7 +4,7 @@ import styles from './profile.module.css';
 import clsx from "clsx";
 import FormProfile from "../../components/UI/FormProfile/FormProfile";
 import { logOut } from "../../utils/Api";
-import { logOutAction } from "../../services/actions/login";
+import { logOutAction } from "../../services/actions/userActions";
 import { useDispatch } from "react-redux";
 import { clearIngredientsActions } from "../../services/actions/constructor";
 
@@ -15,7 +15,7 @@ const Profile = () => {
 
     const handleLogOut = () => {
         dispatch(clearIngredientsActions())
-        dispatch(logOutAction())
+        dispatch(logOutAction());
         logOut();
     }
 
