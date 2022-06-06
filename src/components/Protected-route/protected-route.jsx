@@ -45,5 +45,6 @@ export const ProtectedRoute = ({onlyUnAuth, children, ...rest }) => {
 
 ProtectedRoute.propTypes = {
     children: PropTypes.node.isRequired,
-    rest: PropTypes.object
+    rest: PropTypes.object,
+    onlyUnAuth: PropTypes.bool
 }

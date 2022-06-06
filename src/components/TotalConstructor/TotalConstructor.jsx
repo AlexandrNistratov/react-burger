@@ -27,10 +27,10 @@ const TotalConstructor = () => {
     //Модалка с номером заказа
     const openOrderModal = () => {
         if(!isAuth) {
-            arrIdIngredients &&
-            dispatch(getOrders(arrIdIngredients))
             history.push('login')
         }
+        arrIdIngredients &&
+        dispatch(getOrders(arrIdIngredients))
         openPopup();
     };
 

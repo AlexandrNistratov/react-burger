@@ -6,7 +6,7 @@ import { ProtectedRoute } from "../Protected-route/protected-route";
 import { MainPage, LoginPage, RegisterPage, ForgotPasswordPage, ResetPassword, Profile, OrdersPage } from '../../pages/pages';
 
 
-import { getData } from "../../utils/Api";
+import {getData, getUser} from "../../utils/Api";
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from "clsx";
 import IngredientPage from "../../pages/IngredientPage/IngredientPage";
@@ -23,6 +23,7 @@ const App = () => {
 
     useEffect(() => {
         dispatch(getData());
+        dispatch(getUser())
     }, [dispatch]);
 
     const onlyUnAuth = true;
