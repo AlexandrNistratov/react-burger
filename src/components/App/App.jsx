@@ -25,6 +25,8 @@ const App = () => {
         dispatch(getData());
     }, [dispatch]);
 
+    const onlyUnAuth = true;
+
     return (
             <section className={ styles.main }>
                     <AppHeader />
@@ -36,16 +38,16 @@ const App = () => {
                                         dataFailed ? <p className={ clsx('text_type_main-medium') }>Ошибка</p> : null
                             }
                         </Route>
-                        <ProtectedRoute path='/login' exact>
+                        <ProtectedRoute path='/login' exact  onlyUnAuth={ onlyUnAuth }>
                             <LoginPage />
                         </ProtectedRoute>
-                        <ProtectedRoute path='/register' exact>
+                        <ProtectedRoute path='/register' exact  onlyUnAuth={ onlyUnAuth }>
                             <RegisterPage />
                         </ProtectedRoute>
-                        <ProtectedRoute path='/forgot-password' exact>
+                        <ProtectedRoute path='/forgot-password' exact  onlyUnAuth={ onlyUnAuth }>
                             <ForgotPasswordPage />
                         </ProtectedRoute>
-                        <ProtectedRoute path='/reset-password' exact>
+                        <ProtectedRoute path='/reset-password' exact  onlyUnAuth={ onlyUnAuth }>
                             <ResetPassword />
                         </ProtectedRoute>
                         <ProtectedRoute path='/profile' exact>

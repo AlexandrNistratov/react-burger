@@ -1,47 +1,45 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {Route, Redirect, useLocation} from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../utils/Api";
 import { getCookie } from "../../utils/cookie";
 import PropTypes from "prop-types";
 
-export const ProtectedRoute = ({ children, ...rest }) => {
+export const ProtectedRoute = ({onlyUnAuth, children, ...rest }) => {
+    const location = useLocation();
+    const dispatch = useDispatch();
+
     const isUser = useSelector((state => state.userReducer.isUser));
     const isToken = getCookie("accessToken");
-    console.log(isToken)
-    console.log(isUser)
     const [ isUserLoaded, setUserLoaded ] = useState(false);
 
-    const init = async () => {
-        await getUser();
+    const init = () => {
+        dispatch(getUser());
         setUserLoaded(true);
     };
 
     useEffect(() => {
         init()
-            .catch(err => console.log(err))
     }, []);
 
     if (!isUserLoaded) {
         return null;
     }
 
-    if (!isUser && !isToken) {
+    if (!isUser && !isToken  && location.pathname !== '/login') {
         return (
-            <Route
-                {...rest}
-                render={({ location }) => (
-                    <Redirect
-                        to={{
-                            pathname: "/login",
-                            state: { from: location },
-                        }}
-                    />
-                )}
+            <Redirect
+                to={{
+                    pathname: "/login",
+                    state: { from: location },
+                }}
             />
         );
     }
-
+    if (onlyUnAuth && isUser) {
+        const { from } = location.state || { from: { pathname: '/' } }
+        return <Redirect to={ from } />
+    }
     return <Route {...rest} render={({ location }) => children} />;
 };
 

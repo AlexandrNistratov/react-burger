@@ -6,15 +6,11 @@ import FormLink from "../../components/UI/FormLink/FormLink";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../utils/Api";
 import { setEditAction } from "../../services/actions/userActions";
-import {useHistory, Redirect, useLocation} from "react-router-dom";
 
 const LoginPage = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
-    const location = useLocation();
 
     const data = useSelector(state => state.userReducer);
-    const { isAuth, isUser } = data;
     const { email, password } = data.user;
 
 
@@ -26,12 +22,6 @@ const LoginPage = () => {
         e.preventDefault();
         dispatch(login(data.user));
     }
-
-    if (isUser) {
-        const { from } = location.state || { from: { pathname: "/" } };
-        return <Redirect to={ from } />;
-    }
-
 
     return (
         <>
