@@ -3,18 +3,18 @@ import Form from "../../components/UI/Form/Form";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
 import { register } from "../../utils/Api";
-import { setEditAction } from "../../services/actions/userActions";
+import {loginSuccessAction, setEditAction} from "../../services/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { userUpdateSuccessAction } from "../../services/actions/userActions";
 import { useHistory } from "react-router-dom";
 
 const RegisterPage = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
+    // const history = useHistory();
 
     const user = useSelector(state => state.userReducer.user);
     const data = useSelector(state => state.userReducer);
-    const { isAuth } = data
+    // const { isAuth } = data
 
     const onChange = e => {
         dispatch(setEditAction({...user, [e.target.name]: e.target.value}))
@@ -24,11 +24,14 @@ const RegisterPage = () => {
         e.preventDefault();
         dispatch(register(user));
         dispatch(userUpdateSuccessAction(user))
+        setTimeout(() => {
+            dispatch(loginSuccessAction(user))
+        },3000)
     }
 
-    useEffect(() => {
-        isAuth && history.push('/')
-    }, [isAuth, history])
+    // useEffect(() => {
+    //     isAuth && history.push('/')
+    // }, [isAuth, history])
 
     return (
         <>

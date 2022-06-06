@@ -41,7 +41,6 @@ export const getOrders = (data) => {
             })
         })
             .then(res => {
-                console.log(res)
                 return checkResponse(res)
             })
             .then(data => dispatch(ordersSuccessAction(data)))
@@ -193,7 +192,11 @@ export const register = (data) => {
             })
         })
             .then(res => checkResponse(res))
-            .then(data => dispatch(registrationSuccessAction(data)))
+            .then(data => {
+                console.log(data)
+                dispatch(getUser())
+                dispatch(registrationSuccessAction(data))
+                dispatch(loginSuccessAction(data))})
             .catch(() => {dispatch(registrationFailedAction())})
     }
 };
@@ -219,8 +222,8 @@ export const login = (data) => {
                 if (data) {
                     setCookie('accessToken', data.accessToken);
                     setCookie('refreshToken', data.refreshToken);
-                    dispatch(getUser())
                     dispatch(loginSuccessAction(data))
+                    dispatch(getUser())
                 }
             })
             .catch(err => {

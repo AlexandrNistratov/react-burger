@@ -26,7 +26,12 @@ export const ProtectedRoute = ({onlyUnAuth, children, ...rest }) => {
         return null;
     }
 
-    if (!isUser && !isToken  && location.pathname !== '/login') {
+    if (!isUser
+        && !isToken
+        && location.pathname !== '/login'
+        && location.pathname !== '/register'
+        && location.pathname !== '/forgot-password'
+        && location.pathname !== '/reset-password') {
         return (
             <Redirect
                 to={{
@@ -36,6 +41,7 @@ export const ProtectedRoute = ({onlyUnAuth, children, ...rest }) => {
             />
         );
     }
+
     if (onlyUnAuth && isUser) {
         const { from } = location.state || { from: { pathname: '/' } }
         return <Redirect to={ from } />
