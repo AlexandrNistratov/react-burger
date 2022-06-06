@@ -3,7 +3,16 @@ import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
 import styles from './app.module.css';
 import AppHeader from "../AppHeader/AppHeader";
 import { ProtectedRoute } from "../Protected-route/protected-route";
-import { MainPage, LoginPage, RegisterPage, ForgotPasswordPage, ResetPassword, Profile, OrdersPage } from '../../pages/pages';
+import {
+    MainPage,
+    LoginPage,
+    RegisterPage,
+    ForgotPasswordPage,
+    ResetPassword,
+    Profile,
+    OrdersPage,
+    NotFoundPage
+} from '../../pages/pages';
 
 
 import {getData, getUser} from "../../utils/Api";
@@ -59,6 +68,9 @@ const App = () => {
                         </ProtectedRoute>
                         <Route path='/ingredients/:id' exact>
                             <IngredientPage />
+                        </Route>
+                        <Route>
+                            <NotFoundPage />
                         </Route>
                     </Switch>
             </section>
