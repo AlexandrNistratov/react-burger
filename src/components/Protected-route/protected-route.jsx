@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import {Route, Redirect, useLocation} from "react-router-dom";
+import { Route, Redirect, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../utils/Api";
 import { getCookie } from "../../utils/cookie";
 import PropTypes from "prop-types";
 
-export const ProtectedRoute = ({onlyUnAuth, children, ...rest }) => {
+export const ProtectedRoute = ({ onlyUnAuth, children, ...rest }) => {
     const location = useLocation();
     const dispatch = useDispatch();
 
@@ -14,7 +14,9 @@ export const ProtectedRoute = ({onlyUnAuth, children, ...rest }) => {
     const [ isUserLoaded, setUserLoaded ] = useState(false);
 
     const init = () => {
-        dispatch(getUser());
+        if(isUser) {
+            dispatch(getUser())
+        }
         setUserLoaded(true);
     };
 

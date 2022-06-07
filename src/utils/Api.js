@@ -124,7 +124,6 @@ export const getUser = () => {
                     setCookie("refreshToken", token.refreshToken);
                 }
                 const res = await getUserRequest();
-                console.log(res)
                 if (res && res.success) {
                     dispatch(getUserSuccessAction(res.user))
                 }
@@ -159,8 +158,7 @@ export const userUpdate = (data) => {
                 deleteCookie("accessToken");
                 const refreshToken = getCookie("refreshToken");
                 const token = await updateToken(refreshToken);
-                console.log(token)
-                if (updateToken.success) {
+                if (token.success) {
                     setCookie("accessToken", token.accessToken);
                     setCookie("refreshToken", token.refreshToken);
                 }

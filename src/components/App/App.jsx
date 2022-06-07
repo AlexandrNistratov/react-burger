@@ -24,6 +24,7 @@ import IngredientPage from "../../pages/IngredientPage/IngredientPage";
 const App = () => {
     const dispatch = useDispatch();
     const { ingredientsData, dataRequest, dataFailed } = useSelector(state => state.data);
+    const user = useSelector(state => state.userReducer.user)
 
     const location = useLocation();
     const history = useHistory();
@@ -32,7 +33,9 @@ const App = () => {
 
     useEffect(() => {
         dispatch(getData());
-        dispatch(getUser())
+        if(user.name !== '') {
+            dispatch(getUser())
+        }
     }, [dispatch]);
 
     const onlyUnAuth = true;
