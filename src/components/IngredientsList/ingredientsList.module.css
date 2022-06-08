@@ -17,3 +17,8 @@
     grid-column-gap: 24px;
     grid-row-gap: 32px;
 }
+
+.link {
+    text-decoration: none;
+    color: #fff;
+}

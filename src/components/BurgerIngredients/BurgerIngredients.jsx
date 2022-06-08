@@ -8,10 +8,13 @@ import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useModal } from "../../hooks/useModal";
 import { useDispatch } from "react-redux";
 import { getDetailsAction, deleteDetailsAction } from "../../services/actions/details";
+import { useHistory } from "react-router-dom";
 
 const BurgerIngredients = () => {
     const { isOpen, closePopup, openPopup} = useModal();
     const [ current, setCurrent ] = useState('Булки');
+
+    const history = useHistory();
 
     const dispatch = useDispatch();
 
@@ -23,6 +26,7 @@ const BurgerIngredients = () => {
     const closeModalDetails = () => {
         dispatch(deleteDetailsAction());
         closePopup();
+        history.push('/')
     };
 
     const onClickTab = (tab) => {

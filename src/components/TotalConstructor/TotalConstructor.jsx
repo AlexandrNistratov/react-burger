@@ -7,22 +7,28 @@ import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import { getOrders } from "../../utils/Api";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 
 const TotalConstructor = () => {
     const [ totalPrice, setTotalPrice ] = useState(0);
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const { bun, ingredients } = useSelector(state => state.constructorData);
 
     const allItems = useSelector( state => [state.constructorData.bun, state.constructorData.bun, ...state.constructorData.ingredients]);
+    const isAuth = useSelector(state => state.userReducer.isAuth)
 
     //Айдишки элементов в конструкторе
     const arrIdIngredients = allItems.map((item) => item?._id);
 
     //Модалка с номером заказа
     const openOrderModal = () => {
+        if(!isAuth) {
+            history.push('login')
+        }
         arrIdIngredients &&
         dispatch(getOrders(arrIdIngredients))
         openPopup();
@@ -56,9 +62,9 @@ const TotalConstructor = () => {
                     <CurrencyIcon type="primary" />
                 </div>
             </div>
-            <div className={ styles.button }>
-                <Button size='large' type='primary' onClick={ openOrderModal } disabled={ !bun }>Оформить заказ</Button>
-            </div>
+                <div className={ styles.button }>
+                    <Button onClick={ openOrderModal } disabled={ !bun }>Оформить заказ</Button>
+                </div>
             {isOpen &&
                 < Modal isOpen={ isOpen } closePopup={ closePopup }>
                     <OrderDetails />
