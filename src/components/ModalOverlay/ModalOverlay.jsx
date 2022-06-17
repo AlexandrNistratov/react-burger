@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import styles from'./modalOverlay.module.css';
 import clsx from "clsx";
 import PropTypes from "prop-types";

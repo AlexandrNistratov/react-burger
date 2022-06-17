@@ -36,7 +36,7 @@ const App = () => {
         if(user.name !== '') {
             dispatch(getUser())
         }
-    }, [dispatch]);
+    }, [dispatch, user.name]);
 
     const onlyUnAuth = true;
 
