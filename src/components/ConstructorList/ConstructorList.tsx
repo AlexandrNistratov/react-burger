@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './constructorList.module.css';
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
@@ -7,11 +7,14 @@ import { addBunsAction, addIngredientsAction, deleteIngredientsActions, moveIngr
 import { v4 as uuidv4 } from 'uuid';
 import ConstructorItem from "../ConstructorItem/ConstructorItem";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import { TData, TConstructorList } from "../../utils/types";
 
-const ConstructorList = () => {
+
+
+const ConstructorList: FC<TConstructorList> = () => {
     const dispatch = useDispatch();
 
-    const onDropHandler = (item) => {
+    const onDropHandler: (item: any) => void = (item) => {
         if(item.type === 'bun') {
             dispatch(addBunsAction(item));
         } else {
@@ -22,7 +25,8 @@ const ConstructorList = () => {
         }
     };
 
-    const { bun, ingredients } = useSelector(state => state.constructorData);
+    // TODO типизировать на следующем спринте
+    const { bun, ingredients } = useSelector((state: any) => state.constructorData);
 
     const [, ref] = useDrop({
         accept: 'ingredients',
@@ -32,12 +36,12 @@ const ConstructorList = () => {
     });
 
     //Удаление ингридиента по клику на кнопку
-    const deleteHandler = (item) => {
+    const deleteHandler: (item: TData) => void = (item) => {
         dispatch(deleteIngredientsActions(item.key));
     };
 
     //Перетаскивание ингридиентов
-    const moveIngredients = (dragIndex, hoverIndex) => {
+    const moveIngredients = (dragIndex: number, hoverIndex: number) => {
         const newCards = [...ingredients];
         const dragCard = ingredients[dragIndex];
         newCards.splice(dragIndex, 1);
@@ -63,9 +67,9 @@ const ConstructorList = () => {
             }
             <div className={ styles.scroll }>
                 {ingredients.length > 0 ? (
-                    ingredients.map((item, index) => {
+                    ingredients.map((item: TData, index: TConstructorList['index']) => {
                         return <li className={ styles.item } key={ item?.key }>
-                                    <ConstructorItem item={ item } index={ index } deleteHandler={ () => deleteHandler(item) } moveIngredients={ moveIngredients } />
+                                    <ConstructorItem item={ item } index={ index } deleteHandler={ () => deleteHandler(item) } moveIngredients={ moveIngredients } isLocked={ false }/>
                         </li>})
                         )
                     : (<p className={clsx(styles.text, 'text_type_main-medium')}>И не забудь ингридиенты.<br/> Тут сейчас совсем пусто</p>)

@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './appHeader.module.css';
 import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import clsx from "clsx";
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
-const AppHeader = () => {
-    const user = useSelector(state => state.userReducer);
+const AppHeader: FC = () => {
+    // TODO типизировать на следующем спринте
+    const user = useSelector((state: any) => state.userReducer);
+
     const { isAuth, isUser } = user;
 
     return (

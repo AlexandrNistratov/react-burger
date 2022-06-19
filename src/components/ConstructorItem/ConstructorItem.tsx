@@ -1,12 +1,19 @@
-import React, { useRef } from 'react';
+import React, { useRef, FC } from 'react';
 import styles from './constructorItem.module.css';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag, useDrop } from "react-dnd";
-import PropTypes from "prop-types";
-import {dataPropTypes} from "../../utils/proptypes";
+import { TData } from "../../utils/types";
 
-const ConstructorItem = ({ item, index, deleteHandler, isLocked, moveIngredients }) => {
-    const ref = useRef(null);
+type TConstructorItem = {
+    item: TData;
+    index: number;
+    deleteHandler: (item: TData['_id']) => void;
+    isLocked: boolean;
+    moveIngredients: (dragIndex: number, hoverIndex: number) => void;
+}
+
+const ConstructorItem: React.FC<TConstructorItem> = ({ item, index, deleteHandler, isLocked, moveIngredients }) => {
+    const ref = useRef<HTMLInputElement>(null);
 
     const { id } = item;
 
@@ -26,7 +33,7 @@ const ConstructorItem = ({ item, index, deleteHandler, isLocked, moveIngredients
                 handlerId: monitor.getHandlerId(),
             }
         },
-        hover: (item, monitor) => {
+        hover: (item: { index: number}, monitor) => {
             if (!ref.current) {
                 return
             }
@@ -39,7 +46,8 @@ const ConstructorItem = ({ item, index, deleteHandler, isLocked, moveIngredients
             }
             const hoverBoundingRect = ref.current?.getBoundingClientRect()
             const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
-            const clientOffset = monitor.getClientOffset()
+            const clientOffset= monitor.getClientOffset() as { x:number, y: number };
+
             const hoverClientY = clientOffset.y - hoverBoundingRect.top
 
             if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
@@ -74,14 +82,6 @@ const ConstructorItem = ({ item, index, deleteHandler, isLocked, moveIngredients
             </ConstructorElement>
         </div>
     );
-}
-
-ConstructorItem.propTypes = {
-    item: dataPropTypes.isRequired,
-    index: PropTypes.number.isRequired,
-    deleteHandler: PropTypes.func.isRequired,
-    isLocked: PropTypes.bool,
-    moveIngredients: PropTypes.func.isRequired
 }
 
 export default ConstructorItem;

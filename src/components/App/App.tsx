@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
 import styles from './app.module.css';
 import AppHeader from "../AppHeader/AppHeader";
@@ -13,20 +13,23 @@ import {
     OrdersPage,
     NotFoundPage
 } from '../../pages/pages';
-
-
-import {getData, getUser} from "../../utils/Api";
+import { getData, getUser } from "../../utils/Api";
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from "clsx";
 import IngredientPage from "../../pages/IngredientPage/IngredientPage";
+import { Location } from 'history';
 
 
-const App = () => {
+const App: FC = () => {
     const dispatch = useDispatch();
-    const { ingredientsData, dataRequest, dataFailed } = useSelector(state => state.data);
-    const user = useSelector(state => state.userReducer.user)
 
-    const location = useLocation();
+    // TODO типизировать на следующем спринте
+    const { ingredientsData, dataRequest, dataFailed } = useSelector((state: any) => state.data);
+
+    // TODO типизировать на следующем спринте
+    const user = useSelector((state: any) => state.userReducer.user);
+
+    const location = useLocation<{ background : Location }>();
     const history = useHistory();
     const action = history.action === "PUSH" || history.action === "REPLACE";
     const background = action && location.state && location.state.background;

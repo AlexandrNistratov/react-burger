@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import styles from './burgerIngredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsList from "../IngredientsList/IngredientsList";
@@ -10,15 +10,15 @@ import { useDispatch } from "react-redux";
 import { getDetailsAction, deleteDetailsAction } from "../../services/actions/details";
 import { useHistory } from "react-router-dom";
 
-const BurgerIngredients = () => {
+const BurgerIngredients: FC = () => {
     const { isOpen, closePopup, openPopup} = useModal();
-    const [ current, setCurrent ] = useState('Булки');
+    const [ current, setCurrent ] = useState<string>('Булки');
 
     const history = useHistory();
 
     const dispatch = useDispatch();
 
-    const clickIngredients = (item) => {
+    const clickIngredients: (item: object) => void  = (item) => {
         dispatch(getDetailsAction(item));
         openPopup();
     };
@@ -29,13 +29,14 @@ const BurgerIngredients = () => {
         history.push('/')
     };
 
-    const onClickTab = (tab) => {
+    const onClickTab: (tab: string) => void = (tab: string) => {
         setCurrent(tab);
         const element = document.getElementById(tab);
         element && element.scrollIntoView({behavior: 'smooth'});
     };
 
-    const scrollHandler = (e) => {
+    // TODO типизировать на следующем спринте
+    const scrollHandler: (e: any) => void = (e) => {
         const target = e.target;
         const scroll = target.scrollTop;
         if(scroll > 0 && scroll < 300) {

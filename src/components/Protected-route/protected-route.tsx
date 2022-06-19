@@ -1,15 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { Route, Redirect, useLocation } from "react-router-dom";
+import React, { useEffect, useState, FC } from 'react';
+import { Route, Redirect, useLocation, RouteProps } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../utils/Api";
 import { getCookie } from "../../utils/cookie";
-import PropTypes from "prop-types";
+import { Location } from 'history';
 
-export const ProtectedRoute = ({ onlyUnAuth, children, ...rest }) => {
-    const location = useLocation();
+type TProtectedRoute = {
+    onlyUnAuth?: boolean;
+    children?: React.ReactNode;
+    rest?: {};
+} &  RouteProps
+
+export const ProtectedRoute: FC<TProtectedRoute> = ({ onlyUnAuth, children, ...rest }) => {
+    const location = useLocation<{ from: Location}>();
     const dispatch = useDispatch();
 
-    const isUser = useSelector((state => state.userReducer.isUser));
+    // TODO типизировать на следующем спринте
+    const isUser = useSelector(((state: any) => state.userReducer.isUser));
+
     const isToken = getCookie("accessToken");
     const [ isUserLoaded, setUserLoaded ] = useState(false);
 
@@ -48,11 +56,5 @@ export const ProtectedRoute = ({ onlyUnAuth, children, ...rest }) => {
         const { from } = location.state || { from: { pathname: '/' } }
         return <Redirect to={ from } />
     }
-    return <Route {...rest} render={({ location }) => children} />;
+    return <Route {...rest} render={({ location }) =><>children</>} />;
 };
-
-ProtectedRoute.propTypes = {
-    children: PropTypes.node.isRequired,
-    rest: PropTypes.object,
-    onlyUnAuth: PropTypes.bool
-}
