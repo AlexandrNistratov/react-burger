@@ -7,11 +7,10 @@ import { addBunsAction, addIngredientsAction, deleteIngredientsActions, moveIngr
 import { v4 as uuidv4 } from 'uuid';
 import ConstructorItem from "../ConstructorItem/ConstructorItem";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { TData, TConstructorList } from "../../utils/types";
+import { TData } from "../../utils/types";
 
 
-
-const ConstructorList: FC<TConstructorList> = () => {
+const ConstructorList: FC<TData> = () => {
     const dispatch = useDispatch();
 
     const onDropHandler: (item: any) => void = (item) => {
@@ -41,7 +40,7 @@ const ConstructorList: FC<TConstructorList> = () => {
     };
 
     //Перетаскивание ингридиентов
-    const moveIngredients = (dragIndex: number, hoverIndex: number) => {
+    const moveIngredients:  (dragIndex: number, hoverIndex: number) => void = (dragIndex, hoverIndex) => {
         const newCards = [...ingredients];
         const dragCard = ingredients[dragIndex];
         newCards.splice(dragIndex, 1);
@@ -67,9 +66,9 @@ const ConstructorList: FC<TConstructorList> = () => {
             }
             <div className={ styles.scroll }>
                 {ingredients.length > 0 ? (
-                    ingredients.map((item: TData, index: TConstructorList['index']) => {
+                    ingredients.map((item, index) => {
                         return <li className={ styles.item } key={ item?.key }>
-                                    <ConstructorItem item={ item } index={ index } deleteHandler={ () => deleteHandler(item) } moveIngredients={ moveIngredients } isLocked={ false }/>
+                                    <ConstructorItem key={ item?.key } item={ item } index={ index } deleteHandler={ () => deleteHandler(item) } moveIngredients={ moveIngredients } isLocked={ false }/>
                         </li>})
                         )
                     : (<p className={clsx(styles.text, 'text_type_main-medium')}>И не забудь ингридиенты.<br/> Тут сейчас совсем пусто</p>)

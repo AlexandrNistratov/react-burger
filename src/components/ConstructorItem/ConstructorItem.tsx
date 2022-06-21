@@ -5,14 +5,12 @@ import { useDrag, useDrop } from "react-dnd";
 import { TData } from "../../utils/types";
 
 type TConstructorItem = {
-    item: TData;
-    index: number;
-    deleteHandler: (item: TData['_id']) => void;
+    deleteHandler: (item: string) => void;
     isLocked: boolean;
     moveIngredients: (dragIndex: number, hoverIndex: number) => void;
 }
 
-const ConstructorItem: React.FC<TConstructorItem> = ({ item, index, deleteHandler, isLocked, moveIngredients }) => {
+const ConstructorItem: React.FC<TData & TConstructorItem> = ({ item, index, deleteHandler, isLocked, moveIngredients }) => {
     const ref = useRef<HTMLInputElement>(null);
 
     const { id } = item;
