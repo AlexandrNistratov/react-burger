@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './formProfile.module.css';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,21 +7,22 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { setEditAction } from "../../../services/actions/userActions";
 import clsx from "clsx";
 
-const FormProfile = () => {
+const FormProfile: FC = () => {
     const dispatch = useDispatch();
 
-    const user = useSelector(state => state.userReducer.user);// стор с данными из авторизации
+    // TODO типизировать на следующем спринте
+    const user = useSelector((state: any) => state.userReducer.user);// стор с данными из авторизации
 
-    const onChange = e => {
+    const onChange: (e: any) => void = e => {
         dispatch(setEditAction({...user, [e.target.name]: e.target.value}))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit: (e: any) => void = (e) => {
         e.preventDefault();
         dispatch(userUpdate(user));//обновляю тот стор с данными из авторизации
     }
 
-    const handleCloseEdit = (e) => {
+    const handleCloseEdit: (e: any) => void = (e) => {
         e.preventDefault();
         dispatch(getUser());
     }

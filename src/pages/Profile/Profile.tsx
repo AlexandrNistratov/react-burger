@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { NavLink, useLocation } from "react-router-dom";
 import styles from './profile.module.css';
 import clsx from "clsx";
@@ -8,7 +8,7 @@ import { logOutAction } from "../../services/actions/userActions";
 import { useDispatch } from "react-redux";
 import { clearIngredientsActions } from "../../services/actions/constructor";
 
-const Profile = () => {
+const Profile: FC = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const isProfile = location.pathname === '/profile';

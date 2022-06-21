@@ -5,12 +5,15 @@ import { useDrag, useDrop } from "react-dnd";
 import { TData } from "../../utils/types";
 
 type TConstructorItem = {
+    item: TData;
+    index: number;
     deleteHandler: (item: string) => void;
     isLocked: boolean;
     moveIngredients: (dragIndex: number, hoverIndex: number) => void;
+    hoverIndex?: number;
 }
 
-const ConstructorItem: React.FC<TData & TConstructorItem> = ({ item, index, deleteHandler, isLocked, moveIngredients }) => {
+const ConstructorItem: FC<TConstructorItem> = ({ item, index, deleteHandler, isLocked, moveIngredients }) => {
     const ref = useRef<HTMLInputElement>(null);
 
     const { id } = item;
@@ -59,26 +62,27 @@ const ConstructorItem: React.FC<TData & TConstructorItem> = ({ item, index, dele
             moveIngredients(dragIndex, hoverIndex)
 
             item.index = hoverIndex
-
-
         }
     })
 
     dragRef(dropRef(ref));
 
     return (
-        <div className={ styles.main } style={ { opacity } }  ref={ ref }>
-            <div className={ styles.wrapper }>
-                <DragIcon type="primary"/>
-            </div>
-            <ConstructorElement
-                isLocked={ isLocked }
-                text={ item?.name }
-                price={ item?.price }
-                thumbnail={ item?.image }
-                handleClose={() => deleteHandler(item._id)}>
-            </ConstructorElement>
-        </div>
+        (item) &&
+            <>
+                <div className={ styles.main } style={ { opacity } }  ref={ ref }>
+                    <div className={ styles.wrapper }>
+                        <DragIcon type="primary"/>
+                    </div>
+                    <ConstructorElement
+                        isLocked={ isLocked }
+                        text={ item.name }
+                        price={ item.price }
+                        thumbnail={ item.image }
+                        handleClose={() => deleteHandler(item._id)}>
+                    </ConstructorElement>
+                </div>
+            </>
     );
 }
 

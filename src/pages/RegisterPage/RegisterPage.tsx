@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { FC } from 'react';
 import Form from "../../components/UI/Form/Form";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
@@ -6,21 +6,18 @@ import { register } from "../../utils/Api";
 import {loginSuccessAction, setEditAction} from "../../services/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { userUpdateSuccessAction } from "../../services/actions/userActions";
-import { useHistory } from "react-router-dom";
 
-const RegisterPage = () => {
+const RegisterPage: FC = () => {
     const dispatch = useDispatch();
-    // const history = useHistory();
 
-    const user = useSelector(state => state.userReducer.user);
-    const data = useSelector(state => state.userReducer);
-    // const { isAuth } = data
+    // TODO типизировать на следующем спринте
+    const user = useSelector((state: any) => state.userReducer.user);
 
-    const onChange = e => {
+    const onChange: (e: any) => void = (e) => {
         dispatch(setEditAction({...user, [e.target.name]: e.target.value}))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit: (e: any) => void  = (e) => {
         e.preventDefault();
         dispatch(register(user));
         dispatch(userUpdateSuccessAction(user))
@@ -28,10 +25,6 @@ const RegisterPage = () => {
             dispatch(loginSuccessAction(user))
         },3000)
     }
-
-    // useEffect(() => {
-    //     isAuth && history.push('/')
-    // }, [isAuth, history])
 
     return (
         <>

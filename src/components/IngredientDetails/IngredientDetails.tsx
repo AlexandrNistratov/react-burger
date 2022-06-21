@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './ingredientDetails.module.css';
 import clsx from "clsx";
 import { useSelector } from "react-redux";
-import PropTypes from "prop-types";
 
-const IngredientDetails = ({ details }) => {
-    const ingredients = useSelector(state => state.details.ingredientsDetails);
+type TIngredientDetails = {
+    details?: {
+        image: string;
+        name: string;
+        calories: number;
+        proteins: number;
+        fat: number;
+        carbohydrates: number;
+    }
+}
+
+const IngredientDetails: FC<TIngredientDetails> = ({ details }) => {
+
+    // TODO типизировать на следующем спринте
+    const ingredients = useSelector((state: any) => state.details.ingredientsDetails);
     const { image, name, calories, proteins, fat, carbohydrates } = ingredients;
 
     return (
@@ -33,9 +45,5 @@ const IngredientDetails = ({ details }) => {
         </section>
     );
 };
-
-IngredientDetails.propTypes = {
-    details: PropTypes.object
-}
 
 export default IngredientDetails;

@@ -9,8 +9,12 @@ import ConstructorItem from "../ConstructorItem/ConstructorItem";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { TData } from "../../utils/types";
 
+type TConstructorList = {
+    item?: TData;
+    key?: number;
+}
 
-const ConstructorList: FC<TData> = () => {
+const ConstructorList: FC<TConstructorList> = () => {
     const dispatch = useDispatch();
 
     const onDropHandler: (item: any) => void = (item) => {
@@ -35,7 +39,7 @@ const ConstructorList: FC<TData> = () => {
     });
 
     //Удаление ингридиента по клику на кнопку
-    const deleteHandler: (item: TData) => void = (item) => {
+    const deleteHandler: (item: TConstructorList) => void = (item) => {
         dispatch(deleteIngredientsActions(item.key));
     };
 
@@ -66,7 +70,8 @@ const ConstructorList: FC<TData> = () => {
             }
             <div className={ styles.scroll }>
                 {ingredients.length > 0 ? (
-                    ingredients.map((item, index) => {
+                        // TODO типизировать на следующем спринте
+                    ingredients.map((item: any, index: any) => {
                         return <li className={ styles.item } key={ item?.key }>
                                     <ConstructorItem key={ item?.key } item={ item } index={ index } deleteHandler={ () => deleteHandler(item) } moveIngredients={ moveIngredients } isLocked={ false }/>
                         </li>})

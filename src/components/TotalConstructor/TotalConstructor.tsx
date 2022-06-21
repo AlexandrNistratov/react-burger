@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 import  styles from './totalConstructor.module.css';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useModal } from "../../hooks/useModal";
@@ -10,16 +10,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 
-const TotalConstructor = () => {
+const TotalConstructor: FC = () => {
     const [ totalPrice, setTotalPrice ] = useState(0);
 
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const { bun, ingredients } = useSelector(state => state.constructorData);
+    // TODO типизировать на следующем спринте
+    const { bun, ingredients } = useSelector((state: any) => state.constructorData);
 
-    const allItems = useSelector( state => [state.constructorData.bun, state.constructorData.bun, ...state.constructorData.ingredients]);
-    const isAuth = useSelector(state => state.userReducer.isAuth)
+    // TODO типизировать на следующем спринте
+    const allItems = useSelector( (state: any) => [state.constructorData.bun, state.constructorData.bun, ...state.constructorData.ingredients]);
+
+    // TODO типизировать на следующем спринте
+    const isAuth = useSelector((state: any) => state.userReducer.isAuth)
 
     //Айдишки элементов в конструкторе
     const arrIdIngredients = allItems.map((item) => item?._id);
@@ -35,9 +39,9 @@ const TotalConstructor = () => {
     };
 
     // Считаем сумму заказа
-    const calculateTotalPrice = (buns, arr) => {
+    const calculateTotalPrice: (buns: any, arr: any) => void = (buns, arr) => {
         const priceBuns = Number(buns?.price * 2);
-        const sum = arr?.reduce((acc, item) => {
+        const sum = arr?.reduce((acc: any, item: any) => {
             return Number(acc + item?.price)
         }, 0)
         if (buns && arr) {

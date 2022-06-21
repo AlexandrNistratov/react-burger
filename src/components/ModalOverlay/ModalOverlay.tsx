@@ -1,13 +1,17 @@
-import React, { useRef } from 'react';
+import React, { useRef, FC } from 'react';
 import styles from'./modalOverlay.module.css';
 import clsx from "clsx";
-import PropTypes from "prop-types";
 
-const ModalOverlay = ({ isOpen, closePopup }) => {
+type TModalOverlay = {
+    isOpen: boolean;
+    closePopup: () => void;
+}
 
-    const overlayRef = useRef(null)
+const ModalOverlay: FC<TModalOverlay> = ({ isOpen, closePopup }) => {
 
-    const closeOverlay = (event) => {
+    const overlayRef = useRef<HTMLInputElement>(null)
+
+    const closeOverlay: (event: any) => void = (event) => {
         if(isOpen && overlayRef.current && overlayRef.current.contains(event.target)){
             closePopup();}
     }
@@ -17,10 +21,5 @@ const ModalOverlay = ({ isOpen, closePopup }) => {
 
     );
 };
-
-ModalOverlay.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    closePopup: PropTypes.func.isRequired
-}
 
 export default ModalOverlay;

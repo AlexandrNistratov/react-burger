@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import Form from "../../components/UI/Form/Form";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
 import { resetPassword } from "../../utils/Api";
 import { useHistory, useLocation } from 'react-router-dom';
+import { Location } from 'history';
 
-const ResetPassword = () => {
+const ResetPassword: FC = () => {
     const history = useHistory();
-    const location = useLocation()
+    const location = useLocation<Location>()
     const isForgotPassword = location.state?.pathname === '/forgot-password';
 
-    const [ value, setValue ] = useState({ password: '', token: '' });
+    const [ value, setValue ] = useState<{ password: string, token: string}>({ password: '', token: '' });
     const { password, token } = value;
 
-    const onChange = e => {
+    const onChange: (e: any) => void = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value });
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit: (e: any) => void = (e) => {
         e.preventDefault();
         resetPassword(password, token)
             .then(res => {

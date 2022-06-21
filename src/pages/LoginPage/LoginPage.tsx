@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Form from "../../components/UI/Form/Form";
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import './index.css';
@@ -7,18 +7,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../utils/Api";
 import { setEditAction } from "../../services/actions/userActions";
 
-const LoginPage = () => {
+const LoginPage: FC = () => {
     const dispatch = useDispatch();
 
-    const data = useSelector(state => state.userReducer);
+    // TODO типизировать на следующем спринте
+    const data = useSelector((state: any) => state.userReducer);
     const { email, password } = data.user;
 
 
-    const onChange = e => {
+    const onChange: (e: any) => void  = e => {
         dispatch(setEditAction({...data.user, [e.target.name]: e.target.value}))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit: (e: any) => void  = (e) => {
         e.preventDefault();
         dispatch(login(data.user));
     }

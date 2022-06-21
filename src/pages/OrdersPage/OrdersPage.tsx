@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './ordersPage.module.css';
 
-const OrdersPage = () => {
+const OrdersPage: FC = () => {
     return (
         <section className={ styles.main }>
 

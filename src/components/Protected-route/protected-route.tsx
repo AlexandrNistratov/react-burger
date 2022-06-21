@@ -56,5 +56,5 @@ export const ProtectedRoute: FC<TProtectedRoute> = ({ onlyUnAuth, children, ...r
         const { from } = location.state || { from: { pathname: '/' } }
         return <Redirect to={ from } />
     }
-    return <Route {...rest} render={({ location }) =><>children</>} />;
+    return <Route {...rest} render={({ location }) =><>{children}</>} />;
 };
