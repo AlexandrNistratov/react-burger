@@ -6,8 +6,9 @@ import { registrationRequestAction, registrationSuccessAction, registrationFaile
     loginRequestAction, loginSuccessAction, loginFailedAction,
     getUserRequestAction, getUserSuccessAction, getUserFailedAction,
     userUpdateFailedAction, userUpdateRequestAction, userUpdateSuccessAction } from "../services/actions/userActions";
+import { TData } from "./types";
 
-const checkResponse = (res) => {
+const checkResponse = (res: Response) => {
     if (res.ok) {
         return res.json();
     }
@@ -15,7 +16,7 @@ const checkResponse = (res) => {
 };
 
 export const getData = () => {
-    return dispatch => {
+    return (dispatch: any) => {
         dispatch(dataRequestAction)
         fetch(`${ API_URL }/ingredients`)
             .then(res =>  checkResponse(res))
@@ -27,8 +28,8 @@ export const getData = () => {
     }
 };
 
-export const getOrders = (data) => {
-    return dispatch => {
+export const getOrders = (data: {}) => {
+    return (dispatch: any) => {
         dispatch(ordersRequestAction())
         fetch(`${ API_URL }/orders`, {
             method: 'POST',
@@ -50,7 +51,7 @@ export const getOrders = (data) => {
     }
 };
 
-export const forgotPassword = (email) => {
+export const forgotPassword = (email: string) => {
     return fetch(`${ API_URL }/password-reset`, {
         method: 'POST',
         headers: {
@@ -65,7 +66,7 @@ export const forgotPassword = (email) => {
         .catch(err => console.log(err))
 }
 
-export const resetPassword = (password, token) => {
+export const resetPassword = (password: string, token: string) => {
     return fetch(`${ API_URL }/password-reset/reset`, {
         method: 'POST',
         headers: {
@@ -81,7 +82,7 @@ export const resetPassword = (password, token) => {
         .catch(err => console.log(err))
 }
 
-const updateToken = async (token) => {
+const updateToken = async (token: string) => {
     return await fetch(`${ API_URL }/auth/token`, {
         method: "POST",
         headers: {
@@ -99,7 +100,7 @@ const getUserRequest = async () => {
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: getCookie("accessToken")
+            Authorization: getCookie("accessToken") || ''
         },
     })
         .then(res => checkResponse(res))
@@ -107,7 +108,7 @@ const getUserRequest = async () => {
 
 
 export const getUser = () => {
-    return async dispatch => {
+    return async (dispatch: any) => {
         dispatch(getUserRequestAction())
         try {
             const res = await getUserRequest();
@@ -116,9 +117,8 @@ export const getUser = () => {
             console.log(err)
             if (err === "Ошибка 403") {
                 deleteCookie("accessToken");
-                const refreshToken = getCookie("refreshToken");
+                const refreshToken = getCookie("refreshToken") || '';
                 const token = await updateToken(refreshToken);
-                console.log(token)
                 if (token.success) {
                     setCookie("accessToken", token.accessToken);
                     setCookie("refreshToken", token.refreshToken);
@@ -134,21 +134,27 @@ export const getUser = () => {
     }
 };
 
-const getUserUpdateRequest = async (data) => {
+type TGetUserUpdate = {
+    name?: string;
+    email?: string;
+    password?: string;
+}
+
+const getUserUpdateRequest = async (data: TGetUserUpdate) => {
     return await fetch(`${ API_URL }/auth/user`, {
         method: 'PATCH',
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: getCookie("accessToken")
+            Authorization: getCookie("accessToken") || ''
         },
         body: JSON.stringify(data)
     })
         .then(res => checkResponse(res))
 }
 
-export const userUpdate = (data) => {
-    return async dispatch => {
+export const userUpdate = (data: TGetUserUpdate) => {
+    return async (dispatch: any) => {
         dispatch(userUpdateRequestAction())
         try {
             const res = await getUserUpdateRequest(data);
@@ -156,7 +162,7 @@ export const userUpdate = (data) => {
         } catch (err) {
             if (err === "Ошибка 403") {
                 deleteCookie("accessToken");
-                const refreshToken = getCookie("refreshToken");
+                const refreshToken = getCookie("refreshToken") || '';
                 const token = await updateToken(refreshToken);
                 if (token.success) {
                     setCookie("accessToken", token.accessToken);
@@ -173,9 +179,14 @@ export const userUpdate = (data) => {
     }
 };
 
+type TRegister = {
+    name: string;
+    email: string;
+    password: string;
+}
 
-export const register = (data) => {
-    return dispatch => {
+export const register = (data: TRegister) => {
+    return (dispatch: any) => {
         dispatch(registrationRequestAction())
         fetch(`${ API_URL }/auth/register`, {
             method: 'POST',
@@ -186,12 +197,11 @@ export const register = (data) => {
             body: JSON.stringify({
                 name: data.name,
                 email: data.email,
-             password: data.password
+                password: data.password
             })
         })
             .then(res => checkResponse(res))
             .then(data => {
-                console.log(data)
                 dispatch(getUser())
                 dispatch(registrationSuccessAction(data))
                 dispatch(loginSuccessAction(data))})
@@ -199,8 +209,13 @@ export const register = (data) => {
     }
 };
 
-export const login = (data) => {
-    return dispatch => {
+type TLogin = {
+    email: string;
+    password: string;
+}
+
+export const login = (data: TLogin) => {
+    return (dispatch: any) => {
         dispatch(loginRequestAction)
         fetch(`${ API_URL }/auth/login`, {
             method: 'POST',

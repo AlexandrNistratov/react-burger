@@ -14,7 +14,7 @@ type IModal = {
 const Modal: FC<IModal> = ({ children, isOpen, closePopup, header }) => {
     const reactModals: any = document.getElementById('modals');
 
-    const closePopupEsc: (e: any) => void = (e) => {
+    const closePopupEsc: (e: KeyboardEvent) => void = (e) => {
         if (e.key ==='Escape') {
             closePopup()
         }

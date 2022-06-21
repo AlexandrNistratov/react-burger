@@ -2,16 +2,10 @@ import React, { FC } from 'react';
 import styles from './ingredientDetails.module.css';
 import clsx from "clsx";
 import { useSelector } from "react-redux";
+import { TData } from "../../utils/types";
 
 type TIngredientDetails = {
-    details?: {
-        image: string;
-        name: string;
-        calories: number;
-        proteins: number;
-        fat: number;
-        carbohydrates: number;
-    }
+    details?: TData;
 }
 
 const IngredientDetails: FC<TIngredientDetails> = ({ details }) => {
