@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from 'react';
+import React, {useState, useEffect, FC, SyntheticEvent, ChangeEvent} from 'react';
 import Form from "../../components/UI/Form/Form";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
@@ -12,7 +12,7 @@ const ForgotPasswordPage: FC = () => {
 
     const [ value, setValue ] = useState({ email: '' });
 
-    const onChange: (e: any) => void = e => {
+    const onChange: (e: ChangeEvent<HTMLInputElement>) => void = e => {
         setValue({ ...value, [e.target.name]: e.target.value });
     }
 
@@ -20,7 +20,7 @@ const ForgotPasswordPage: FC = () => {
     const data = useSelector((state: any) => state.userReducer);
     const { isAuth } = data
 
-    const handleSubmit: (e: any) => void = (e) => {
+    const handleSubmit: (e: SyntheticEvent) => void = (e) => {
         e.preventDefault();
         forgotPassword(value.email)
             .then(res => {

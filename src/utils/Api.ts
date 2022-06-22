@@ -6,7 +6,6 @@ import { registrationRequestAction, registrationSuccessAction, registrationFaile
     loginRequestAction, loginSuccessAction, loginFailedAction,
     getUserRequestAction, getUserSuccessAction, getUserFailedAction,
     userUpdateFailedAction, userUpdateRequestAction, userUpdateSuccessAction } from "../services/actions/userActions";
-import { TData } from "./types";
 
 const checkResponse = (res: Response) => {
     if (res.ok) {

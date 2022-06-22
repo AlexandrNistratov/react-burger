@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ChangeEvent, FC, SyntheticEvent } from 'react';
 import Form from "../../components/UI/Form/Form";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
@@ -13,11 +13,11 @@ const RegisterPage: FC = () => {
     // TODO типизировать на следующем спринте
     const user = useSelector((state: any) => state.userReducer.user);
 
-    const onChange: (e: any) => void = (e) => {
+    const onChange: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
         dispatch(setEditAction({...user, [e.target.name]: e.target.value}))
     }
 
-    const handleSubmit: (e: any) => void  = (e) => {
+    const handleSubmit: (e: SyntheticEvent) => void  = (e) => {
         e.preventDefault();
         dispatch(register(user));
         dispatch(userUpdateSuccessAction(user))

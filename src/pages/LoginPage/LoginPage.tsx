@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ChangeEvent, FC, SyntheticEvent } from 'react';
 import Form from "../../components/UI/Form/Form";
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import './index.css';
@@ -15,11 +15,11 @@ const LoginPage: FC = () => {
     const { email, password } = data.user;
 
 
-    const onChange: (e: any) => void  = e => {
+    const onChange: (e: ChangeEvent<HTMLInputElement>) => void  = e => {
         dispatch(setEditAction({...data.user, [e.target.name]: e.target.value}))
     }
 
-    const handleSubmit: (e: any) => void  = (e) => {
+    const handleSubmit: (e: SyntheticEvent) => void  = (e) => {
         e.preventDefault();
         dispatch(login(data.user));
     }

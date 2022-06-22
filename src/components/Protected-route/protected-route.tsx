@@ -5,13 +5,7 @@ import { getUser } from "../../utils/Api";
 import { getCookie } from "../../utils/cookie";
 import { Location } from 'history';
 
-type TProtectedRoute = {
-    onlyUnAuth?: boolean;
-    children?: React.ReactNode;
-    rest?: {};
-} &  RouteProps
-
-export const ProtectedRoute: FC<TProtectedRoute> = ({ onlyUnAuth, children, ...rest }) => {
+export const ProtectedRoute: FC<RouteProps & { onlyUnAuth?: boolean }> = ({ onlyUnAuth, children, ...rest }) => {
     const location = useLocation<{ from: Location}>();
     const dispatch = useDispatch();
 

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, FormEvent, ChangeEvent } from 'react';
 import styles from './formProfile.module.css';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,11 +13,11 @@ const FormProfile: FC = () => {
     // TODO типизировать на следующем спринте
     const user = useSelector((state: any) => state.userReducer.user);// стор с данными из авторизации
 
-    const onChange: (e: any) => void = e => {
+    const onChange: (e: ChangeEvent<HTMLInputElement>) => void = e => {
         dispatch(setEditAction({...user, [e.target.name]: e.target.value}))
     }
 
-    const handleSubmit: (e: any) => void = (e) => {
+    const handleSubmit: (e: FormEvent) => void = (e) => {
         e.preventDefault();
         dispatch(userUpdate(user));//обновляю тот стор с данными из авторизации
     }

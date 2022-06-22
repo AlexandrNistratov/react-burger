@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import React, {useState, FC, SyntheticEvent} from 'react';
 import styles from './burgerIngredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsList from "../IngredientsList/IngredientsList";

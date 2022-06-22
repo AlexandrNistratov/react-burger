@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from 'react';
+import React, { useState, useEffect, FC, SyntheticEvent, ChangeEvent } from 'react';
 import Form from "../../components/UI/Form/Form";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
@@ -14,11 +14,11 @@ const ResetPassword: FC = () => {
     const [ value, setValue ] = useState<{ password: string, token: string}>({ password: '', token: '' });
     const { password, token } = value;
 
-    const onChange: (e: any) => void = (e) => {
+    const onChange: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value });
     }
 
-    const handleSubmit: (e: any) => void = (e) => {
+    const handleSubmit: (e: SyntheticEvent) => void = (e) => {
         e.preventDefault();
         resetPassword(password, token)
             .then(res => {

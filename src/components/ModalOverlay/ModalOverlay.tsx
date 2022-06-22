@@ -1,4 +1,4 @@
-import React, { useRef, FC } from 'react';
+import React, {useRef, FC, MouseEvent, SyntheticEvent} from 'react';
 import styles from'./modalOverlay.module.css';
 import clsx from "clsx";
 
@@ -11,13 +11,13 @@ const ModalOverlay: FC<TModalOverlay> = ({ isOpen, closePopup }) => {
 
     const overlayRef = useRef<HTMLInputElement>(null)
 
-    const closeOverlay: (event: any) => void = (event) => {
-        if(isOpen && overlayRef.current && overlayRef.current.contains(event.target)){
-            closePopup();}
+    const closeOverlay: (event: MouseEvent<HTMLInputElement>) => void = (event) => {
+        if(isOpen && overlayRef.current && overlayRef.current.contains(event.target as Node)){
+            closePopup()}
     }
 
     return (
-        <section className={ clsx(styles.main, {[styles.hidden] : !isOpen}) } ref={ overlayRef } onClick={closeOverlay}/>
+        <section className={ clsx(styles.main, {[styles.hidden] : !isOpen}) } ref={ overlayRef } onClick={ closeOverlay }/>
 
     );
 };
