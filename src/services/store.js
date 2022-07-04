@@ -1,10 +1,10 @@
 import { compose, createStore, applyMiddleware, combineReducers } from 'redux';
 
 import thunk from "redux-thunk";
-import { dataReducer } from "./reducers/data";
-import { constructorReducer } from "./reducers/constructor";
-import { orderReducer } from "./reducers/orders";
-import { detailsReducer } from "./reducers/details";
+import { dataReducer } from "./reducers/dataReducers";
+import { constructorReducer } from "./reducers/constructorReducers";
+import { orderReducer } from "./reducers/ordersReducers";
+import { detailsReducer } from "./reducers/detailsReducers";
 import { userReducer } from "./reducers/userReducers";
 
 const composeEnhancers =

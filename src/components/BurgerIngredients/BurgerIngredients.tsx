@@ -1,4 +1,4 @@
-import React, {useState, FC, SyntheticEvent} from 'react';
+import React, {useState, FC } from 'react';
 import styles from './burgerIngredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsList from "../IngredientsList/IngredientsList";
@@ -7,7 +7,7 @@ import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useModal } from "../../hooks/useModal";
 import { useDispatch } from "react-redux";
-import { getDetailsAction, deleteDetailsAction } from "../../services/actions/details";
+import { getDetailsAction, deleteDetailsAction } from "../../services/actions/detailsActions";
 import { useHistory } from "react-router-dom";
 
 const BurgerIngredients: FC = () => {

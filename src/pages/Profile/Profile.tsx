@@ -6,7 +6,7 @@ import FormProfile from "../../components/UI/FormProfile/FormProfile";
 import { logOut } from "../../utils/Api";
 import { logOutAction } from "../../services/actions/userActions";
 import { useDispatch } from "react-redux";
-import { clearIngredientsActions } from "../../services/actions/constructor";
+import { clearIngredientsActions } from "../../services/actions/constructorActions";
 
 const Profile: FC = () => {
     const location = useLocation();
