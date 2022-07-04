@@ -6,9 +6,10 @@ import clsx from "clsx";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useModal } from "../../hooks/useModal";
-import { useDispatch } from "react-redux";
+import { useDispatch } from '../../types';
 import { getDetailsAction, deleteDetailsAction } from "../../services/actions/detailsActions";
 import { useHistory } from "react-router-dom";
+import { TIngredientDetails } from "../../types/types";
 
 const BurgerIngredients: FC = () => {
     const { isOpen, closePopup, openPopup} = useModal();
@@ -18,7 +19,7 @@ const BurgerIngredients: FC = () => {
 
     const dispatch = useDispatch();
 
-    const clickIngredients: (item: object) => void  = (item) => {
+    const clickIngredients: (item: TIngredientDetails) => void  = (item) => {
         dispatch(getDetailsAction(item));
         openPopup();
     };
@@ -35,7 +36,6 @@ const BurgerIngredients: FC = () => {
         element && element.scrollIntoView({behavior: 'smooth'});
     };
 
-    // TODO типизировать на следующем спринте
     const scrollHandler: (e: any) => void = (e) => {
         const target = e.target;
         const scroll = target.scrollTop;

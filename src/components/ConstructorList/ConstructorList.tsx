@@ -1,14 +1,13 @@
 import React, { FC } from 'react';
 import styles from './constructorList.module.css';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from '../../types';
 import { useDrop } from "react-dnd";
 import clsx from "clsx";
 import { addBunsAction, addIngredientsAction, deleteIngredientsActions, moveIngredientsActions } from "../../services/actions/constructorActions";
 import { v4 as uuidv4 } from 'uuid';
 import ConstructorItem from "../ConstructorItem/ConstructorItem";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { TData } from "../../utils/types";
-
+import { TData } from "../../types/types";
 
 type TConstructorList = {
     item?: TData;
@@ -29,8 +28,7 @@ const ConstructorList: FC<TConstructorList> = () => {
         }
     };
 
-    // TODO типизировать на следующем спринте
-    const { bun, ingredients } = useSelector((state: any) => state.constructorData);
+    const { bun, ingredients } = useSelector(state => state.constructorData);
 
     const [, ref] = useDrop({
         accept: 'ingredients',

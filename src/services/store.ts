@@ -1,11 +1,8 @@
-import { compose, createStore, applyMiddleware, combineReducers } from 'redux';
+import { compose, createStore, applyMiddleware } from 'redux';
+import { rootReducer } from "./reducers/reducers";
 
 import thunk from "redux-thunk";
-import { dataReducer } from "./reducers/dataReducers";
-import { constructorReducer } from "./reducers/constructorReducers";
-import { orderReducer } from "./reducers/ordersReducers";
-import { detailsReducer } from "./reducers/detailsReducers";
-import { userReducer } from "./reducers/userReducers";
+
 
 declare global {
     interface Window {
@@ -20,12 +17,6 @@ const composeEnhancers =
 
 const enhancer = composeEnhancers(applyMiddleware(thunk));
 
-export const rootReducer = combineReducers({
-    data: dataReducer,
-    constructorData: constructorReducer,
-    order: orderReducer,
-    details: detailsReducer,
-    userReducer: userReducer
-})
+
 
 export const store = createStore(rootReducer, enhancer)

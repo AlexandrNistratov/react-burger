@@ -1,19 +1,19 @@
 import { RootDataAction, TDataAction } from "../actions/dataActions";
-import { TData } from "../../utils/types";
+import { TData } from "../../types/types";
 
-type TInitialState = {
-    ingredientsData: null | Array<TData>,
+type TDataInitialState = {
+    ingredientsData: Array<TData>,
     dataRequest: boolean,
     dataFailed: boolean
 }
 
-const initialState: TInitialState = {
+const initialState: TDataInitialState = {
     ingredientsData: [],
     dataRequest: false,
     dataFailed: false
 }
 
-export const dataReducer = (state: TInitialState = initialState, action: TDataAction): TInitialState => {
+export const dataReducer = (state: TDataInitialState = initialState, action: TDataAction): TDataInitialState => {
     switch (action.type) {
         case RootDataAction.GET_DATA_REQUEST: {
             return {...state, dataRequest: true, dataFailed: false}

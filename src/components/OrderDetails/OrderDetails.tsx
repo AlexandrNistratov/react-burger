@@ -3,11 +3,10 @@ import styles from './orderDetails.module.css';
 import clsx from "clsx";
 import img from '../../images/graphics.svg';
 import Icon from "../Icon/Icon";
-import { useSelector } from "react-redux";
+import { useSelector } from '../../types';
 
 const OrderDetails: FC = () => {
-    // TODO типизировать на следующем спринте
-    const { ordersRequest, ordersFailed, orders } = useSelector((state: any) => state.order);
+    const { ordersRequest, ordersFailed, orders } = useSelector(state => state.order);
 
 
     return (

@@ -1,4 +1,4 @@
-import React, {useRef, FC, MouseEvent, SyntheticEvent} from 'react';
+import React, { useRef, FC, MouseEvent } from 'react';
 import styles from'./modalOverlay.module.css';
 import clsx from "clsx";
 

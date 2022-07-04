@@ -1,3 +1,5 @@
+import { TOrder } from "../../types/types";
+
 export enum RootOrdersActions {
     GET_ORDERS_REQUEST = 'GET_ORDERS_REQUEST',
     GET_ORDERS_SUCCESS = 'GET_ORDERS_SUCCESS',
@@ -10,7 +12,7 @@ interface IOrdersRequest {
 
 interface IOrdersSuccess {
     type: RootOrdersActions.GET_ORDERS_SUCCESS,
-    payload: object
+    payload: TOrder
 }
 
 interface IOrdersFailed {
@@ -23,5 +25,5 @@ export type TOrdersAction =
     | IOrdersFailed
 
 export const ordersRequestAction = (): TOrdersAction => ({ type: RootOrdersActions.GET_ORDERS_REQUEST });
-export const ordersSuccessAction = (payload: object): TOrdersAction => ({ type: RootOrdersActions.GET_ORDERS_SUCCESS, payload });
+export const ordersSuccessAction = (payload: TOrder): TOrdersAction => ({ type: RootOrdersActions.GET_ORDERS_SUCCESS, payload });
 export const ordersFailedAction = (): TOrdersAction => ({ type: RootOrdersActions.GET_ORDERS_FAILED });

@@ -1,4 +1,4 @@
-import { TData } from "../../utils/types";
+import { TData } from "../../types/types";
 
 export enum RootDataAction {
     GET_DATA_REQUEST = 'GET_ITEM_REQUEST',

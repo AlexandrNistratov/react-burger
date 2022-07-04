@@ -1,7 +1,8 @@
 import { RootUserActions, TUserAction } from "../actions/userActions";
+import { TUser } from "../../types/types";
 
-type TInitialState = {
-    user: object,
+type TUserInitialState = {
+    user: TUser,
 
     token: string,
 
@@ -20,7 +21,7 @@ type TInitialState = {
     userUpdateRequest: boolean,
     useUpdateFailed: boolean,
 }
-const initialState: TInitialState = {
+const initialState: TUserInitialState = {
     user: {
         name: '',
         email: '',
@@ -45,7 +46,7 @@ const initialState: TInitialState = {
     useUpdateFailed: false,
 };
 
-export const userReducer = (state: TInitialState = initialState, action: TUserAction): TInitialState => {
+export const userReducer = (state: TUserInitialState = initialState, action: TUserAction): TUserInitialState => {
     switch (action.type) {
         //Регистрация
         case RootUserActions.GET_REGISTRATION_REQUEST: {

@@ -1,17 +1,17 @@
 import { RootConstructorAction, TConstructorAction } from "../actions/constructorActions";
-import { TData } from "../../utils/types";
+import { TData } from "../../types/types";
 
-type TInitialState = {
+type TConstructorInitialState = {
     bun: null | TData,
     ingredients: Array<TData & { key?: number}>,
 }
 
-const initialState: TInitialState = {
+const initialState: TConstructorInitialState = {
     bun: null,
     ingredients: [],
 }
 
-export const constructorReducer = (state: TInitialState = initialState, action: TConstructorAction): TInitialState => {
+export const constructorReducer = (state: TConstructorInitialState = initialState, action: TConstructorAction): TConstructorInitialState => {
     switch (action.type) {
         case RootConstructorAction.ADD_BUNS: {
             return {...state, bun: action.payload}

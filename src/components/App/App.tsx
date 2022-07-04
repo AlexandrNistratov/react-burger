@@ -14,7 +14,7 @@ import {
     NotFoundPage
 } from '../../pages/pages';
 import { getData, getUser } from "../../utils/Api";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../types';
 import clsx from "clsx";
 import IngredientPage from "../../pages/IngredientPage/IngredientPage";
 import { Location } from 'history';
@@ -23,11 +23,9 @@ import { Location } from 'history';
 const App: FC = () => {
     const dispatch = useDispatch();
 
-    // TODO типизировать на следующем спринте
-    const { ingredientsData, dataRequest, dataFailed } = useSelector((state: any) => state.data);
+    const { ingredientsData, dataRequest, dataFailed } = useSelector(state => state.data);
 
-    // TODO типизировать на следующем спринте
-    const user = useSelector((state: any) => state.userReducer.user);
+    const user = useSelector(state => state.userReducer.user);
 
     const location = useLocation<{ background : Location }>();
     const history = useHistory();

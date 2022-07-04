@@ -1,18 +1,23 @@
-import {RootOrdersActions, TOrdersAction} from "../actions/ordersActions";
+import { RootOrdersActions, TOrdersAction } from "../actions/ordersActions";
+import { TOrder } from "../../types/types";
 
-type TInitialState = {
+type TOrderInitialState = {
     ordersRequest: boolean,
     ordersFailed: boolean,
-    orders: null | object
+    orders: TOrder
 }
 
-const initialState: TInitialState = {
+const initialState: TOrderInitialState = {
     ordersRequest: false,
     ordersFailed: false,
-    orders: null
+    orders: {
+        order: {
+            number: 0
+        }
+    }
 };
 
-export const orderReducer = (state: TInitialState = initialState, action: TOrdersAction): TInitialState => {
+export const orderReducer = (state: TOrderInitialState = initialState, action: TOrdersAction): TOrderInitialState => {
     switch (action.type) {
         case RootOrdersActions.GET_ORDERS_REQUEST: {
             return {...state, ordersRequest: true, ordersFailed: false}

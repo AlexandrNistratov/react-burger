@@ -1,7 +1,7 @@
-import React, { FC, FormEvent, ChangeEvent } from 'react';
+import React, {FC, FormEvent, ChangeEvent, SyntheticEvent} from 'react';
 import styles from './formProfile.module.css';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from '../../../types';
 import { getUser, userUpdate } from "../../../utils/Api";
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { setEditAction } from "../../../services/actions/userActions";
@@ -10,8 +10,7 @@ import clsx from "clsx";
 const FormProfile: FC = () => {
     const dispatch = useDispatch();
 
-    // TODO типизировать на следующем спринте
-    const user = useSelector((state: any) => state.userReducer.user);// стор с данными из авторизации
+    const user = useSelector(state => state.userReducer.user);// стор с данными из авторизации
 
     const onChange: (e: ChangeEvent<HTMLInputElement>) => void = e => {
         dispatch(setEditAction({...user, [e.target.name]: e.target.value}))
@@ -22,7 +21,7 @@ const FormProfile: FC = () => {
         dispatch(userUpdate(user));//обновляю тот стор с данными из авторизации
     }
 
-    const handleCloseEdit: (e: any) => void = (e) => {
+    const handleCloseEdit: (e: SyntheticEvent) => void = (e) => {
         e.preventDefault();
         dispatch(getUser());
     }

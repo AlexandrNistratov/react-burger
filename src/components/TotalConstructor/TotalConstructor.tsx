@@ -6,7 +6,7 @@ import clsx from "clsx";
 import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import { getOrders } from "../../utils/Api";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from '../../types';
 import { useHistory } from "react-router-dom";
 
 
@@ -16,14 +16,11 @@ const TotalConstructor: FC = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    // TODO типизировать на следующем спринте
-    const { bun, ingredients } = useSelector((state: any) => state.constructorData);
+    const { bun, ingredients } = useSelector(state => state.constructorData);
 
-    // TODO типизировать на следующем спринте
-    const allItems = useSelector( (state: any) => [state.constructorData.bun, state.constructorData.bun, ...state.constructorData.ingredients]);
+    const allItems = useSelector( state => [state.constructorData.bun, state.constructorData.bun, ...state.constructorData.ingredients]);
 
-    // TODO типизировать на следующем спринте
-    const isAuth = useSelector((state: any) => state.userReducer.isAuth)
+    const isAuth = useSelector(state => state.userReducer.isAuth)
 
     //Айдишки элементов в конструкторе
     const arrIdIngredients = allItems.map((item) => item?._id);

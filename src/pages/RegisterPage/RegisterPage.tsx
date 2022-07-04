@@ -4,14 +4,13 @@ import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
 import { register } from "../../utils/Api";
 import {loginSuccessAction, setEditAction} from "../../services/actions/userActions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from '../../types';
 import { userUpdateSuccessAction } from "../../services/actions/userActions";
 
 const RegisterPage: FC = () => {
     const dispatch = useDispatch();
 
-    // TODO типизировать на следующем спринте
-    const user = useSelector((state: any) => state.userReducer.user);
+    const user = useSelector(state => state.userReducer.user);
 
     const onChange: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
         dispatch(setEditAction({...user, [e.target.name]: e.target.value}))

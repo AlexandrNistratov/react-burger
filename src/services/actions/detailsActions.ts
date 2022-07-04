@@ -1,3 +1,5 @@
+import { TIngredientDetails } from "../../types/types";
+
 export enum RootDetailsAction {
     GET_DETAILS = 'ADD_DETAILS',
     DELETE_DETAILS = 'DELETE_DETAILS'
@@ -5,7 +7,7 @@ export enum RootDetailsAction {
 
 interface IGetDetails {
     type: RootDetailsAction.GET_DETAILS,
-    payload: object
+    payload: TIngredientDetails
 }
 
 interface IDeleteDetails {
@@ -16,5 +18,5 @@ export type TDetailsAction =
     | IGetDetails
     | IDeleteDetails
 
-export const getDetailsAction = (payload: object): TDetailsAction => ({ type: RootDetailsAction.GET_DETAILS, payload });
+export const getDetailsAction = (payload: TIngredientDetails): TDetailsAction => ({ type: RootDetailsAction.GET_DETAILS, payload });
 export const deleteDetailsAction = (): TDetailsAction => ({ type: RootDetailsAction.DELETE_DETAILS });

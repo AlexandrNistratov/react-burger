@@ -1,4 +1,4 @@
-import { TData } from "../../utils/types";
+import { TData } from "../../types/types";
 
 export enum RootConstructorAction {
     ADD_BUNS = 'ADD_BUNS',

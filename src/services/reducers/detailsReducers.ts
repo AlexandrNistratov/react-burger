@@ -1,20 +1,34 @@
-import {RootDetailsAction, TDetailsAction} from "../actions/detailsActions";
+import { RootDetailsAction, TDetailsAction } from "../actions/detailsActions";
+import { TIngredientDetails } from "../../types/types";
 
-type TInitialState = {
-    ingredientsDetails: object
+type TDetailsInitialState = {
+    ingredientsDetails: TIngredientDetails
 }
 
-const initialState: TInitialState = {
-    ingredientsDetails: {},
+const initialState: TDetailsInitialState = {
+    ingredientsDetails: {
+        calories: 0,
+        carbohydrates: 0,
+        fat: 0,
+        image: '',
+        name: '',
+        proteins: 0
+    },
 }
 
-export const detailsReducer = (state: TInitialState = initialState, action: TDetailsAction): TInitialState => {
+export const detailsReducer = (state: TDetailsInitialState = initialState, action: TDetailsAction): TDetailsInitialState => {
     switch (action.type) {
         case RootDetailsAction.GET_DETAILS: {
             return {...state, ingredientsDetails: action.payload}
         }
         case RootDetailsAction.DELETE_DETAILS: {
-            return {...state, ingredientsDetails: {}}
+            return {...state, ingredientsDetails: {
+                    calories: 0,
+                    carbohydrates: 0,
+                    fat: 0,
+                    image: '',
+                    name: '',
+                    proteins: 0}}
         }
         default: return state
     }

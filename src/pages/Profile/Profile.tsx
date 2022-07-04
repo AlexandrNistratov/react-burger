@@ -5,7 +5,7 @@ import clsx from "clsx";
 import FormProfile from "../../components/UI/FormProfile/FormProfile";
 import { logOut } from "../../utils/Api";
 import { logOutAction } from "../../services/actions/userActions";
-import { useDispatch } from "react-redux";
+import { useDispatch } from '../../types';
 import { clearIngredientsActions } from "../../services/actions/constructorActions";
 
 const Profile: FC = () => {
