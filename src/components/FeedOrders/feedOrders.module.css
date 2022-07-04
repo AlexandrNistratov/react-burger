@@ -1,0 +1,7 @@
+.main {
+    flex-direction: column;
+    height: 74vh;
+    overflow-y: scroll;
+    max-width: 600px;
+    width: 100%;
+}

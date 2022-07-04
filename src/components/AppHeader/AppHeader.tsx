@@ -20,10 +20,10 @@ const AppHeader: FC = () => {
                             <BurgerIcon type="primary" />
                             <p className={ clsx(styles.text, 'text text_type_main-default ml-2') }>Конструктор</p>
                         </Link>
-                        <a href='#' className={ styles.item }>
+                        <Link to='/feed' className={ styles.item }>
                             <ListIcon type="secondary" />
                             <p className={ clsx('text text_type_main-default ml-2 text_color_inactive') }>Лента заказов</p>
-                        </a>
+                        </Link>
                     </nav>
                     <Logo />
                 </div>

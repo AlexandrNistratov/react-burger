@@ -7,9 +7,15 @@ import { orderReducer } from "./reducers/ordersReducers";
 import { detailsReducer } from "./reducers/detailsReducers";
 import { userReducer } from "./reducers/userReducers";
 
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
+
 const composeEnhancers =
-    typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-        ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+    typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+        ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
         : compose;
 
 const enhancer = composeEnhancers(applyMiddleware(thunk));

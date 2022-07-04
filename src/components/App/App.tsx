@@ -10,7 +10,7 @@ import {
     ForgotPasswordPage,
     ResetPassword,
     Profile,
-    OrdersPage,
+    OrdersFeedPage,
     NotFoundPage
 } from '../../pages/pages';
 import { getData, getUser } from "../../utils/Api";
@@ -69,9 +69,9 @@ const App: FC = () => {
                         <ProtectedRoute path='/profile' exact>
                             <Profile />
                         </ProtectedRoute>
-                        <ProtectedRoute path='/profile/orders' exact>
-                            <OrdersPage />
-                        </ProtectedRoute>
+                        <Route path='/feed' exact>
+                            <OrdersFeedPage />
+                        </Route>
                         <Route path='/ingredients/:id' exact>
                             <IngredientPage />
                         </Route>

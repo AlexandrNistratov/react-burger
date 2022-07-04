@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import styles from './ordersPage.module.css';
+import styles from './feedOrders.module.css';
 
-const OrdersPage: FC = () => {
+const FeedOrders: FC = () => {
     return (
         <section className={ styles.main }>
 
@@ -9,4 +9,4 @@ const OrdersPage: FC = () => {
     );
 };
 
-export default OrdersPage;
+export default FeedOrders;
