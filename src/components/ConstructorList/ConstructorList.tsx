@@ -69,7 +69,6 @@ const ConstructorList: FC<TConstructorList> = () => {
             }
             <div className={ styles.scroll }>
                 {ingredients.length > 0 ? (
-                        // TODO типизировать на следующем спринте
                     ingredients.map((item: any, index: any) => {
                         return <li className={ styles.item } key={ item?.key }>
                                     <ConstructorItem key={ item?.key } item={ item } index={ index } deleteHandler={ () => deleteHandler(item) } moveIngredients={ moveIngredients } isLocked={ false }/>

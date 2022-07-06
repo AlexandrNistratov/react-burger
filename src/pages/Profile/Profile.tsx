@@ -1,34 +1,22 @@
 import React, { FC } from 'react';
-import { NavLink, useLocation } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import styles from './profile.module.css';
-import clsx from "clsx";
 import FormProfile from "../../components/UI/FormProfile/FormProfile";
-import { logOut } from "../../utils/Api";
-import { logOutAction } from "../../services/actions/userActions";
-import { useDispatch } from '../../types';
-import { clearIngredientsActions } from "../../services/actions/constructorActions";
+import OrdersHistory from "../OrdersHistory/OrdersHistory";
+import ProfileNav from "../../components/App/ProfileNav/ProfileNav";
 
 const Profile: FC = () => {
-    const location = useLocation();
-    const dispatch = useDispatch();
-    const isProfile = location.pathname === '/profile';
-    const isOrders = location.pathname === '/profile/orders';
-
-    const handleLogOut = () => {
-        dispatch(clearIngredientsActions())
-        dispatch(logOutAction());
-        logOut();
-    }
-
     return (
         <div className={ styles.main }>
-            <div className={ styles.navigation}>
-                <NavLink exact to='/profile' className={ clsx(styles.link,'text_type_main-medium text_color_inactive mb-5') } activeClassName={ styles.link_active }>Профиль</NavLink>
-                <NavLink exact to='/profile/orders' className={ clsx(styles.link,'text_type_main-medium text_color_inactive mb-5') } activeClassName={ styles.link_active }>История заказов</NavLink>
-                <NavLink exact to='/login' className={ clsx(styles.link,'text_type_main-medium text_color_inactive') } activeClassName={ styles.link_active } onClick={ handleLogOut }>Выход</NavLink>
-            </div>
-            {isProfile ? <FormProfile /> : null}
-            {isOrders ? }
+            <ProfileNav />
+            <Switch>
+                <Route path='/profile' exact>
+                    <FormProfile />
+                </Route>
+                <Route path='/profile/orders'>
+                    <OrdersHistory />
+                </Route>
+            </Switch>
         </div>
     );
 };

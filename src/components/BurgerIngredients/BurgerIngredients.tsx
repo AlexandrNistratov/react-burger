@@ -58,7 +58,7 @@ const BurgerIngredients: FC = () => {
             </div>
             <IngredientsList onClick={ clickIngredients }  scrollHandler={ scrollHandler }/>
             {isOpen &&
-                <Modal isOpen={ isOpen }
+                <Modal isOrders={false} isOpen={ isOpen }
                        closePopup={ closeModalDetails }
                        header='Детали ингредиента'>
                     <IngredientDetails />

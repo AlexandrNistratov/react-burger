@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    max-width: 584px;
     max-height: 246px;
     border-radius: 40px;
     background: #1C1C21;
@@ -19,7 +18,6 @@
 .wrapper {
     display: flex;
     justify-content: space-between;
-    max-width: 536px;
     width: 100%;
 }
 

@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from '../../types';
 import clsx from "clsx";
 import IngredientPage from "../../pages/IngredientPage/IngredientPage";
 import { Location } from 'history';
+import OrdersHistory from "../../pages/OrdersHistory/OrdersHistory";
 
 
 const App: FC = () => {
@@ -65,7 +66,7 @@ const App: FC = () => {
                         <ProtectedRoute path='/reset-password' exact  onlyUnAuth={ onlyUnAuth }>
                             <ResetPassword />
                         </ProtectedRoute>
-                        <ProtectedRoute path='/profile' exact>
+                        <ProtectedRoute path='/profile'>
                             <Profile />
                         </ProtectedRoute>
                         <Route path='/feed' exact>

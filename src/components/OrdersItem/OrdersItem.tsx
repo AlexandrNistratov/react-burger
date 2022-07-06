@@ -5,7 +5,11 @@ import { useSelector} from "../../types";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { v4 as uuidv4 } from 'uuid';
 
-const OrdersItem: FC = () => {
+type TOrdersItem = {
+    clickIngredients: () => void;
+}
+
+const OrdersItem: FC<TOrdersItem> = ({ clickIngredients }) => {
 
     const { ingredientsData } = useSelector(state => state.data);
 
@@ -16,11 +20,8 @@ const OrdersItem: FC = () => {
 
     const lastIngredient = ingredientsData[ingredientsData.length - 1];
 
-
-    console.log(lastIngredient)
-
     return (
-        <section className={ styles.main }>
+        <section className={ styles.main } onClick={ clickIngredients }>
             <div className={ styles.wrapper }>
                 <p className={ clsx(styles.number, 'text_type_digits-default') }>cdcd</p>
                 <p className={ clsx('text text_type_main-default text_color_inactive') }>cdcd</p>
