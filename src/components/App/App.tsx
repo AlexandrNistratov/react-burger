@@ -19,6 +19,7 @@ import clsx from "clsx";
 import IngredientPage from "../../pages/IngredientPage/IngredientPage";
 import { Location } from 'history';
 import OrdersHistory from "../../pages/OrdersHistory/OrdersHistory";
+import OrderDetailsPage from "../../pages/OrderDetailsPage/OrderDetailsPage";
 
 
 const App: FC = () => {
@@ -74,6 +75,12 @@ const App: FC = () => {
                         </Route>
                         <Route path='/ingredients/:id' exact>
                             <IngredientPage />
+                        </Route>
+                        <Route path='/feed/:id' exact>
+                            <OrderDetailsPage/>
+                        </Route>
+                        <Route path='/profile/orders/:id' exact>
+                            <OrderDetailsPage/>
                         </Route>
                         <Route>
                             <NotFoundPage />
