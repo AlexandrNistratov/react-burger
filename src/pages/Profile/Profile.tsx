@@ -12,6 +12,7 @@ const Profile: FC = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const isProfile = location.pathname === '/profile';
+    const isOrders = location.pathname === '/profile/orders';
 
     const handleLogOut = () => {
         dispatch(clearIngredientsActions())
@@ -27,6 +28,7 @@ const Profile: FC = () => {
                 <NavLink exact to='/login' className={ clsx(styles.link,'text_type_main-medium text_color_inactive') } activeClassName={ styles.link_active } onClick={ handleLogOut }>Выход</NavLink>
             </div>
             {isProfile ? <FormProfile /> : null}
+            {isOrders ? }
         </div>
     );
 };

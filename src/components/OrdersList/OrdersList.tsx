@@ -6,6 +6,16 @@ const OrdersList: FC = () => {
     return (
         <section className={ styles.main }>
             <OrdersItem />
+            <OrdersItem />
+            <OrdersItem />
+            <OrdersItem />
+            <OrdersItem />
+            <OrdersItem />
+            <OrdersItem />
+            <OrdersItem />
+            <OrdersItem />
+            <OrdersItem />
+            <OrdersItem />
         </section>
     );
 };
