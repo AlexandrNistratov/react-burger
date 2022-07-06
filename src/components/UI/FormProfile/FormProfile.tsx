@@ -1,4 +1,4 @@
-import React, {FC, FormEvent, ChangeEvent, SyntheticEvent} from 'react';
+import React, { FC, FormEvent, ChangeEvent, SyntheticEvent } from 'react';
 import styles from './formProfile.module.css';
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from '../../../types';
