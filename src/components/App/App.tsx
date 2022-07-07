@@ -28,7 +28,7 @@ const App: FC = () => {
     const { ingredientsData, dataRequest, dataFailed } = useSelector(state => state.data);
 
 
-    const user = useSelector(state => state.userReducer.user);
+    const { isUser } = useSelector(state => state.userReducer);
 
     const location = useLocation<{ background : Location }>();
     const history = useHistory();
@@ -37,10 +37,10 @@ const App: FC = () => {
 
     useEffect(() => {
         dispatch(getData());
-        if(user.name !== '') {
+        if(isUser) {
             dispatch(getUser())
         }
-    }, [dispatch, user.name]);
+    }, [dispatch, isUser]);
 
     const onlyUnAuth = true;
 

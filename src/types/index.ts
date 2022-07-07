@@ -1,5 +1,5 @@
 import { ThunkAction } from 'redux-thunk';
-import { Action, ActionCreator } from 'redux';
+import { Action, ActionCreator, Dispatch } from 'redux';
 import { store } from "../services/store";
 import {
     TypedUseSelectorHook,

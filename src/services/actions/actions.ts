@@ -1,8 +1,8 @@
-import { TDataAction } from '../actions/dataActions';
-import { TConstructorAction } from '../actions/constructorActions';
-import { TDetailsAction } from '../actions/detailsActions';
-import { TOrdersAction } from '../actions/ordersActions';
-import { TUserAction } from '../actions/userActions';
+import { TDataAction } from './dataActions';
+import { TConstructorAction } from './constructorActions';
+import { TDetailsAction } from './detailsActions';
+import { TOrdersAction } from './ordersActions';
+import { TUserAction } from './userActions';
 
 export type TAppActions =
     | TDataAction

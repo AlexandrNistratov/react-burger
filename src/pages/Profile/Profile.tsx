@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import styles from './profile.module.css';
 import FormProfile from "../../components/UI/FormProfile/FormProfile";
 import OrdersHistory from "../OrdersHistory/OrdersHistory";
-import ProfileNav from "../../components/App/ProfileNav/ProfileNav";
+import ProfileNav from "../../components/ProfileNav/ProfileNav";
 
 const Profile: FC = () => {
     return (

@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import styles from "./profileNav.module.css";
 import { NavLink } from "react-router-dom";
 import clsx from "clsx";
-import { useDispatch } from '../../../types';
-import {clearIngredientsActions} from "../../../services/actions/constructorActions";
-import {logOutAction} from "../../../services/actions/userActions";
-import {logOut} from "../../../utils/Api";
+import { useDispatch } from '../../types';
+import {clearIngredientsActions} from "../../services/actions/constructorActions";
+import {logOutAction} from "../../services/actions/userActions";
+import {logOut} from "../../utils/Api";
 
 const ProfileNav: FC= () => {
     const dispatch = useDispatch();

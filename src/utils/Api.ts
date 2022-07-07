@@ -6,6 +6,24 @@ import { registrationRequestAction, registrationSuccessAction, registrationFaile
     loginRequestAction, loginSuccessAction, loginFailedAction,
     getUserRequestAction, getUserSuccessAction, getUserFailedAction,
     userUpdateFailedAction, userUpdateRequestAction, userUpdateSuccessAction } from "../services/actions/userActions";
+import { AppDispatch, AppThunk} from "../types";
+
+type TGetUserUpdate = {
+    name?: string;
+    email?: string;
+    password?: string;
+}
+
+type TRegister = {
+    name: string;
+    email: string;
+    password: string;
+}
+
+type TLogin = {
+    email: string;
+    password: string;
+}
 
 const checkResponse = (res: Response) => {
     if (res.ok) {
@@ -14,9 +32,9 @@ const checkResponse = (res: Response) => {
     return Promise.reject(`Ошибка ${res.status}`);
 };
 
-export const getData = () => {
-    return (dispatch: any) => {
-        dispatch(dataRequestAction)
+export const getData: AppThunk = () => {
+    return (dispatch: AppDispatch) => {
+        dispatch(dataRequestAction())
         fetch(`${ API_URL }/ingredients`)
             .then(res =>  checkResponse(res))
             .then(data => dispatch(dataSuccessAction(data.data)))
@@ -27,8 +45,8 @@ export const getData = () => {
     }
 };
 
-export const getOrders = (data: {}) => {
-    return (dispatch: any) => {
+export const getOrders: AppThunk = (data: {}) => {
+    return (dispatch: AppDispatch) => {
         dispatch(ordersRequestAction())
         fetch(`${ API_URL }/orders`, {
             method: 'POST',
@@ -105,9 +123,48 @@ const getUserRequest = async () => {
         .then(res => checkResponse(res))
 };
 
+const getUserUpdateRequest = async (data: TGetUserUpdate) => {
+    return await fetch(`${ API_URL }/auth/user`, {
+        method: 'PATCH',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: getCookie("accessToken") || ''
+        },
+        body: JSON.stringify(data)
+    })
+        .then(res => checkResponse(res))
+}
 
-export const getUser = () => {
-    return async (dispatch: any) => {
+export const userUpdate: AppThunk = (data: TGetUserUpdate) => {
+    return async (dispatch: AppDispatch) => {
+        dispatch(userUpdateRequestAction())
+        try {
+            const res = await getUserUpdateRequest(data);
+            (res && res.success) && dispatch(userUpdateSuccessAction(res.user));
+        } catch (err) {
+            if (err === "Ошибка 403") {
+                deleteCookie("accessToken");
+                const refreshToken = getCookie("refreshToken") || '';
+                const token = await updateToken(refreshToken);
+                if (token.success) {
+                    setCookie("accessToken", token.accessToken);
+                    setCookie("refreshToken", token.refreshToken);
+                }
+                const res = await getUserUpdateRequest(data);
+                if (res && res.success) {
+                    dispatch(userUpdateSuccessAction(res.user))
+                }
+            } else {
+                dispatch(userUpdateFailedAction())
+            }
+        }
+    }
+};
+
+
+export const getUser: AppThunk = () => {
+    return async (dispatch: AppDispatch) => {
         dispatch(getUserRequestAction())
         try {
             const res = await getUserRequest();
@@ -133,59 +190,8 @@ export const getUser = () => {
     }
 };
 
-type TGetUserUpdate = {
-    name?: string;
-    email?: string;
-    password?: string;
-}
-
-const getUserUpdateRequest = async (data: TGetUserUpdate) => {
-    return await fetch(`${ API_URL }/auth/user`, {
-        method: 'PATCH',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: getCookie("accessToken") || ''
-        },
-        body: JSON.stringify(data)
-    })
-        .then(res => checkResponse(res))
-}
-
-export const userUpdate = (data: TGetUserUpdate) => {
-    return async (dispatch: any) => {
-        dispatch(userUpdateRequestAction())
-        try {
-            const res = await getUserUpdateRequest(data);
-            (res && res.success) && dispatch(userUpdateSuccessAction(res.user));
-        } catch (err) {
-            if (err === "Ошибка 403") {
-                deleteCookie("accessToken");
-                const refreshToken = getCookie("refreshToken") || '';
-                const token = await updateToken(refreshToken);
-                if (token.success) {
-                    setCookie("accessToken", token.accessToken);
-                    setCookie("refreshToken", token.refreshToken);
-                }
-                const res = await getUserUpdateRequest(data);
-                if (res && res.success) {
-                    dispatch(userUpdateSuccessAction(res.user))
-                }
-            } else {
-                dispatch(userUpdateFailedAction())
-            }
-        }
-    }
-};
-
-type TRegister = {
-    name: string;
-    email: string;
-    password: string;
-}
-
-export const register = (data: TRegister) => {
-    return (dispatch: any) => {
+export const register: AppThunk = (data: TRegister) => {
+    return (dispatch: AppDispatch) => {
         dispatch(registrationRequestAction())
         fetch(`${ API_URL }/auth/register`, {
             method: 'POST',
@@ -201,21 +207,16 @@ export const register = (data: TRegister) => {
         })
             .then(res => checkResponse(res))
             .then(data => {
-                dispatch(getUser())
                 dispatch(registrationSuccessAction(data))
-                dispatch(loginSuccessAction(data))})
+                dispatch(loginSuccessAction(data))
+                getUser()})
             .catch(() => {dispatch(registrationFailedAction())})
     }
 };
 
-type TLogin = {
-    email: string;
-    password: string;
-}
-
-export const login = (data: TLogin) => {
-    return (dispatch: any) => {
-        dispatch(loginRequestAction)
+export const login: AppThunk = (data: TLogin) => {
+    return (dispatch: AppDispatch) => {
+        dispatch(loginRequestAction())
         fetch(`${ API_URL }/auth/login`, {
             method: 'POST',
             headers: {
@@ -235,7 +236,7 @@ export const login = (data: TLogin) => {
                     setCookie('accessToken', data.accessToken);
                     setCookie('refreshToken', data.refreshToken);
                     dispatch(loginSuccessAction(data))
-                    dispatch(getUser())
+                    getUser()
                 }
             })
             .catch(err => {
