@@ -28,6 +28,22 @@ export type TIngredientDetails = {
     proteins: number;
 };
 
-export type TOrder = {
+export type TNumberOrder = {
     order: { number: number };
 };
+
+export type TOrders = {
+    ingredients: Array<string>;
+    _id: string;
+    status: string;
+    number: number;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export type TAllOrders = {
+    success: boolean;
+    orders: TOrders[];
+    total: number;
+    totalToday: number;
+}

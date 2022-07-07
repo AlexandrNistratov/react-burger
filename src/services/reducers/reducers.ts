@@ -4,12 +4,14 @@ import { detailsReducer } from './detailsReducers';
 import { userReducer } from './userReducers';
 import { orderReducer } from './ordersReducers';
 import { combineReducers } from "redux";
+import { socketReducer } from "./socketReducers";
 
 export const rootReducer = combineReducers({
     data: dataReducer,
     constructorData: constructorReducer,
     order: orderReducer,
     details: detailsReducer,
-    userReducer: userReducer
+    userReducer: userReducer,
+    socket: socketReducer
 })
 

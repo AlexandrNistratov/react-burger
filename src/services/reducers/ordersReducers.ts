@@ -1,10 +1,10 @@
 import { RootOrdersActions, TOrdersAction } from "../actions/ordersActions";
-import { TOrder } from "../../types/types";
+import { TNumberOrder } from "../../types/types";
 
 type TOrderInitialState = {
     ordersRequest: boolean,
     ordersFailed: boolean,
-    orders: TOrder
+    orders: TNumberOrder
 }
 
 const initialState: TOrderInitialState = {

@@ -1,11 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import styles from './ordersHistory.module.css';
 import OrdersItem from "../../components/OrdersItem/OrdersItem";
 import Modal from "../../components/Modal/Modal";
 import { useModal } from "../../hooks/useModal";
 // import {TIngredientDetails} from "../../types/types";
 // import { getDetailsAction } from "../../services/actions/detailsActions";
+import { socketActionCreators } from "../../services/actions/socketActions";
 import { useDispatch } from "../../types";
+import { getCookie } from "../../utils/cookie";
 
 const OrdersHistory: FC = () => {
     const { isOpen, closePopup, openPopup} = useModal();
@@ -20,6 +22,11 @@ const OrdersHistory: FC = () => {
         // dispatch(getDetailsAction(item));
         openPopup();
     };
+
+    useEffect(() => {
+        dispatch(socketActionCreators.start(getCookie("accessToken")))
+    }, [dispatch])
+
     return (
         <section className={ styles.main }>
             <OrdersItem clickIngredients={clickIngredients}/>

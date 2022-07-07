@@ -18,9 +18,7 @@ import { useDispatch, useSelector } from '../../types';
 import clsx from "clsx";
 import IngredientPage from "../../pages/IngredientPage/IngredientPage";
 import { Location } from 'history';
-import OrdersHistory from "../../pages/OrdersHistory/OrdersHistory";
 import OrderDetailsPage from "../../pages/OrderDetailsPage/OrderDetailsPage";
-
 
 const App: FC = () => {
     const dispatch = useDispatch();
