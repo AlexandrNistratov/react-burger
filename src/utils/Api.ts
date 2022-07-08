@@ -1,6 +1,6 @@
 import { API_URL } from "./constants";
 import { dataRequestAction, dataSuccessAction, dataFailedAction } from "../store/data/data.actions";
-import { ordersRequestAction, ordersSuccessAction, ordersFailedAction } from "../store/orders/orders.actions";
+import { ordersRequestAction, ordersSuccessAction, ordersFailedAction } from "../store/numberOrders/numberOrders.actions";
 import { setCookie, getCookie, deleteCookie } from "./cookie";
 import { registrationRequestAction, registrationSuccessAction, registrationFailedAction,
     loginRequestAction, loginSuccessAction, loginFailedAction,

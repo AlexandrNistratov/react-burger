@@ -6,7 +6,6 @@ export enum RootSocketAction {
     error = 'WS_CONNECTION_ERROR',
     closed = 'WS_CONNECTION_CLOSED',
     message = 'WS_GET_USER_MESSAGE',
-    allMessage = 'WS_GET_ALL_MESSAGE'
 }
 
 export type TwsActions = {
@@ -14,7 +13,7 @@ export type TwsActions = {
     success: typeof RootSocketAction.success;
     error: typeof RootSocketAction.error;
     closed: typeof RootSocketAction.closed;
-    message: typeof RootSocketAction.message | typeof RootSocketAction.allMessage;
+    message: typeof RootSocketAction.message;
 }
 
 interface IWSStart {
@@ -39,25 +38,18 @@ interface IWSGet {
     payload: TAllOrders
 }
 
-interface IWSGetAll {
-    type: RootSocketAction.allMessage,
-    payload: TAllOrders
-}
-
 export type TSocketAction =
     | IWSStart
     | IWSSuccess
     | IWSError
     | IWSClosed
     | IWSGet
-    | IWSGetAll
 
 const socketStartAction = (token?: string): TSocketAction => ({ type: RootSocketAction.start, payload: { token } });
 const socketSuccessAction = (): TSocketAction => ({ type: RootSocketAction.success });
 const socketErrorAction = (): TSocketAction => ({ type: RootSocketAction.error });
 const socketCloseAction = (): TSocketAction => ({ type: RootSocketAction.closed });
 const socketGetMessageAction = (payload: TAllOrders): TSocketAction => ({ type: RootSocketAction.message, payload });
-const socketGetAllAction = (payload: TAllOrders): TSocketAction => ({ type: RootSocketAction.allMessage, payload });
 
 export const socketActionCreators = {
     start: socketStartAction,
@@ -65,5 +57,4 @@ export const socketActionCreators = {
     error: socketErrorAction,
     close: socketCloseAction,
     getMessage: socketGetMessageAction,
-    getAllMessage: socketGetAllAction
 }

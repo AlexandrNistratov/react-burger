@@ -2,7 +2,7 @@ import React, { useEffect, FC } from 'react';
 import ReactDOM from "react-dom";
 import styles from './modal.module.css';
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
-import {CloseIcon, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import { CloseIcon, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import clsx from "clsx";
 import { useSelector } from "../../types";
 import OrderInfo from "../OrderInfo/OrderInfo";
@@ -91,15 +91,6 @@ const Modal: FC<IModal> = ({ isOrders, children, isOpen, closePopup, header }) =
                 :
                 <ModalIngredients isOpen={ isOpen } closePopup={ closePopup } header={ header } children={children}/>
             }
-            {/*<section className={ styles.main }>*/}
-            {/*    <div className={ styles.header }>*/}
-            {/*        <h1 className={ clsx(styles.title, 'text_type_main-large') }>{ header }</h1>*/}
-            {/*        <div className={ styles.icon }>*/}
-            {/*            <CloseIcon type="primary" onClick={ closePopup }/>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*    { children }*/}
-            {/*</section>*/}
         </>, reactModals
         )
 };

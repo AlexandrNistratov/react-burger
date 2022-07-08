@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    max-width: 280px;
+    /*max-width: 280px;*/
     width: 100%;
     margin-right: 30px;
 }
@@ -32,7 +32,7 @@
 }
 
 .text {
-    margin: 0 0 8px 0;
+    margin: 0;
 }
 
 .text:last-of-type {
@@ -53,4 +53,11 @@
     align-items: flex-start;
     justify-content: center;
     margin: 60px 0;
+}
+
+.list {
+    display: grid;
+    grid-template-rows: repeat(10, 30px);
+    grid-auto-flow: column;
+    gap: 8px 10px
 }

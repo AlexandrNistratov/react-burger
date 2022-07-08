@@ -27,9 +27,6 @@ export const socketReducer = (state: TSocketInitialState = initialState, action:
             return { ...state, connected: false }
         }
         case RootSocketAction.message: {
-            return {...state, messages: action.payload.orders }
-        }
-        case RootSocketAction.allMessage: {
             return {...state, messages: action.payload.orders, total: action.payload.total, totalToday: action.payload.totalToday }
         }
 

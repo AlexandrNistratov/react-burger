@@ -6,15 +6,15 @@ import Icon from "../Icon/Icon";
 import { useSelector } from '../../types';
 
 const OrderDetails: FC = () => {
-    const { ordersRequest, ordersFailed, orders } = useSelector(state => state.order);
+    const { ordersNumberRequest, ordersNumberFailed, ordersNumber } = useSelector(state => state.numberOrder);
 
 
     return (
         <section className={ styles.main }>
             {
-                ordersRequest ? <p className={ clsx(styles.subtitle, 'text_type_main-medium') }>Загрузка..</p> :
-                    orders ? <h1 className={ clsx(styles.header, 'text_type_digits-large ') }>{orders.order.number}</h1> :
-                        ordersFailed ? <p className={ clsx(styles.subtitle, 'text_type_main-medium') }>Ошибка</p> : null
+                ordersNumberRequest ? <p className={ clsx(styles.subtitle, 'text_type_main-medium') }>Загрузка..</p> :
+                    ordersNumber ? <h1 className={ clsx(styles.header, 'text_type_digits-large ') }>{ ordersNumber?.order.number }</h1> :
+                        ordersNumberFailed ? <p className={ clsx(styles.subtitle, 'text_type_main-medium') }>Ошибка</p> : null
             }
             <h2 className={ clsx(styles.subtitle, 'text_type_main-medium') }>идентификатор заказа</h2>
             <Icon icon={ img }/>

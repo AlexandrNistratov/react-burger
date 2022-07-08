@@ -9,7 +9,7 @@ export const socketMiddleware = (wsUrl: string, wsActions: TwsActions): Middlewa
         return (next) => (action) => {
             const { dispatch } = store;
             const { type, payload } = action;
-            const { start, closed } = RootSocketAction;
+            const { start } = RootSocketAction;
 
             if (type === start) {
                 socket = new WebSocket(`${wsUrl}/all`);
@@ -34,7 +34,6 @@ export const socketMiddleware = (wsUrl: string, wsActions: TwsActions): Middlewa
                 socket.onmessage = (event) => {
                     console.log('получили')
                     const data = JSON.parse(event.data);
-                    console.log(data)
                     dispatch(socketActionCreators.getMessage(data));
                 };
 

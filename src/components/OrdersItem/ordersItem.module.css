@@ -3,10 +3,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    max-height: 246px;
+    /*max-height: 246px;*/
     border-radius: 40px;
     background: #1C1C21;
-    margin: 0 8px 18px 0;
+    margin: 0;
     padding: 24px;
     box-sizing: border-box;
 }
@@ -19,6 +19,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    margin-top: 24px;
 }
 
 .number {
@@ -33,7 +34,7 @@
 }
 
 .status {
-    margin: 8px 0 24px;
+    margin: 8px 0 0;
 }
 
 .images {

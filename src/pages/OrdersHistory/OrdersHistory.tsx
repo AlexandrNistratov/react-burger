@@ -29,16 +29,7 @@ const OrdersHistory: FC = () => {
 
     return (
         <section className={ styles.main }>
-            <OrdersItem clickIngredients={clickIngredients}/>
-            <OrdersItem clickIngredients={clickIngredients}/>
-            <OrdersItem clickIngredients={clickIngredients}/>
-            <OrdersItem clickIngredients={clickIngredients}/>
-            <OrdersItem clickIngredients={clickIngredients}/>
-            <OrdersItem clickIngredients={clickIngredients}/>
-            <OrdersItem clickIngredients={clickIngredients}/>
-            <OrdersItem clickIngredients={clickIngredients}/>
-            <OrdersItem clickIngredients={clickIngredients}/>
-            <OrdersItem clickIngredients={clickIngredients}/>
+
             {isOpen && <Modal isOpen={ isOpen } closePopup={ closePopup } header='номер заказа' isOrders={ true }/>}
         </section>
     );

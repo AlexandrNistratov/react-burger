@@ -6,10 +6,7 @@ import OrderInfo from '../../components/OrderInfo/OrderInfo';
 import { useSelector } from '../../types';
 
 const OrderDetailsPage: FC = () => {
-	const ingredients = useSelector(state => state.data.ingredientsData).slice(
-		0,
-		6
-	);
+	const ingredients = useSelector(state => state.data.ingredientsData).slice(0, 6);
 	return (
 		<section className={styles.main}>
 			<div className={styles.header}>
