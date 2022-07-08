@@ -11,6 +11,9 @@ const OrdersFeedPage: FC = () => {
 
     useEffect(() => {
         dispatch(socketActionCreators.start())
+        return () => {
+            dispatch(socketActionCreators.close())
+        }
     }, [dispatch])
 
     return (
