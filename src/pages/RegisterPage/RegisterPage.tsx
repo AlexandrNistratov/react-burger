@@ -3,9 +3,9 @@ import Form from "../../components/UI/Form/Form";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
 import { register } from "../../utils/Api";
-import {loginSuccessAction, setEditAction} from "../../services/actions/userActions";
+import {loginSuccessAction, setEditAction} from "../../store/user/user.actions";
 import { useDispatch, useSelector } from '../../types';
-import { userUpdateSuccessAction } from "../../services/actions/userActions";
+import { userUpdateSuccessAction } from "../../store/user/user.actions";
 
 const RegisterPage: FC = () => {
     const dispatch = useDispatch();

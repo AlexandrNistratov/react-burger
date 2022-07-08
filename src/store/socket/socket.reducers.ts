@@ -1,4 +1,4 @@
-import { RootSocketAction, TSocketAction } from "../actions/socketActions";
+import { RootSocketAction, TSocketAction } from "./socket.actions";
 import { TOrders } from "../../types/types";
 
 type TSocketInitialState = {

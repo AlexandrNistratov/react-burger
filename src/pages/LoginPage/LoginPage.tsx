@@ -5,7 +5,7 @@ import './index.css';
 import FormLink from "../../components/UI/FormLink/FormLink";
 import { useDispatch, useSelector } from '../../types';
 import { login } from "../../utils/Api";
-import { setEditAction } from "../../services/actions/userActions";
+import { setEditAction } from "../../store/user/user.actions";
 
 const LoginPage: FC = () => {
     const dispatch = useDispatch();

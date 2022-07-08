@@ -1,4 +1,4 @@
-import { RootUserActions, TUserAction } from "../actions/userActions";
+import { RootUserActions, TUserAction } from "./user.actions";
 import { TUser } from "../../types/types";
 
 type TUserInitialState = {

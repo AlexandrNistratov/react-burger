@@ -1,4 +1,4 @@
-import { RootConstructorAction, TConstructorAction } from "../actions/constructorActions";
+import { RootConstructorAction, TConstructorAction } from "./constructor.actions";
 import { TData } from "../../types/types";
 
 type TConstructorInitialState = {

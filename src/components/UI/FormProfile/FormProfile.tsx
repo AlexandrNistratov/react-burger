@@ -4,7 +4,7 @@ import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from '../../../types';
 import { getUser, userUpdate } from "../../../utils/Api";
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { setEditAction } from "../../../services/actions/userActions";
+import { setEditAction } from "../../../store/user/user.actions";
 import clsx from "clsx";
 
 const FormProfile: FC = () => {

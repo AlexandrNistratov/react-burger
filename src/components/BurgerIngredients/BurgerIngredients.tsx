@@ -7,7 +7,7 @@ import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useModal } from "../../hooks/useModal";
 import { useDispatch } from '../../types';
-import { getDetailsAction, deleteDetailsAction } from "../../services/actions/detailsActions";
+import { getDetailsAction, deleteDetailsAction } from "../../store/details/details.actions";
 import { useHistory } from "react-router-dom";
 import { TIngredientDetails } from "../../types/types";
 

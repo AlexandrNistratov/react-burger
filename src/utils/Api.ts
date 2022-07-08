@@ -1,11 +1,11 @@
 import { API_URL } from "./constants";
-import { dataRequestAction, dataSuccessAction, dataFailedAction } from "../services/actions/dataActions";
-import { ordersRequestAction, ordersSuccessAction, ordersFailedAction } from "../services/actions/ordersActions";
+import { dataRequestAction, dataSuccessAction, dataFailedAction } from "../store/data/data.actions";
+import { ordersRequestAction, ordersSuccessAction, ordersFailedAction } from "../store/orders/orders.actions";
 import { setCookie, getCookie, deleteCookie } from "./cookie";
 import { registrationRequestAction, registrationSuccessAction, registrationFailedAction,
     loginRequestAction, loginSuccessAction, loginFailedAction,
     getUserRequestAction, getUserSuccessAction, getUserFailedAction,
-    userUpdateFailedAction, userUpdateRequestAction, userUpdateSuccessAction } from "../services/actions/userActions";
+    userUpdateFailedAction, userUpdateRequestAction, userUpdateSuccessAction } from "../store/user/user.actions";
 import { AppDispatch, AppThunk} from "../types";
 
 type TGetUserUpdate = {

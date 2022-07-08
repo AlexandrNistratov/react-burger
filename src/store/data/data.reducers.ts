@@ -1,4 +1,4 @@
-import { RootDataAction, TDataAction } from "../actions/dataActions";
+import { RootDataAction, TDataAction } from "./data.actions";
 import { TData } from "../../types/types";
 
 type TDataInitialState = {

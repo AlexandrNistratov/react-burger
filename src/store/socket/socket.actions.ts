@@ -19,7 +19,7 @@ export type TwsActions = {
 
 interface IWSStart {
     type: RootSocketAction.start,
-    payload: string | undefined
+    payload: object
 }
 
 interface IWSSuccess {
@@ -52,7 +52,7 @@ export type TSocketAction =
     | IWSGet
     | IWSGetAll
 
-const socketStartAction = (payload?: string): TSocketAction => ({ type: RootSocketAction.start, payload });
+const socketStartAction = (token?: string): TSocketAction => ({ type: RootSocketAction.start, payload: { token } });
 const socketSuccessAction = (): TSocketAction => ({ type: RootSocketAction.success });
 const socketErrorAction = (): TSocketAction => ({ type: RootSocketAction.error });
 const socketCloseAction = (): TSocketAction => ({ type: RootSocketAction.closed });

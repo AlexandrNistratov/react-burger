@@ -1,4 +1,4 @@
-import { RootDetailsAction, TDetailsAction } from "../actions/detailsActions";
+import { RootDetailsAction, TDetailsAction } from "./details.actions";
 import { TIngredientDetails } from "../../types/types";
 
 type TDetailsInitialState = {

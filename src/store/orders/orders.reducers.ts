@@ -1,4 +1,4 @@
-import { RootOrdersActions, TOrdersAction } from "../actions/ordersActions";
+import { RootOrdersActions, TOrdersAction } from "./orders.actions";
 import { TNumberOrder } from "../../types/types";
 
 type TOrderInitialState = {

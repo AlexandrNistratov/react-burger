@@ -4,8 +4,8 @@ import OrdersItem from "../../components/OrdersItem/OrdersItem";
 import Modal from "../../components/Modal/Modal";
 import { useModal } from "../../hooks/useModal";
 // import {TIngredientDetails} from "../../types/types";
-// import { getDetailsAction } from "../../services/actions/detailsActions";
-import { socketActionCreators } from "../../services/actions/socketActions";
+// import { getDetailsAction } from "../../store/actions/detailsActions";
+import { socketActionCreators } from "../../store/socket/socket.actions";
 import { useDispatch } from "../../types";
 import { getCookie } from "../../utils/cookie";
 

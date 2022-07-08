@@ -3,7 +3,7 @@ import styles from './ordersFeedPage.module.css';
 import clsx from "clsx";
 import TotalFeedOrders from "../../components/TotalFeedOrders/TotalFeedOrders";
 import OrdersList from "../../components/OrdersList/OrdersList";
-import { socketActionCreators } from "../../services/actions/socketActions";
+import { socketActionCreators } from "../../store/socket/socket.actions";
 import { useDispatch } from "../../types";
 
 const OrdersFeedPage: FC = () => {

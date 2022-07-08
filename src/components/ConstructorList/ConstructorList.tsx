@@ -3,7 +3,7 @@ import styles from './constructorList.module.css';
 import { useSelector, useDispatch } from '../../types';
 import { useDrop } from "react-dnd";
 import clsx from "clsx";
-import { addBunsAction, addIngredientsAction, deleteIngredientsActions, moveIngredientsActions } from "../../services/actions/constructorActions";
+import { addBunsAction, addIngredientsAction, deleteIngredientsActions, moveIngredientsActions } from "../../store/constructor/constructor.actions";
 import { v4 as uuidv4 } from 'uuid';
 import ConstructorItem from "../ConstructorItem/ConstructorItem";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";

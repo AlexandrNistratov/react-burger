@@ -1,8 +1,8 @@
 import { AppDispatch } from "../../types";
 import { Middleware, MiddlewareAPI } from "redux";
-import { RootSocketAction, TwsActions, socketActionCreators } from "../actions/socketActions";
+import { RootSocketAction, TwsActions, socketActionCreators } from "../socket/socket.actions";
 
-export const socketMiddleware = (wsUrl: string, wsActions: TwsActions, token?: string): Middleware => {
+export const socketMiddleware = (wsUrl: string, wsActions: TwsActions): Middleware => {
     return (store: MiddlewareAPI<AppDispatch, RootSocketAction>) => {
         let socket: WebSocket | null = null;
 
@@ -14,8 +14,8 @@ export const socketMiddleware = (wsUrl: string, wsActions: TwsActions, token?: s
             if (type === start) {
                 socket = new WebSocket(`${wsUrl}/all`);
 
-            } else if (type === start && payload.token) {
-                const url = `${wsUrl}?token=${token?.split("Bearer ").join("")}`;
+            } else if (type === start && payload?.token) {
+                const url = `${wsUrl}?token=${payload.token?.split("Bearer ").join("")}`;
                 console.log(url)
                 socket = new WebSocket(url);
 
