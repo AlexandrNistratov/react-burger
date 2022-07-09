@@ -14,7 +14,7 @@ const IngredientPage: FC = () => {
         <section className={ styles.main }>
             {items && (
                 <IngredientDetails
-                    details={items.filter((el: any) => el._id === id)[0]}
+                    details={ items.filter((el: any) => el._id === id)[0] }
                 />
             )}
         </section>

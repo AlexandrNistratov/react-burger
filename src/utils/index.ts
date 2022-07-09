@@ -15,3 +15,13 @@ export const sumOrders = (arr: any, set: any) => {
         set( sum )
     }
 }
+
+export const orderStatus = (status: string) => {
+   return  status === "done"
+                ? "Выполнен"
+                 : status === "pending"
+                 ? "Готовится"
+                : status === "created"
+                ? "Создан"
+                : "";
+}

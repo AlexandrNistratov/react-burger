@@ -4,7 +4,7 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 import { useModal } from "../../hooks/useModal";
 import clsx from "clsx";
 import Modal from "../Modal/Modal";
-import OrderDetails from "../OrderDetails/OrderDetails";
+import OrderNumberDetails from "../OrderNumberDetails/OrderNumberDetails";
 import { getOrders } from "../../utils/Api";
 import { useDispatch, useSelector } from '../../types';
 import { useHistory } from "react-router-dom";
@@ -68,7 +68,7 @@ const TotalConstructor: FC = () => {
                 </div>
             {isOpen &&
                 < Modal isOpen={ isOpen } closePopup={ closePopup }>
-                    <OrderDetails />
+                    <OrderNumberDetails />
                 </Modal>}
         </section>
     );

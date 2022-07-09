@@ -2,23 +2,31 @@ import React, { FC } from 'react';
 import styles from './ordersList.module.css';
 import OrdersItem from '../OrdersItem/OrdersItem';
 import { useModal } from '../../hooks/useModal';
-import { useSelector } from "../../types";
+import { useDispatch, useSelector } from "../../types";
+import  { Link, useLocation } from "react-router-dom";
+import { TOrders } from "../../types/types";
+import { getOrdersDetailsAction } from '../../store/ordersDetails/ordersDetails.actions';
 
-const OrdersList: FC = () => {
-	const { openPopup } = useModal();
+type TOrdersList = {
+	onClick: (item: TOrders) => void;
+}
+
+const OrdersList: FC<TOrdersList> = ({ onClick }) => {
+	const location = useLocation();
 
 	const orders = useSelector(state => state.socket.messages);
-
-	const clickIngredients: () => void = () => {
-		// dispatch(getDetailsAction(item));
-		openPopup();
-	};
 
 	return (
 		<section className={styles.main}>
 			{
 				orders?.map(item => {
-					return <OrdersItem clickIngredients={clickIngredients} key={ item._id } item={ item }/>
+					return <Link className={ styles.link }
+								 key={item._id}
+								 to={ { pathname: `feed/${item._id}`,
+									 state: { background: location }} }
+					>
+						<OrdersItem onClick={ onClick } key={ item._id } item={ item }/>
+					</Link>
 				})
 			}
 		</section>

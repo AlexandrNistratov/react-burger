@@ -9,13 +9,13 @@ import { useSelector } from '../../types';
 import { sumOrders } from '../../utils';
 
 type TOrdersItem = {
-	clickIngredients: () => void;
+	onClick: (item: TOrders) => void;
 	item: TOrders;
 	status?: boolean;
 };
 
-const OrdersItem: FC<TOrdersItem> = ({ clickIngredients, item, status }) => {
-	const [price, setPrice] = useState(0);
+const OrdersItem: FC<TOrdersItem> = ({ onClick,  item, status }) => {
+	const [ price, setPrice ] = useState(0);
 
 	// Массив всех ингридаентов
 	const data = useSelector(state => state.data.ingredientsData);
@@ -26,8 +26,6 @@ const OrdersItem: FC<TOrdersItem> = ({ clickIngredients, item, status }) => {
 		.map(id => {
 			return data.find(item => item._id == id);
 		});
-
-	console.log(identicalIngredients);
 
 	//5 ингредиентов для отображения
 	const ingredients = identicalIngredients.slice(0, 5);
@@ -43,7 +41,7 @@ const OrdersItem: FC<TOrdersItem> = ({ clickIngredients, item, status }) => {
 	useEffect(() => sumOrders(identicalIngredients, setPrice),[]);
 
 	return (
-		<section className={styles.main} onClick={clickIngredients}>
+		<section className={styles.main} onClick={() => onClick(item)}>
 			<div className={styles.wrapper}>
 				<p
 					className={clsx(styles.number, 'text_type_digits-default')}
@@ -62,7 +60,7 @@ const OrdersItem: FC<TOrdersItem> = ({ clickIngredients, item, status }) => {
 			)}
 			<div className={styles.wrapper}>
 				<div className={styles.images}>
-					{ingredients.map(el => {
+					{ingredients.map((el: any) => {
 						return (
 							<div className={styles.item} key={uuidv4()}>
 								<img className={styles.img} src={el?.image_large} alt='' />

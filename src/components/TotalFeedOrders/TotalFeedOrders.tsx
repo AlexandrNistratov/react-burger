@@ -23,16 +23,18 @@ const TotalFeedOrders: FC = () => {
                         }
                     </div>
                 </div>
-                <div className={ styles.wrapper }>
-                    <h2 className={ clsx(styles.subtitle, 'text_type_main-medium') }>В работе:</h2>
-                    <div className={ styles.list }>
-                        {pendingOrders && pendingOrders.length !== 0 ?
-                            pendingOrders.map(item => {
-                                return <p className={ clsx(styles.text, styles.text__green, 'text_type_digits-default')} key={ item._id }>{ item.number }</p>
-                            }) : <p className={ clsx(styles.text, 'text_type_main-default') }>Нет заказов</p>
-                        }
+                { pendingOrders &&  pendingOrders.length !== 0  &&
+                    <div className={ styles.wrapper }>
+                        <h2 className={ clsx(styles.subtitle, 'text_type_main-medium') }>В работе:</h2>
+                        <div className={ styles.list }>
+                            {pendingOrders && pendingOrders.length !== 0 &&
+                                pendingOrders.map(item => {
+                                    return <p className={ clsx(styles.text, styles.text__green, 'text_type_digits-default')} key={ item._id }>{ item.number }</p>
+                                })
+                            }
+                        </div>
                     </div>
-                </div>
+                }
             </div>
             <div className={ styles.all }>
                 <h2 className={ clsx(styles.subtitle, styles.subtitle__all, 'text_type_main-medium') }>Выполнено за все время:</h2>

@@ -4,6 +4,7 @@ import { TDetailsAction } from '../store/details/details.actions';
 import { TNumberOrdersAction } from '../store/numberOrders/numberOrders.actions';
 import { TUserAction } from '../store/user/user.actions';
 import { TSocketAction } from "../store/socket/socket.actions";
+import { TOrdersDetailsAction } from '../store/ordersDetails/ordersDetails.actions';
 
 export type TAppActions =
     | TDataAction
@@ -12,3 +13,4 @@ export type TAppActions =
     | TNumberOrdersAction
     | TUserAction
     | TSocketAction
+    | TOrdersDetailsAction
