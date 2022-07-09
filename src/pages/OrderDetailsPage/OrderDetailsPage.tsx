@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, { FC, useEffect}  from 'react';
 import styles from './orderDetailsPage.module.css';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from '../../types';
@@ -21,16 +21,17 @@ const OrderDetailsPage: FC = () => {
 	const history = useHistory();
 	const id = history.location.pathname.replace("/feed/", "");
 
-	const itemDetails = orders?.filter((el: any) => el._id === id)[0];
-	console.log(itemDetails)
+	const itemFilter = orders?.filter((el: any) => el._id === id)[0];
+	console.log(itemFilter)
+
+
 	return (
 		<section className={styles.main}>
 			<div className={styles.header}>
-				<h1 className={clsx(styles.title, 'text_type_digits-default')}>
-					cdcdcdcdc
-				</h1>
+				<h1 className={clsx(styles.title, 'text_type_digits-default')}>{`#${ itemFilter?.number }`}</h1>
 			</div>
-			{ orders  && <OrderDetails details={  orders.filter((el: any) => el._id === id)[0] } />}
+			{orders ? <OrderDetails details={ itemFilter }/> : 'идет загрузка'}
+
 		</section>
 	);
 };

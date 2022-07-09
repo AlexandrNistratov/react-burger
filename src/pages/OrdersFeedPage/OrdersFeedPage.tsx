@@ -16,7 +16,14 @@ const OrdersFeedPage: FC = () => {
     const history = useHistory();
     const { isOpen, openPopup, closePopup } = useModal();
     const dispatch = useDispatch();
-    const { number } = useSelector(state => state.oderDetails.orderDetails)
+    const { number } = useSelector(state => state.oderDetails.orderDetails);
+
+    useEffect(() => {
+        dispatch(socketActionCreators.start())
+        return () => {
+            dispatch(socketActionCreators.close())
+        }
+    }, [dispatch])
 
     const clickIngredients: (item: TOrders) => void  = (item) => {
         dispatch(getOrdersDetailsAction(item));
@@ -28,13 +35,6 @@ const OrdersFeedPage: FC = () => {
         closePopup();
         history.push('/feed')
     };
-
-    useEffect(() => {
-        dispatch(socketActionCreators.start())
-        return () => {
-            dispatch(socketActionCreators.close())
-        }
-    }, [dispatch])
 
     return (
         <section className={ styles.main }>

@@ -15,12 +15,6 @@
     color: #00CCCC;
 }
 
-/*.item {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: space-between;*/
-/*}*/
-
 .list {
     max-height: 320px;
     overflow-y: scroll;

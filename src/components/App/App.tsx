@@ -19,6 +19,7 @@ import clsx from "clsx";
 import IngredientPage from "../../pages/IngredientPage/IngredientPage";
 import { Location } from 'history';
 import OrderDetailsPage from "../../pages/OrderDetailsPage/OrderDetailsPage";
+import {socketActionCreators} from "../../store/socket/socket.actions";
 
 const App: FC = () => {
     const dispatch = useDispatch();
