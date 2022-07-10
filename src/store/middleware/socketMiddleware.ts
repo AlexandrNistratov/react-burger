@@ -5,7 +5,7 @@ import { RootSocketAction, TwsActions, socketActionCreators } from "../socket/so
 export const socketMiddleware = (wsUrl: string, wsActions: TwsActions): Middleware => {
     return (store: MiddlewareAPI<AppDispatch, RootSocketAction>) => {
         let socket: WebSocket | null = null;
-
+        const { success, error, close, getMessage } = socketActionCreators;
         return (next) => (action) => {
             const { dispatch } = store;
             const { type, payload } = action;
@@ -13,32 +13,41 @@ export const socketMiddleware = (wsUrl: string, wsActions: TwsActions): Middlewa
 
             if (type === start && payload?.token) {
                 const url = `${wsUrl}?token=${payload.token}`;
-                console.log(url)
                 socket = new WebSocket(url);
             } else if(type === start) {
                 socket = new WebSocket(`${wsUrl}/all`);
             }
 
             if (socket) {
+                console.log(socket)
                 socket.onopen = (event) => {
                     console.log("подключились");
-                    dispatch(socketActionCreators.success());
+                    dispatch(success());
                 };
 
                 socket.onerror = (event) => {
                     console.log('ошибочка');
-                    dispatch(socketActionCreators.error());
+                    dispatch(error());
                 };
 
-                socket.onmessage = (event) => {
-                    console.log('получили');
-                    const data = JSON.parse(event.data);
-                    dispatch(socketActionCreators.getMessage(data));
-                };
+                if (socket.url.includes('token')) {
+                    socket.onmessage = (event) => {
+                        console.log('получили заказы пользователя');
+                        const data = JSON.parse(event.data);
+                        dispatch(getMessage(data));
+                    };
+                } else {
+                    socket.onmessage = (event) => {
+                        console.log('получили все заказы');
+                        const data = JSON.parse(event.data);
+                        dispatch(getMessage(data));
+                    };
+                }
+
 
                 socket.onclose = (event) => {
                     console.log('отключились');
-                    dispatch(socketActionCreators.close());
+                    dispatch(close());
                 };
             }
             next(action);

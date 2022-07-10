@@ -5,7 +5,7 @@ export enum RootSocketAction {
     success = 'WS_CONNECTION_SUCCESS',
     error = 'WS_CONNECTION_ERROR',
     closed = 'WS_CONNECTION_CLOSED',
-    message = 'WS_GET_USER_MESSAGE',
+    message = 'WS_GET_MESSAGE',
 }
 
 export type TwsActions = {

@@ -12,7 +12,7 @@ const initialState: TSocketInitialState = {
     connected: false,
     messages: null,
     total: null,
-    totalToday: null,
+    totalToday: null
 }
 
 export const socketReducer = (state: TSocketInitialState = initialState, action: TSocketAction): TSocketInitialState => {
