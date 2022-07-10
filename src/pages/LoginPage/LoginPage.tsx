@@ -5,17 +5,18 @@ import './index.css';
 import FormLink from "../../components/UI/FormLink/FormLink";
 import { useDispatch, useSelector } from '../../types';
 import { login } from "../../utils/Api";
-import { setEditAction } from "../../store/user/user.actions";
+import { userActionCreator } from "../../store/user/user.actions";
 
 const LoginPage: FC = () => {
     const dispatch = useDispatch();
 
     const data = useSelector(state => state.userReducer);
     const { email, password } = data.user;
+    const { setEdit } = userActionCreator;
 
 
     const onChange: (e: ChangeEvent<HTMLInputElement>) => void  = e => {
-        dispatch(setEditAction({...data.user, [e.target.name]: e.target.value}))
+        dispatch(setEdit({...data.user, [e.target.name]: e.target.value}))
     }
 
     const handleSubmit: (e: SyntheticEvent) => void  = (e) => {

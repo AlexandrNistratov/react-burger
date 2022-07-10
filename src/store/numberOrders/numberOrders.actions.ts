@@ -24,6 +24,8 @@ export type TNumberOrdersAction =
     | INumberOrdersSuccess
     | INumberOrdersFailed
 
-export const ordersRequestAction = (): TNumberOrdersAction => ({ type: RootNumberOrdersActions.GET_NUMBER_ORDERS_REQUEST });
-export const ordersSuccessAction = (payload: TNumberOrder): TNumberOrdersAction => ({ type: RootNumberOrdersActions.GET_NUMBER_ORDERS_SUCCESS, payload });
-export const ordersFailedAction = (): TNumberOrdersAction => ({ type: RootNumberOrdersActions.GET_NUMBER_ORDERS_FAILED });
+export const numberOrdersActionCreator = {
+   numberOrdersRequest: (): TNumberOrdersAction => ({ type: RootNumberOrdersActions.GET_NUMBER_ORDERS_REQUEST }),
+    numberOrdersSuccess: (payload: TNumberOrder): TNumberOrdersAction => ({ type: RootNumberOrdersActions.GET_NUMBER_ORDERS_SUCCESS, payload }),
+    numberOrdersError: (): TNumberOrdersAction => ({ type: RootNumberOrdersActions.GET_NUMBER_ORDERS_FAILED })
+}

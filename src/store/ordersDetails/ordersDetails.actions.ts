@@ -18,5 +18,7 @@ export type TOrdersDetailsAction =
     | IGetOrdersDetails
     | IDeleteOrdersDetails
 
-export const getOrdersDetailsAction = (payload: TOrders): TOrdersDetailsAction => ({ type: RootOrdersDetailsAction.GET_ORDERS_DETAILS, payload });
-export const deleteOrdersDetailsAction = (): TOrdersDetailsAction => ({ type: RootOrdersDetailsAction.DELETE_ORDERS_DETAILS });
+export const orderDetailsActionCreator = {
+    getOrdersDetails: (payload: TOrders): TOrdersDetailsAction => ({ type: RootOrdersDetailsAction.GET_ORDERS_DETAILS, payload }),
+    deleteOrdersDetails: (): TOrdersDetailsAction => ({ type: RootOrdersDetailsAction.DELETE_ORDERS_DETAILS })
+}

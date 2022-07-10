@@ -24,6 +24,8 @@ export type TDataAction =
     | IDataSuccess
     | IDataFailed
 
-export const dataRequestAction = (): TDataAction => ({ type: RootDataAction.GET_DATA_REQUEST });
-export const dataSuccessAction = (payload: TData[]): TDataAction => ({ type: RootDataAction.GET_DATA_SUCCESS, payload });
-export const dataFailedAction = (): TDataAction => ({ type: RootDataAction.GET_DATA_FAILED });
+export const dataActionCreator = {
+    dataRequest: (): TDataAction => ({ type: RootDataAction.GET_DATA_REQUEST }),
+    dataSuccess: (payload: TData[]): TDataAction => ({ type: RootDataAction.GET_DATA_SUCCESS, payload }),
+    dataError: (): TDataAction => ({ type: RootDataAction.GET_DATA_FAILED })
+}

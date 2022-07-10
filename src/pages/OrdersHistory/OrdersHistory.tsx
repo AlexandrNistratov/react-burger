@@ -3,34 +3,62 @@ import styles from './ordersHistory.module.css';
 import OrdersItem from "../../components/OrdersItem/OrdersItem";
 import Modal from "../../components/Modal/Modal";
 import { useModal } from "../../hooks/useModal";
-// import {TIngredientDetails} from "../../types/types";
-// import { getDetailsAction } from "../../store/actions/detailsActions";
 import { socketActionCreators } from "../../store/socket/socket.actions";
-import { useDispatch } from "../../types";
+import { useDispatch, useSelector } from "../../types";
 import { getCookie } from "../../utils/cookie";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import {TOrders} from "../../types/types";
+import { orderDetailsActionCreator } from "../../store/ordersDetails/ordersDetails.actions";
+import OrderDetails from "../../components/OrderDetails/OrderDetails";
 
 const OrdersHistory: FC = () => {
     const { isOpen, closePopup, openPopup} = useModal();
     const dispatch = useDispatch();
+    const history = useHistory();
+    const location = useLocation();
 
-    // const clickIngredients: (item: TIngredientDetails) => void  = (item) => {
-    //     // dispatch(getDetailsAction(item));
-    //     openPopup();
-    // };
+    useEffect(() => {
+        dispatch(socketActionCreators.start(getCookie("accessToken")?.split("Bearer ").join("")))
+        return () => {
+            dispatch(socketActionCreators.close())
+        }
+    }, [dispatch])
+    const { getOrdersDetails, deleteOrdersDetails } = orderDetailsActionCreator;
+    const orders = useSelector(state => state.socket.messages);
+    const { number } = useSelector(state => state.oderDetails.orderDetails)
 
-    const clickIngredients: () => void  = () => {
-        // dispatch(getDetailsAction(item));
+    const clickIngredients: (item: TOrders) => void  = (item) => {
+        dispatch(getOrdersDetails(item));
         openPopup();
     };
 
-    useEffect(() => {
-        dispatch(socketActionCreators.start(getCookie("accessToken")))
-    }, [dispatch])
+    const closeModalDetails = () => {
+        dispatch(deleteOrdersDetails());
+        closePopup();
+        history.push('/feed')
+    };
 
     return (
         <section className={ styles.main }>
-
-            {isOpen && <Modal isOpen={ isOpen } closePopup={ closePopup } header='номер заказа' isOrders={ true }/>}
+            {
+                orders?.map(item => {
+                    return <Link className={ styles.link }
+                                 key={item._id}
+                                 to={ { pathname: `orders/${item._id}`,
+                                     state: { background: location }} }
+                    >
+                        <OrdersItem onClick={ clickIngredients } key={ item._id } item={ item }/>
+                    </Link>
+                })
+            }
+            {isOpen &&
+                <Modal
+                    isOpen={ isOpen }
+                    closePopup={ closeModalDetails }
+                    header={ number }
+                    isOrders={ true }>
+                    <OrderDetails />
+                </Modal>}
         </section>
     );
 };

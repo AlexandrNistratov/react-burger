@@ -5,7 +5,7 @@ import { useModal } from "../../hooks/useModal";
 import clsx from "clsx";
 import Modal from "../Modal/Modal";
 import OrderNumberDetails from "../OrderNumberDetails/OrderNumberDetails";
-import { getOrders } from "../../utils/Api";
+import { getNumberOrders } from "../../utils/Api";
 import { useDispatch, useSelector } from '../../types';
 import { useHistory } from "react-router-dom";
 
@@ -31,7 +31,7 @@ const TotalConstructor: FC = () => {
             history.push('login')
         }
         arrIdIngredients &&
-        dispatch(getOrders(arrIdIngredients))
+        dispatch(getNumberOrders(arrIdIngredients))
         openPopup();
     };
 

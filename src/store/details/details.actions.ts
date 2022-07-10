@@ -18,5 +18,7 @@ export type TDetailsAction =
     | IGetDetails
     | IDeleteDetails
 
-export const getDetailsAction = (payload: TIngredientDetails): TDetailsAction => ({ type: RootDetailsAction.GET_DETAILS, payload });
-export const deleteDetailsAction = (): TDetailsAction => ({ type: RootDetailsAction.DELETE_DETAILS });
+export const detailsActionCreator = {
+    getDetails: (payload: TIngredientDetails): TDetailsAction => ({ type: RootDetailsAction.GET_DETAILS, payload }),
+    deleteDetails: (): TDetailsAction => ({ type: RootDetailsAction.DELETE_DETAILS })
+}

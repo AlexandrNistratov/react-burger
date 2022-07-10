@@ -7,7 +7,7 @@ import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useModal } from "../../hooks/useModal";
 import { useDispatch } from '../../types';
-import { getDetailsAction, deleteDetailsAction } from "../../store/details/details.actions";
+import { detailsActionCreator } from "../../store/details/details.actions";
 import { useHistory } from "react-router-dom";
 import { TIngredientDetails } from "../../types/types";
 
@@ -15,17 +15,19 @@ const BurgerIngredients: FC = () => {
     const { isOpen, closePopup, openPopup} = useModal();
     const [ current, setCurrent ] = useState<string>('Булки');
 
+    const { getDetails, deleteDetails } = detailsActionCreator;
+
     const history = useHistory();
 
     const dispatch = useDispatch();
 
     const clickIngredients: (item: TIngredientDetails) => void  = (item) => {
-        dispatch(getDetailsAction(item));
+        dispatch(getDetails(item));
         openPopup();
     };
 
     const closeModalDetails = () => {
-        dispatch(deleteDetailsAction());
+        dispatch(deleteDetails());
         closePopup();
         history.push('/')
     };

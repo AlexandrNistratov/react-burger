@@ -20,6 +20,7 @@ import IngredientPage from "../../pages/IngredientPage/IngredientPage";
 import { Location } from 'history';
 import OrderDetailsPage from "../../pages/OrderDetailsPage/OrderDetailsPage";
 import {socketActionCreators} from "../../store/socket/socket.actions";
+import OrdersHistory from "../../pages/OrdersHistory/OrdersHistory";
 
 const App: FC = () => {
     const dispatch = useDispatch();
@@ -78,9 +79,9 @@ const App: FC = () => {
                         <Route path='/feed/:id' exact>
                             <OrderDetailsPage/>
                         </Route>
-                        <Route path='/profile/orders/:id' exact>
+                        <ProtectedRoute path='profile/orders/:id' exact>
                             <OrderDetailsPage/>
-                        </Route>
+                        </ProtectedRoute>
                         <Route>
                             <NotFoundPage />
                         </Route>

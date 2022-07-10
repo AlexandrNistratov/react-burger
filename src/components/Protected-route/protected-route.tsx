@@ -14,6 +14,7 @@ export const ProtectedRoute: FC<RouteProps & { onlyUnAuth?: boolean }> = ({ only
     const isToken = getCookie("accessToken");
     const [ isUserLoaded, setUserLoaded ] = useState(false);
 
+
     const init = () => {
         if(isUser) {
             dispatch(getUser())

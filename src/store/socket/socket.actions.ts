@@ -45,16 +45,10 @@ export type TSocketAction =
     | IWSClosed
     | IWSGet
 
-const socketStartAction = (token?: string): TSocketAction => ({ type: RootSocketAction.start, payload: { token } });
-const socketSuccessAction = (): TSocketAction => ({ type: RootSocketAction.success });
-const socketErrorAction = (): TSocketAction => ({ type: RootSocketAction.error });
-const socketCloseAction = (): TSocketAction => ({ type: RootSocketAction.closed });
-const socketGetMessageAction = (payload: TAllOrders): TSocketAction => ({ type: RootSocketAction.message, payload });
-
 export const socketActionCreators = {
-    start: socketStartAction,
-    success: socketSuccessAction,
-    error: socketErrorAction,
-    close: socketCloseAction,
-    getMessage: socketGetMessageAction,
+    start: (token?: string): TSocketAction => ({ type: RootSocketAction.start, payload: { token } }),
+    success: (): TSocketAction => ({ type: RootSocketAction.error }),
+    error: (): TSocketAction => ({ type: RootSocketAction.error }),
+    close: (): TSocketAction => ({ type: RootSocketAction.closed }),
+    getMessage: (payload: TAllOrders): TSocketAction => ({ type: RootSocketAction.message, payload }),
 }

@@ -11,34 +11,33 @@ export const socketMiddleware = (wsUrl: string, wsActions: TwsActions): Middlewa
             const { type, payload } = action;
             const { start } = RootSocketAction;
 
-            if (type === start) {
-                socket = new WebSocket(`${wsUrl}/all`);
-
-            } else if (type === start && payload?.token) {
-                const url = `${wsUrl}?token=${payload.token?.split("Bearer ").join("")}`;
+            if (type === start && payload?.token) {
+                const url = `${wsUrl}?token=${payload.token}`;
                 console.log(url)
                 socket = new WebSocket(url);
+            } else if(type === start) {
+                socket = new WebSocket(`${wsUrl}/all`);
             }
 
             if (socket) {
                 socket.onopen = (event) => {
-                    console.log("подключились")
+                    console.log("подключились");
                     dispatch(socketActionCreators.success());
                 };
 
                 socket.onerror = (event) => {
-                    console.log('ошибочка')
+                    console.log('ошибочка');
                     dispatch(socketActionCreators.error());
                 };
 
                 socket.onmessage = (event) => {
-                    console.log('получили')
+                    console.log('получили');
                     const data = JSON.parse(event.data);
                     dispatch(socketActionCreators.getMessage(data));
                 };
 
                 socket.onclose = (event) => {
-                    console.log('отключились')
+                    console.log('отключились');
                     dispatch(socketActionCreators.close());
                 };
             }

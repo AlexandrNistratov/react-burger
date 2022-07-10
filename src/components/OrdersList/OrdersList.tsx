@@ -1,11 +1,9 @@
 import React, { FC } from 'react';
 import styles from './ordersList.module.css';
 import OrdersItem from '../OrdersItem/OrdersItem';
-import { useModal } from '../../hooks/useModal';
-import { useDispatch, useSelector } from "../../types";
+import { useSelector } from "../../types";
 import  { Link, useLocation } from "react-router-dom";
 import { TOrders } from "../../types/types";
-import { getOrdersDetailsAction } from '../../store/ordersDetails/ordersDetails.actions';
 
 type TOrdersList = {
 	onClick: (item: TOrders) => void;

@@ -3,25 +3,25 @@ import Form from "../../components/UI/Form/Form";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
 import { register } from "../../utils/Api";
-import {loginSuccessAction, setEditAction} from "../../store/user/user.actions";
 import { useDispatch, useSelector } from '../../types';
-import { userUpdateSuccessAction } from "../../store/user/user.actions";
+import { userActionCreator } from "../../store/user/user.actions";
 
 const RegisterPage: FC = () => {
     const dispatch = useDispatch();
 
     const user = useSelector(state => state.userReducer.user);
+    const { setEdit, userUpdateSuccess, loginSuccess } = userActionCreator;
 
     const onChange: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
-        dispatch(setEditAction({...user, [e.target.name]: e.target.value}))
+        dispatch(setEdit({...user, [e.target.name]: e.target.value}))
     }
 
     const handleSubmit: (e: SyntheticEvent) => void  = (e) => {
         e.preventDefault();
         dispatch(register(user));
-        dispatch(userUpdateSuccessAction(user))
+        dispatch(userUpdateSuccess(user))
         setTimeout(() => {
-            dispatch(loginSuccessAction(user))
+            dispatch(loginSuccess(user))
         },3000)
     }
 

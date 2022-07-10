@@ -6,7 +6,7 @@ import OrdersList from "../../components/OrdersList/OrdersList";
 import { socketActionCreators } from "../../store/socket/socket.actions";
 import { useDispatch, useSelector } from "../../types";
 import {TOrders} from "../../types/types";
-import { getOrdersDetailsAction , deleteOrdersDetailsAction} from "../../store/ordersDetails/ordersDetails.actions";
+import { orderDetailsActionCreator } from "../../store/ordersDetails/ordersDetails.actions";
 import { useModal } from "../../hooks/useModal";
 import Modal from "../../components/Modal/Modal";
 import { useHistory } from "react-router-dom";
@@ -17,6 +17,7 @@ const OrdersFeedPage: FC = () => {
     const { isOpen, openPopup, closePopup } = useModal();
     const dispatch = useDispatch();
     const { number } = useSelector(state => state.oderDetails.orderDetails);
+    const { getOrdersDetails, deleteOrdersDetails } = orderDetailsActionCreator;
 
     useEffect(() => {
         dispatch(socketActionCreators.start())
@@ -26,12 +27,12 @@ const OrdersFeedPage: FC = () => {
     }, [dispatch])
 
     const clickIngredients: (item: TOrders) => void  = (item) => {
-        dispatch(getOrdersDetailsAction(item));
+        dispatch(getOrdersDetails(item));
         openPopup();
     };
 
     const closeModalDetails = () => {
-        dispatch(deleteOrdersDetailsAction());
+        dispatch(deleteOrdersDetails());
         closePopup();
         history.push('/feed')
     };

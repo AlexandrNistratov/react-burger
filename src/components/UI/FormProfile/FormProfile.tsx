@@ -4,16 +4,17 @@ import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from '../../../types';
 import { getUser, userUpdate } from "../../../utils/Api";
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { setEditAction } from "../../../store/user/user.actions";
+import { userActionCreator } from "../../../store/user/user.actions";
 import clsx from "clsx";
 
 const FormProfile: FC = () => {
     const dispatch = useDispatch();
 
     const user = useSelector(state => state.userReducer.user);// стор с данными из авторизации
+    const { setEdit } = userActionCreator;
 
     const onChange: (e: ChangeEvent<HTMLInputElement>) => void = e => {
-        dispatch(setEditAction({...user, [e.target.name]: e.target.value}))
+        dispatch(setEdit({...user, [e.target.name]: e.target.value}))
     }
 
     const handleSubmit: (e: FormEvent) => void = (e) => {

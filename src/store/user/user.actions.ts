@@ -100,23 +100,26 @@ export type TUserAction =
     | ISetEdit
 
 
+export const userActionCreator = {
+    registrationRequest: (): TUserAction => ({ type: RootUserActions.GET_REGISTRATION_REQUEST }),
+    registrationSuccess: (payload: TUser): TUserAction  => ({ type: RootUserActions.GET_REGISTRATION_SUCCESS, payload }),
+    registrationFailed: (): TUserAction => ({ type: RootUserActions.GET_REGISTRATION_FAILED }),
 
-export const registrationRequestAction = (): TUserAction => ({ type: RootUserActions.GET_REGISTRATION_REQUEST });
-export const registrationSuccessAction = (payload: TUser): TUserAction  => ({ type: RootUserActions.GET_REGISTRATION_SUCCESS, payload });
-export const registrationFailedAction = (): TUserAction => ({ type: RootUserActions.GET_REGISTRATION_FAILED });
+    loginRequest: (): TUserAction => ({ type: RootUserActions.GET_LOGIN_REQUEST }),
+    loginSuccess: (payload: TUser): TUserAction => ({ type: RootUserActions.GET_LOGIN_SUCCESS, payload }),
+    loginFailed: (): TUserAction => ({ type: RootUserActions.GET_LOGIN_FAILED }),
 
-export const loginRequestAction = (): TUserAction => ({ type: RootUserActions.GET_LOGIN_REQUEST });
-export const loginSuccessAction = (payload: TUser): TUserAction => ({ type: RootUserActions.GET_LOGIN_SUCCESS, payload });
-export const loginFailedAction = (): TUserAction => ({ type: RootUserActions.GET_LOGIN_FAILED });
+    out: (): TUserAction => ({ type: RootUserActions.LOG_OUT }),
 
-export const logOutAction = (): TUserAction => ({ type: RootUserActions.LOG_OUT });
+    userRequest: (): TUserAction => ({ type: RootUserActions.GET_USER_REQUEST }),
+    userSuccess: (payload: TUser): TUserAction => ({ type: RootUserActions.GET_USER_SUCCESS, payload }),
+    userFailed: (): TUserAction => ({ type: RootUserActions.GET_USER_FAILED }),
 
-export const getUserRequestAction = (): TUserAction => ({ type: RootUserActions.GET_USER_REQUEST });
-export const getUserSuccessAction = (payload: TUser): TUserAction => ({ type: RootUserActions.GET_USER_SUCCESS, payload });
-export const getUserFailedAction = (): TUserAction => ({ type: RootUserActions.GET_USER_FAILED });
+    userUpdateRequest: (): TUserAction => ({ type: RootUserActions.USER_UPDATE_REQUEST }),
+    userUpdateSuccess: (payload: TUser): TUserAction => ({ type: RootUserActions.USER_UPDATE_SUCCESS, payload }),
+    userUpdateFailed: (): TUserAction => ({ type: RootUserActions.USER_UPDATE_FAILED }),
 
-export const userUpdateRequestAction = (): TUserAction => ({ type: RootUserActions.USER_UPDATE_REQUEST });
-export const userUpdateSuccessAction = (payload: TUser): TUserAction => ({ type: RootUserActions.USER_UPDATE_SUCCESS, payload });
-export const userUpdateFailedAction = (): TUserAction => ({ type: RootUserActions.USER_UPDATE_FAILED });
+    setEdit: (payload: TUser): TUserAction => ({ type: RootUserActions.SET_EDIT, payload })
+}
 
-export const setEditAction = (payload: TUser): TUserAction => ({ type: RootUserActions.SET_EDIT, payload });
+

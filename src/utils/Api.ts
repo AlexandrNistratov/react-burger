@@ -1,11 +1,8 @@
 import { API_URL } from "./constants";
-import { dataRequestAction, dataSuccessAction, dataFailedAction } from "../store/data/data.actions";
-import { ordersRequestAction, ordersSuccessAction, ordersFailedAction } from "../store/numberOrders/numberOrders.actions";
+import { dataActionCreator } from "../store/data/data.actions";
+import { numberOrdersActionCreator } from "../store/numberOrders/numberOrders.actions";
 import { setCookie, getCookie, deleteCookie } from "./cookie";
-import { registrationRequestAction, registrationSuccessAction, registrationFailedAction,
-    loginRequestAction, loginSuccessAction, loginFailedAction,
-    getUserRequestAction, getUserSuccessAction, getUserFailedAction,
-    userUpdateFailedAction, userUpdateRequestAction, userUpdateSuccessAction } from "../store/user/user.actions";
+import { userActionCreator } from "../store/user/user.actions";
 import { AppDispatch, AppThunk} from "../types";
 
 type TGetUserUpdate = {
@@ -25,6 +22,9 @@ type TLogin = {
     password: string;
 }
 
+const { registrationRequest, registrationSuccess, registrationFailed, loginRequest, loginSuccess, loginFailed, userRequest,
+    userSuccess, userFailed, userUpdateRequest, userUpdateSuccess, userUpdateFailed, out, setEdit  } = userActionCreator;
+
 const checkResponse = (res: Response) => {
     if (res.ok) {
         return res.json();
@@ -34,20 +34,22 @@ const checkResponse = (res: Response) => {
 
 export const getData: AppThunk = () => {
     return (dispatch: AppDispatch) => {
-        dispatch(dataRequestAction())
+        const { dataRequest, dataSuccess, dataError } = dataActionCreator;
+        dispatch(dataRequest())
         fetch(`${ API_URL }/ingredients`)
             .then(res =>  checkResponse(res))
-            .then(data => dispatch(dataSuccessAction(data.data)))
+            .then(data => dispatch(dataSuccess(data.data)))
             .catch(err => {
                 console.log(err)
-                dispatch(dataFailedAction())
+                dispatch(dataError())
             })
     }
 };
 
-export const getOrders: AppThunk = (data: {}) => {
+export const getNumberOrders: AppThunk = (data: {}) => {
     return (dispatch: AppDispatch) => {
-        dispatch(ordersRequestAction())
+        const { numberOrdersRequest, numberOrdersSuccess, numberOrdersError,} = numberOrdersActionCreator;
+        dispatch(numberOrdersRequest())
         fetch(`${ API_URL }/orders`, {
             method: 'POST',
             headers: {
@@ -61,10 +63,10 @@ export const getOrders: AppThunk = (data: {}) => {
             .then(res => {
                 return checkResponse(res)
             })
-            .then(data => dispatch(ordersSuccessAction(data)))
+            .then(data => dispatch(numberOrdersSuccess(data)))
             .catch(err => {
                 console.log(err)
-                dispatch(ordersFailedAction())})
+                dispatch(numberOrdersError())})
     }
 };
 
@@ -138,10 +140,10 @@ const getUserUpdateRequest = async (data: TGetUserUpdate) => {
 
 export const userUpdate: AppThunk = (data: TGetUserUpdate) => {
     return async (dispatch: AppDispatch) => {
-        dispatch(userUpdateRequestAction())
+        dispatch(userUpdateRequest())
         try {
             const res = await getUserUpdateRequest(data);
-            (res && res.success) && dispatch(userUpdateSuccessAction(res.user));
+            (res && res.success) && dispatch(userUpdateSuccess(res.user));
         } catch (err) {
             if (err === "Ошибка 403") {
                 deleteCookie("accessToken");
@@ -153,10 +155,10 @@ export const userUpdate: AppThunk = (data: TGetUserUpdate) => {
                 }
                 const res = await getUserUpdateRequest(data);
                 if (res && res.success) {
-                    dispatch(userUpdateSuccessAction(res.user))
+                    dispatch(userUpdateSuccess(res.user))
                 }
             } else {
-                dispatch(userUpdateFailedAction())
+                dispatch(userUpdateFailed())
             }
         }
     }
@@ -165,10 +167,10 @@ export const userUpdate: AppThunk = (data: TGetUserUpdate) => {
 
 export const getUser: AppThunk = () => {
     return async (dispatch: AppDispatch) => {
-        dispatch(getUserRequestAction())
+        dispatch(userRequest())
         try {
             const res = await getUserRequest();
-            (res && res.success) && await dispatch(getUserSuccessAction(res.user));
+            (res && res.success) && await dispatch(userSuccess(res.user));
         } catch (err) {
             console.log(err)
             if (err === "Ошибка 403") {
@@ -181,10 +183,10 @@ export const getUser: AppThunk = () => {
                 }
                 const res = await getUserRequest();
                 if (res && res.success) {
-                    dispatch(getUserSuccessAction(res.user))
+                    dispatch(userSuccess(res.user))
                 }
             } else {
-                dispatch(getUserFailedAction())
+                dispatch(userFailed())
             }
         }
     }
@@ -192,7 +194,8 @@ export const getUser: AppThunk = () => {
 
 export const register: AppThunk = (data: TRegister) => {
     return (dispatch: AppDispatch) => {
-        dispatch(registrationRequestAction())
+
+        dispatch(registrationRequest())
         fetch(`${ API_URL }/auth/register`, {
             method: 'POST',
             headers: {
@@ -207,16 +210,16 @@ export const register: AppThunk = (data: TRegister) => {
         })
             .then(res => checkResponse(res))
             .then(data => {
-                dispatch(registrationSuccessAction(data))
-                dispatch(loginSuccessAction(data))
+                dispatch(registrationSuccess(data))
+                dispatch(loginSuccess(data))
                 getUser()})
-            .catch(() => {dispatch(registrationFailedAction())})
+            .catch(() => {dispatch(registrationFailed())})
     }
 };
 
 export const login: AppThunk = (data: TLogin) => {
     return (dispatch: AppDispatch) => {
-        dispatch(loginRequestAction())
+        dispatch(loginRequest())
         fetch(`${ API_URL }/auth/login`, {
             method: 'POST',
             headers: {
@@ -235,13 +238,13 @@ export const login: AppThunk = (data: TLogin) => {
                 if (data) {
                     setCookie('accessToken', data.accessToken);
                     setCookie('refreshToken', data.refreshToken);
-                    dispatch(loginSuccessAction(data))
+                    dispatch(loginSuccess(data))
                     getUser()
                 }
             })
             .catch(err => {
                 console.log(err)
-                dispatch(loginFailedAction())})
+                dispatch(loginFailed())})
     }
 };
 

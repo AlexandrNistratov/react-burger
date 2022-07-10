@@ -39,30 +39,10 @@ export type TConstructorAction =
 	| IDeleteIngredients
 	| IClearIngredients;
 
-export const addBunsAction = (payload: TData): TConstructorAction => ({
-	type: RootConstructorAction.ADD_BUNS,
-	payload,
-});
-
-export const addIngredientsAction = (payload: TData): TConstructorAction => ({
-	type: RootConstructorAction.ADD_INGREDIENTS,
-	payload,
-});
-
-export const moveIngredientsActions = (
-	payload: TData[]
-): TConstructorAction => ({
-	type: RootConstructorAction.MOVE_INGREDIENT,
-	payload,
-});
-
-export const deleteIngredientsActions = (
-	payload?: number
-): TConstructorAction => ({
-	type: RootConstructorAction.DELETE_INGREDIENT,
-	payload,
-});
-
-export const clearIngredientsActions = (): TConstructorAction => ({
-	type: RootConstructorAction.ClEAR_INGREDIENT,
-});
+export const constructorActionCreator = {
+	addBuns: (payload: TData): TConstructorAction => ({ type: RootConstructorAction.ADD_BUNS, payload }),
+	addIngredients: (payload: TData): TConstructorAction => ({ type: RootConstructorAction.ADD_INGREDIENTS, payload }),
+	move: (payload: TData[]): TConstructorAction => ({ type: RootConstructorAction.MOVE_INGREDIENT, payload }),
+	deleteItems: (payload?: number): TConstructorAction => ({ type: RootConstructorAction.DELETE_INGREDIENT, payload }),
+	clear: (): TConstructorAction => ({ type: RootConstructorAction.ClEAR_INGREDIENT })
+}
