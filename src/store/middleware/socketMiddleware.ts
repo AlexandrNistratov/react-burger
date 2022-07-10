@@ -19,34 +19,27 @@ export const socketMiddleware = (wsUrl: string, wsActions: TwsActions): Middlewa
             }
 
             if (socket) {
-                console.log(socket)
                 socket.onopen = (event) => {
-                    console.log("подключились");
                     dispatch(success());
                 };
 
                 socket.onerror = (event) => {
-                    console.log('ошибочка');
                     dispatch(error());
                 };
 
                 if (socket.url.includes('token')) {
                     socket.onmessage = (event) => {
-                        console.log('получили заказы пользователя');
                         const data = JSON.parse(event.data);
                         dispatch(getMessage(data));
                     };
                 } else {
                     socket.onmessage = (event) => {
-                        console.log('получили все заказы');
                         const data = JSON.parse(event.data);
                         dispatch(getMessage(data));
                     };
                 }
 
-
                 socket.onclose = (event) => {
-                    console.log('отключились');
                     dispatch(close());
                 };
             }

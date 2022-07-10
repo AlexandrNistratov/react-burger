@@ -11,6 +11,7 @@ import {TOrders} from "../../types/types";
 import { orderDetailsActionCreator } from "../../store/ordersDetails/ordersDetails.actions";
 import OrderDetails from "../../components/OrderDetails/OrderDetails";
 import clsx from "clsx";
+import ProfileNav from "../../components/ProfileNav/ProfileNav";
 
 const OrdersHistory: FC = () => {
     const { isOpen, closePopup, openPopup} = useModal();
@@ -25,9 +26,10 @@ const OrdersHistory: FC = () => {
         }
     }, [dispatch])
     const { getOrdersDetails, deleteOrdersDetails } = orderDetailsActionCreator;
-    const orders = useSelector(state => state.socket.messagesUser);
-    const { number } = useSelector(state => state.oderDetails.orderDetails)
-    // console.log(orders)
+    const orders = useSelector(state => state.socket.messages);
+    const { number } = useSelector(state => state.oderDetails.orderDetails);
+    const ingredient = useSelector(state => state.oderDetails.orderDetails);
+
 
     const clickIngredients: (item: TOrders) => void  = (item) => {
         dispatch(getOrdersDetails(item));
@@ -41,32 +43,33 @@ const OrdersHistory: FC = () => {
     };
 
     return (
-        <>
-            {
-                orders && orders.length > 0 ?
-                <section className={ styles.main }>
-                    {
-                        orders?.map(item => {
-                            return <Link className={ styles.link }
-                                         key={item._id}
-                                         to={ { pathname: `orders/${item._id}`,
-                                             state: { background: location }} }
-                            >
-                                <OrdersItem onClick={ clickIngredients } key={ item._id } item={ item } status={ true }/>
-                            </Link>
-                        })
-                    }
-                    {isOpen &&
-                        <Modal
-                            isOpen={ isOpen }
-                            closePopup={ closeModalDetails }
-                            header={ number }
-                            isOrders={ true }>
-                            <OrderDetails />
-                        </Modal>}
-                </section> : <p className={ clsx(styles.text, 'text_type_main-medium') }>Подождите, идет загрузка</p>
-            }
-        </>
+            <div className={ styles.container}>
+                <ProfileNav />
+                {
+                    orders && orders.length > 0 ?
+                        <section className={ styles.main }>
+                            {
+                                orders?.map(item => {
+                                    return <Link className={ styles.link }
+                                                 key={item._id}
+                                                 to={ { pathname: `orders/${item._id}`,
+                                                     state: { background: location }} }
+                                    >
+                                        <OrdersItem onClick={ clickIngredients } key={ item._id } item={ item } status={ true }/>
+                                    </Link>
+                                })
+                            }
+                            {isOpen &&
+                                <Modal
+                                    isOpen={ isOpen }
+                                    closePopup={ closeModalDetails }
+                                    header={ number }
+                                    isOrders={ true }>
+                                    <OrderDetails details={ ingredient }/>
+                                </Modal>}
+                        </section> : <p className={ clsx(styles.text, 'text_type_main-medium') }>Подождите, идет загрузка</p>
+                }
+            </div>
     );
 };
 

@@ -54,7 +54,8 @@ export const getNumberOrders: AppThunk = (data: {}) => {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization:  getCookie("accessToken") || ''
             },
             body: JSON.stringify({
                 ingredients: data

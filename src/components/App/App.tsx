@@ -21,6 +21,7 @@ import { Location } from 'history';
 import OrderDetailsPage from "../../pages/OrderDetailsPage/OrderDetailsPage";
 import {socketActionCreators} from "../../store/socket/socket.actions";
 import OrdersHistory from "../../pages/OrdersHistory/OrdersHistory";
+import ProfileNav from "../ProfileNav/ProfileNav";
 
 const App: FC = () => {
     const dispatch = useDispatch();
@@ -67,8 +68,14 @@ const App: FC = () => {
                         <ProtectedRoute path='/reset-password' exact  onlyUnAuth={ onlyUnAuth }>
                             <ResetPassword />
                         </ProtectedRoute>
-                        <ProtectedRoute path='/profile'>
+                        <ProtectedRoute path='/profile' exact>
                             <Profile />
+                        </ProtectedRoute>
+                        <ProtectedRoute path='/profile/orders' exact>
+                            <OrdersHistory />
+                        </ProtectedRoute>
+                        <ProtectedRoute path='profile/orders/:id' exact>
+                            <OrderDetailsPage/>
                         </ProtectedRoute>
                         <Route path='/feed' exact>
                             <OrdersFeedPage />
@@ -79,7 +86,7 @@ const App: FC = () => {
                         <Route path='/feed/:id' exact>
                             <OrderDetailsPage/>
                         </Route>
-                        <ProtectedRoute path='profile/orders/:id' exact>
+                        <ProtectedRoute path='/profile/orders/:id'>
                             <OrderDetailsPage/>
                         </ProtectedRoute>
                         <Route>

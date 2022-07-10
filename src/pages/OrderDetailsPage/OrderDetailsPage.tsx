@@ -5,9 +5,11 @@ import { useDispatch, useSelector } from '../../types';
 import OrderDetails from "../../components/OrderDetails/OrderDetails";
 import { useHistory } from "react-router-dom";
 import { socketActionCreators } from "../../store/socket/socket.actions";
+import {TOrders } from "../../types/types";
 
 const OrderDetailsPage: FC = () => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	useEffect(() => {
 		dispatch(socketActionCreators.start())
@@ -18,11 +20,17 @@ const OrderDetailsPage: FC = () => {
 
 	const orders = useSelector(state => state.socket.messages);
 
-	const history = useHistory();
-	const id = history.location.pathname.replace("/feed/", "");
+	if(history.location.pathname.includes('profile')) {
+		const id = history.location.pathname.replace("/profile/orders/", "")
+	} else {
+
+	}
+	const id = history.location.pathname.includes('profile') ?
+		history.location.pathname.replace("/profile/orders/", "")
+		:
+		history.location.pathname.replace("/feed/", "")
 
 	const itemFilter = orders?.filter((el: any) => el._id === id)[0];
-	console.log(itemFilter)
 
 
 	return (
