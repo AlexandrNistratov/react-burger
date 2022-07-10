@@ -28,6 +28,7 @@ const OrderDetails:FC<TOrderDetails> = ({ details}) => {
             return data.find(item => item._id == id);
         });
 
+
     const identicalIngredientsDetails = details?.ingredients
         .filter(item => item !== undefined)
         .map(id => {
@@ -38,11 +39,6 @@ const OrderDetails:FC<TOrderDetails> = ({ details}) => {
     const statusOrder = orderStatus(status);
     const statusOrderDetails = orderStatus(details?.status);
 
-    const map = identicalIngredients.reduce((prev: any, cur: any) => {
-        prev[cur.name] = (prev[cur.name] || 0) + 1;
-        return prev;
-    }, {});
-
     useEffect(() => {
         if (identicalIngredients) {
             sumOrders(identicalIngredients, setTotal)
@@ -50,54 +46,76 @@ const OrderDetails:FC<TOrderDetails> = ({ details}) => {
             sumOrders(identicalIngredientsDetails, setTotal)
 
     })
+    const findI = useMemo(() => {
+        if (orders._id !== '') {
+            const ingredientsArray: any = [];
+            const arr = orders.ingredients?.map((id: string) =>
+                data.find((ingredient) => ingredient._id === id)
+            );
+            arr.forEach((x) => {
+                const find: boolean = ingredientsArray.some(
+                    (ing: any) => ing._id === x!._id
+                );
+                if (find) {
+                    const findElement = ingredientsArray.find(
+                        (ing: any) => ing._id === x!._id
+                    );
+                    if (findElement) {
+                        findElement.__v = findElement.__v + 1;
+                    }
+                    return;
+                } else {
+                    if (x) {
+                        ingredientsArray.push(x);
+                    }
+                }
+            });
 
-    // const findI = useMemo(() => {
-    //     if (orders) {
-    //         const ingredientsArray: Array<any> = [];
-    //
-    //         identicalIngredients.forEach((x) => {
-    //             const find: boolean = ingredientsArray.some((ing) => ing._id === x!._id);
-    //             if (find) {
-    //                 const findElement = ingredientsArray.find(
-    //                     (ing) => ing._id === x!._id
-    //                 );
-    //                 console.log(findElement)
-    //                 if (findElement) {
-    //
-    //                     findElement.__v = findElement.__v + 1;
-    //                 }
-    //                 return;
-    //             } else {
-    //                 if (x) {
-    //                     ingredientsArray.push(x);
-    //                 }
-    //             }
-    //         });
-    //
-    //         return ingredientsArray;
-    //     }
-    // }, [orders, orders, data]);
-    //
-    // console.log(findI)
+            return ingredientsArray;
+        } else {
+            const ingredientsDetailsArray: any = [];
+            const arrDetails = details?.ingredients?.map((id: string) =>
+                data.find((ingredient) => ingredient._id === id)
+            );
+            arrDetails?.forEach((x) => {
+                const find: boolean = ingredientsDetailsArray.some(
+                    (ing: any) => ing._id === x!._id
+                );
+                if (find) {
+                    const findElement = ingredientsDetailsArray.find(
+                        (ing: any) => ing._id === x!._id
+                    );
+                    if (findElement) {
+                        findElement.__v = findElement.__v + 1;
+                    }
+                    return;
+                } else {
+                    if (x) {
+                        ingredientsDetailsArray.push(x);
+                    }
+                }
+            });
 
+            return ingredientsDetailsArray;
+        }
+    }, [orders, details, data]);
+
+    useEffect(() => {
+        return () => {
+            findI.forEach((item: any) => {
+                item.__v = 0
+            })
+        }
+    })
 
     return (
         <div className={ styles.content }>
             <h2 className={ clsx(styles.subtitle, 'text_type_main-medium') }>{ name || details?.name }</h2>
             <p className={ clsx(styles.status, 'text_type_main-default') }>{ statusOrder  || statusOrderDetails }</p>
             <h2 className={ clsx(styles.subtitle, styles.structure, 'text_type_main-medium') }>Состав:</h2>
-            {identicalIngredients &&
+            {findI &&
                 <div className={ styles.list }>
-                    {identicalIngredients.map(item => {
-                        return (
-                            <OrderInfo key={ uuidv4() } item={item} />
-                        );
-                    })}
-                </div>
-            }
-            {identicalIngredientsDetails &&
-                <div className={ styles.list }>
-                    {identicalIngredientsDetails.map(item => {
+                    {findI.map((item: any) => {
                         return (
                             <OrderInfo key={ uuidv4() } item={item} />
                         );

@@ -25,9 +25,10 @@ const OrdersHistory: FC = () => {
             dispatch(socketActionCreators.close())
         }
     }, [dispatch])
+
     const { getOrdersDetails, deleteOrdersDetails } = orderDetailsActionCreator;
     const orders = useSelector(state => state.socket.messages);
-    const { number } = useSelector(state => state.oderDetails.orderDetails);
+;    const { number } = useSelector(state => state.oderDetails.orderDetails);
     const ingredient = useSelector(state => state.oderDetails.orderDetails);
 
 
@@ -35,6 +36,7 @@ const OrdersHistory: FC = () => {
         dispatch(getOrdersDetails(item));
         openPopup();
     };
+
 
     const closeModalDetails = () => {
         dispatch(deleteOrdersDetails());
@@ -49,7 +51,7 @@ const OrdersHistory: FC = () => {
                     orders && orders.length > 0 ?
                         <section className={ styles.main }>
                             {
-                                orders?.map(item => {
+                                orders?.reverse().map(item => {
                                     return <Link className={ styles.link }
                                                  key={item._id}
                                                  to={ { pathname: `orders/${item._id}`,
@@ -65,7 +67,7 @@ const OrdersHistory: FC = () => {
                                     closePopup={ closeModalDetails }
                                     header={ number }
                                     isOrders={ true }>
-                                    <OrderDetails details={ ingredient }/>
+                                    <OrderDetails details={ ingredient } />
                                 </Modal>}
                         </section> : <p className={ clsx(styles.text, 'text_type_main-medium') }>Подождите, идет загрузка</p>
                 }

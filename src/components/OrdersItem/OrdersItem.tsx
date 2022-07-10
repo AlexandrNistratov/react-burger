@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { TOrders } from '../../types/types';
 import { dateCalc } from '../../utils';
 import { useSelector } from '../../types';
-import { sumOrders } from '../../utils';
+import { sumOrders, orderStatus } from '../../utils';
 
 type TOrdersItem = {
 	onClick: (item: TOrders) => void;
@@ -40,6 +40,8 @@ const OrdersItem: FC<TOrdersItem> = ({ onClick,  item, status }) => {
 
 	useEffect(() => sumOrders(identicalIngredients, setPrice),[]);
 
+	const statusOrder = orderStatus(item.status)
+
 	return (
 		<section className={styles.main} onClick={() => onClick(item)}>
 			<div className={styles.wrapper}>
@@ -55,7 +57,7 @@ const OrdersItem: FC<TOrdersItem> = ({ onClick,  item, status }) => {
 			</h2>
 			{status && (
 				<p className={clsx(styles.status, 'text_type_main-default')}>
-					{item.status}
+					{ statusOrder }
 				</p>
 			)}
 			<div className={styles.wrapper}>

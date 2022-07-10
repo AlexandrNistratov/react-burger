@@ -9,6 +9,8 @@ type TOrderInfo = {
 }
 
 const OrderInfo: FC<TOrderInfo> = ({ item }) => {
+const count = item?.__v;
+const countItem = Number(count) === 0 ? Number(count) + 1 : count;
 
     return (
         <div className={ styles.main }>
@@ -21,7 +23,7 @@ const OrderInfo: FC<TOrderInfo> = ({ item }) => {
                 { item &&  <p className={ clsx(styles.name, 'text_type_main-default') }>{ item.name }</p> }
             </div>
             <div className={ styles.total}>
-                <p className={ clsx(styles.price, 'text_type_digits-default') }> 2 x 20</p>
+                {item && <p className={ clsx(styles.price, 'text_type_digits-default') }>{ `${countItem} x ${item.price}` }</p>}
                 <div className={ styles.icon }>
                     <CurrencyIcon type='primary' />
                 </div>
