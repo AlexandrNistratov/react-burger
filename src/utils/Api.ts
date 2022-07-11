@@ -23,7 +23,7 @@ type TLogin = {
 }
 
 const { registrationRequest, registrationSuccess, registrationFailed, loginRequest, loginSuccess, loginFailed, userRequest,
-    userSuccess, userFailed, userUpdateRequest, userUpdateSuccess, userUpdateFailed, out, setEdit  } = userActionCreator;
+    userSuccess, userFailed, userUpdateRequest, userUpdateSuccess, userUpdateFailed } = userActionCreator;
 
 const checkResponse = (res: Response) => {
     if (res.ok) {

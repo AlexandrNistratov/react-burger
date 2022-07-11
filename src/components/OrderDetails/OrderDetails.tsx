@@ -3,7 +3,7 @@ import styles from './orderDetails.module.css';
 import clsx from "clsx";
 import OrderInfo from "../OrderInfo/OrderInfo";
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import {TOrders } from "../../types/types";
+import {TData, TOrders} from "../../types/types";
 import { useSelector } from "../../types";
 import { orderStatus, dateCalc , sumOrders} from "../../utils";
 import { v4 as uuidv4 } from 'uuid';
@@ -19,20 +19,20 @@ const OrderDetails:FC<TOrderDetails> = ({ details}) => {
     const data = useSelector(state => state.data.ingredientsData);
 
     const orders = useSelector(state => state.oderDetails.orderDetails);
-    const {  name, status, createdAt, number } = orders;
+    const {  name, status, createdAt } = orders;
 
     // Ищем картинки всех ингридиентов из заказа
     const identicalIngredients = orders.ingredients
         .filter(item => item !== undefined)
         .map(id => {
-            return data.find(item => item._id == id);
+            return data.find(item => item._id === id);
         });
 
 
     const identicalIngredientsDetails = details?.ingredients
         .filter(item => item !== undefined)
         .map(id => {
-            return data.find(item => item._id == id);
+            return data.find(item => item._id === id);
         });
 
 
@@ -44,21 +44,21 @@ const OrderDetails:FC<TOrderDetails> = ({ details}) => {
             sumOrders(identicalIngredients, setTotal)
         }
             sumOrders(identicalIngredientsDetails, setTotal)
+    }, [])// eslint-disable-line react-hooks/exhaustive-deps
 
-    })
     const findI = useMemo(() => {
         if (orders._id !== '') {
-            const ingredientsArray: any = [];
-            const arr = orders.ingredients?.map((id: string) =>
+            const ingredientsArray: TData[] = [];
+            const arr = orders.ingredients?.map((id) =>
                 data.find((ingredient) => ingredient._id === id)
             );
             arr.forEach((x) => {
                 const find: boolean = ingredientsArray.some(
-                    (ing: any) => ing._id === x!._id
+                    (ing) => ing._id === x!._id
                 );
                 if (find) {
                     const findElement = ingredientsArray.find(
-                        (ing: any) => ing._id === x!._id
+                        (ing) => ing._id === x!._id
                     );
                     if (findElement) {
                         findElement.__v = findElement.__v + 1;
@@ -73,17 +73,17 @@ const OrderDetails:FC<TOrderDetails> = ({ details}) => {
 
             return ingredientsArray;
         } else {
-            const ingredientsDetailsArray: any = [];
-            const arrDetails = details?.ingredients?.map((id: string) =>
+            const ingredientsDetailsArray: TData[] = [];
+            const arrDetails = details?.ingredients?.map((id) =>
                 data.find((ingredient) => ingredient._id === id)
             );
             arrDetails?.forEach((x) => {
                 const find: boolean = ingredientsDetailsArray.some(
-                    (ing: any) => ing._id === x!._id
+                    (ing) => ing._id === x!._id
                 );
                 if (find) {
                     const findElement = ingredientsDetailsArray.find(
-                        (ing: any) => ing._id === x!._id
+                        (ing) => ing._id === x!._id
                     );
                     if (findElement) {
                         findElement.__v = findElement.__v + 1;
@@ -115,7 +115,7 @@ const OrderDetails:FC<TOrderDetails> = ({ details}) => {
             <h2 className={ clsx(styles.subtitle, styles.structure, 'text_type_main-medium') }>Состав:</h2>
             {findI &&
                 <div className={ styles.list }>
-                    {findI.map((item: any) => {
+                    {findI.map((item) => {
                         return (
                             <OrderInfo key={ uuidv4() } item={item} />
                         );

@@ -26,7 +26,7 @@ const IngredientsList: FC<TIngredientsList> = ({ onClick, scrollHandler }) => {
                 <h2 className={ clsx(styles.subtitle, 'text_type_main-medium') } id='Булки'>Булки</h2>
                 <ul className={ styles.ulList }>
                     {
-                        buns.map((item: any) => {
+                        buns.map((item) => {
                             return <Link className={ styles.link }
                                          key={item._id}
                                          to={ { pathname: `ingredients/${item._id}`,
@@ -41,7 +41,7 @@ const IngredientsList: FC<TIngredientsList> = ({ onClick, scrollHandler }) => {
                 <h2 className={ clsx(styles.subtitle, 'text_type_main-medium') } id='Соусы'>Соусы</h2>
                 <ul className={ styles.ulList }>
                     {
-                        sauce.map((item: any) => {
+                        sauce.map((item) => {
                             return <Link className={ styles.link }
                                          key={item._id}
                                          to={ { pathname: `ingredients/${item._id}`,
@@ -55,7 +55,7 @@ const IngredientsList: FC<TIngredientsList> = ({ onClick, scrollHandler }) => {
                 <h2 className={ clsx(styles.subtitle, 'text_type_main-medium') } id='Начинки'>Начинки</h2>
                 <ul className={ styles.ulList }>
                     {
-                        main.map((item: any) => {
+                        main.map((item) => {
                             return <Link className={ styles.link }
                                          key={item._id}
                                          to={ { pathname: `ingredients/${item._id}`,

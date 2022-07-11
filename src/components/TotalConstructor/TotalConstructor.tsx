@@ -8,6 +8,7 @@ import OrderNumberDetails from "../OrderNumberDetails/OrderNumberDetails";
 import { getNumberOrders } from "../../utils/Api";
 import { useDispatch, useSelector } from '../../types';
 import { useHistory } from "react-router-dom";
+import {TData} from "../../types/types";
 
 
 const TotalConstructor: FC = () => {
@@ -36,9 +37,9 @@ const TotalConstructor: FC = () => {
     };
 
     // Считаем сумму заказа
-    const calculateTotalPrice: (buns: any, arr: any) => void = (buns, arr) => {
+    const calculateTotalPrice: (buns: any, arr: TData[]) => void = (buns, arr) => {
         const priceBuns = Number(buns?.price * 2);
-        const sum = arr?.reduce((acc: any, item: any) => {
+        const sum = arr?.reduce((acc, item) => {
             return Number(acc + item?.price)
         }, 0)
         if (buns && arr) {

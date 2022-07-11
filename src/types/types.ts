@@ -11,7 +11,7 @@ export type TData = {
     image: string;
     image_mobile: string;
     image_large: string;
-    __v?: string
+    __v: number
 }
 
 export type TUser = {

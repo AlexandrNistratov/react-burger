@@ -11,17 +11,15 @@ import {
     ResetPassword,
     Profile,
     OrdersFeedPage,
-    NotFoundPage
+    NotFoundPage,
+    IngredientPage,
+    OrdersHistoryPage,
+    OrderDetailsPage
 } from '../../pages/pages';
 import { getData, getUser } from "../../utils/Api";
 import { useDispatch, useSelector } from '../../types';
 import clsx from "clsx";
-import IngredientPage from "../../pages/IngredientPage/IngredientPage";
 import { Location } from 'history';
-import OrderDetailsPage from "../../pages/OrderDetailsPage/OrderDetailsPage";
-import {socketActionCreators} from "../../store/socket/socket.actions";
-import OrdersHistory from "../../pages/OrdersHistory/OrdersHistory";
-import ProfileNav from "../ProfileNav/ProfileNav";
 
 const App: FC = () => {
     const dispatch = useDispatch();
@@ -72,7 +70,7 @@ const App: FC = () => {
                             <Profile />
                         </ProtectedRoute>
                         <ProtectedRoute path='/profile/orders' exact>
-                            <OrdersHistory />
+                            <OrdersHistoryPage />
                         </ProtectedRoute>
                         <ProtectedRoute path='profile/orders/:id' exact>
                             <OrderDetailsPage/>

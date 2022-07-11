@@ -24,7 +24,7 @@ const OrdersItem: FC<TOrdersItem> = ({ onClick,  item, status }) => {
 	const identicalIngredients = item.ingredients
 		.filter(item => item !== undefined)
 		.map(id => {
-			return data.find(item => item._id == id);
+			return data.find(item => item._id === id);
 		});
 
 	//5 ингредиентов для отображения
@@ -38,7 +38,7 @@ const OrdersItem: FC<TOrdersItem> = ({ onClick,  item, status }) => {
 	//последний ингредиент заказа
 	const lastIngredient = identicalIngredients[identicalIngredients.length - 1];
 
-	useEffect(() => sumOrders(identicalIngredients, setPrice),[]);
+	useEffect(() => sumOrders(identicalIngredients, setPrice),[]);// eslint-disable-line react-hooks/exhaustive-deps
 
 	const statusOrder = orderStatus(item.status)
 
@@ -62,7 +62,7 @@ const OrdersItem: FC<TOrdersItem> = ({ onClick,  item, status }) => {
 			)}
 			<div className={styles.wrapper}>
 				<div className={styles.images}>
-					{ingredients.map((el: any) => {
+					{ingredients.map((el) => {
 						return (
 							<div className={styles.item} key={uuidv4()}>
 								<img className={styles.img} src={el?.image_large} alt='' />

@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import styles from './ordersHistory.module.css';
+import styles from './ordersHistoryPage.module.css';
 import OrdersItem from "../../components/OrdersItem/OrdersItem";
 import Modal from "../../components/Modal/Modal";
 import { useModal } from "../../hooks/useModal";
@@ -13,7 +13,7 @@ import OrderDetails from "../../components/OrderDetails/OrderDetails";
 import clsx from "clsx";
 import ProfileNav from "../../components/ProfileNav/ProfileNav";
 
-const OrdersHistory: FC = () => {
+const OrdersHistoryPage: FC = () => {
     const { isOpen, closePopup, openPopup} = useModal();
     const dispatch = useDispatch();
     const history = useHistory();
@@ -26,7 +26,7 @@ const OrdersHistory: FC = () => {
         return () => {
             dispatch(socketActionCreators.close())
         }
-    }, [dispatch])
+    }, [dispatch])// eslint-disable-line react-hooks/exhaustive-deps
 
     const { getOrdersDetails, deleteOrdersDetails } = orderDetailsActionCreator;
     const orders = useSelector(state => state.socket.messages);
@@ -77,4 +77,4 @@ const OrdersHistory: FC = () => {
     );
 };
 
-export default OrdersHistory;
+export default OrdersHistoryPage;

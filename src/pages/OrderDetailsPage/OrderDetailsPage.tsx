@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from '../../types';
 import OrderDetails from "../../components/OrderDetails/OrderDetails";
 import { useHistory } from "react-router-dom";
 import { socketActionCreators } from "../../store/socket/socket.actions";
-import {TOrders } from "../../types/types";
 
 const OrderDetailsPage: FC = () => {
 	const dispatch = useDispatch();
@@ -25,7 +24,7 @@ const OrderDetailsPage: FC = () => {
 		:
 		history.location.pathname.replace("/feed/", "")
 
-	const itemFilter = orders?.filter((el: any) => el._id === id)[0];
+	const itemFilter = orders?.filter(el => el._id === id)[0];
 
 
 	return (
