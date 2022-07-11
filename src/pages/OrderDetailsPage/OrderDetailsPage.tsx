@@ -5,13 +5,17 @@ import { useDispatch, useSelector } from '../../types';
 import OrderDetails from "../../components/OrderDetails/OrderDetails";
 import { useHistory } from "react-router-dom";
 import { socketActionCreators } from "../../store/socket/socket.actions";
+import { url } from '../../utils/constants';
 
 const OrderDetailsPage: FC = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	console.log(history)
 
 	useEffect(() => {
-		dispatch(socketActionCreators.start('/all'))
+		 url && history.location.pathname.includes('profile') ?
+			dispatch(socketActionCreators.start(url)) :
+			dispatch(socketActionCreators.start('/all'))
 		return () => {
 			dispatch(socketActionCreators.close())
 		}
