@@ -8,14 +8,6 @@ export enum RootSocketAction {
     message = 'WS_GET_MESSAGE',
 }
 
-export type TwsActions = {
-    start: typeof RootSocketAction.start;
-    success: typeof RootSocketAction.success;
-    error: typeof RootSocketAction.error;
-    closed: typeof RootSocketAction.closed;
-    message: typeof RootSocketAction.message;
-}
-
 interface IWSStart {
     type: RootSocketAction.start,
     payload: object
@@ -39,7 +31,7 @@ interface IWSGet {
 }
 
 export type TSocketAction =
-    | IWSStart
+    start: IWSStart,
     | IWSSuccess
     | IWSError
     | IWSClosed
