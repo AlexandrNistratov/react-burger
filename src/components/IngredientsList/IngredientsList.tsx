@@ -14,9 +14,9 @@ type TIngredientsList = {
 const IngredientsList: FC<TIngredientsList> = ({ onClick, scrollHandler }) => {
     const data = useSelector(state => state.data.ingredientsData)
 
-    const buns = data.filter((item: any) => item.type === 'bun');
-    const sauce = data.filter((item: any) => item.type === 'sauce');
-    const main = data.filter((item: any) => item.type === 'main');
+    const buns = data.filter(item => item.type === 'bun');
+    const sauce = data.filter(item => item.type === 'sauce');
+    const main = data.filter(item => item.type === 'main');
 
     const location = useLocation();
 

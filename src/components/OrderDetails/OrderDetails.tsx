@@ -102,7 +102,7 @@ const OrderDetails:FC<TOrderDetails> = ({ details}) => {
 
     useEffect(() => {
         return () => {
-            findI.forEach((item: any) => {
+            findI.forEach(item => {
                 item.__v = 0
             })
         }
