@@ -12,7 +12,7 @@ const OrderDetailsPage: FC = () => {
 	const history = useHistory();
 
 	useEffect(() => {
-		dispatch(socketActionCreators.start())
+		dispatch(socketActionCreators.start('/all'))
 		return () => {
 			dispatch(socketActionCreators.close())
 		}
@@ -20,11 +20,6 @@ const OrderDetailsPage: FC = () => {
 
 	const orders = useSelector(state => state.socket.messages);
 
-	if(history.location.pathname.includes('profile')) {
-		const id = history.location.pathname.replace("/profile/orders/", "")
-	} else {
-
-	}
 	const id = history.location.pathname.includes('profile') ?
 		history.location.pathname.replace("/profile/orders/", "")
 		:

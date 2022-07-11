@@ -20,7 +20,7 @@ const OrdersFeedPage: FC = () => {
     const { getOrdersDetails, deleteOrdersDetails } = orderDetailsActionCreator;
 
     useEffect(() => {
-        dispatch(socketActionCreators.start())
+        dispatch(socketActionCreators.start('/all'))
         return () => {
             dispatch(socketActionCreators.close())
         }

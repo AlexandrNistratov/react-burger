@@ -19,8 +19,10 @@ const OrdersHistory: FC = () => {
     const history = useHistory();
     const location = useLocation();
 
+    const url = getCookie("accessToken")?.split("Bearer ").join("");
+
     useEffect(() => {
-        dispatch(socketActionCreators.start(getCookie("accessToken")?.split("Bearer ").join("")))
+        url && dispatch(socketActionCreators.start(url));
         return () => {
             dispatch(socketActionCreators.close())
         }
