@@ -30,7 +30,7 @@ const OrdersHistoryPage: FC = () => {
 
     const { getOrdersDetails, deleteOrdersDetails } = orderDetailsActionCreator;
     const orders = useSelector(state => state.socket.messages);
-;    const { number } = useSelector(state => state.oderDetails.orderDetails);
+    const { number } = useSelector(state => state.oderDetails.orderDetails);
     const ingredient = useSelector(state => state.oderDetails.orderDetails);
 
 

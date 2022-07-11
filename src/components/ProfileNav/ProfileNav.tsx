@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { useDispatch } from '../../types';
 import { constructorActionCreator } from "../../store/constructor/constructor.actions";
 import { userActionCreator } from "../../store/user/user.actions";
-import {logOut} from "../../utils/Api";
+import { logOut } from "../../utils/Api";
 
 const ProfileNav: FC= () => {
     const dispatch = useDispatch();
