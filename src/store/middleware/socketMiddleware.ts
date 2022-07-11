@@ -13,7 +13,6 @@ export const socketMiddleware = (wsUrl: string, wsActions: TWSActions): Middlewa
             const { start, success, error, closed, message } = wsActions;
 
             if (type === start && payload.url.length > 30) {
-                console.log(payload.url)
                 const url = `${ wsUrl }?token=${ payload.url }`;
                 socket = new WebSocket(url);
             } else if(type === start) {

@@ -262,7 +262,6 @@ export const logOut = () => {
     })
         .then(res => checkResponse(res))
         .then(() => {
-            console.log(123)
             deleteCookie('accessToken');
             deleteCookie('refreshToken');
         })

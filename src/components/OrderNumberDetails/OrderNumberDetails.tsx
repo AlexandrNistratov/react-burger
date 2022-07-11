@@ -1,13 +1,21 @@
-import React, { FC } from 'react';
+import React, {FC, useEffect} from 'react';
 import styles from './orderNumberDetails.module.css';
 import clsx from "clsx";
 import img from '../../images/graphics.svg';
 import Icon from "../Icon/Icon";
-import { useSelector } from '../../types';
+import {useDispatch, useSelector} from '../../types';
+import { constructorActionCreator } from "../../store/constructor/constructor.actions";
 
 const OrderNumberDetails: FC = () => {
+    const dispatch = useDispatch();
     const { ordersNumberRequest, ordersNumberFailed, ordersNumber } = useSelector(state => state.numberOrder);
+    const { clear } = constructorActionCreator;
 
+    useEffect(() => {
+        return() => {
+            dispatch(clear())
+        }
+    }, [dispatch])// eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <section className={ styles.main }>
