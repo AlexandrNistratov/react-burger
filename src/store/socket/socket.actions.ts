@@ -18,7 +18,7 @@ export type TwsActions = {
 
 interface IWSStart {
     type: RootSocketAction.start,
-    payload: string
+    payload: object
 }
 
 interface IWSSuccess {
@@ -46,9 +46,9 @@ export type TSocketAction =
     | IWSGet
 
 export const socketActionCreators = {
-    start: (payload: string): TSocketAction => ({ type: RootSocketAction.start, payload }),
-    success: (): TSocketAction => ({ type: RootSocketAction.error }),
-    error: (): TSocketAction => ({ type: RootSocketAction.error }),
-    close: (): TSocketAction => ({ type: RootSocketAction.closed }),
-    getMessage: (payload: TAllOrders): TSocketAction => ({ type: RootSocketAction.message, payload }),
+    start: (url: string): IWSStart => ({ type: RootSocketAction.start, payload: { url } }),
+    success: (): IWSSuccess => ({ type: RootSocketAction.success }),
+    error: (): IWSError => ({ type: RootSocketAction.error }),
+    close: (): IWSClosed => ({ type: RootSocketAction.closed }),
+    getMessage: (payload: TAllOrders): IWSGet => ({ type: RootSocketAction.message, payload }),
 }

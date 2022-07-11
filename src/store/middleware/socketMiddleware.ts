@@ -11,11 +11,11 @@ export const socketMiddleware = (wsUrl: string, wsActions: TwsActions): Middlewa
             const { type, payload } = action;
             const { start } = RootSocketAction;
 
-            if (type === start && payload.length > 30) {
-                const url = `${wsUrl}?token=${payload}`;
+            if (type === start && payload.url.length > 30) {
+                const url = `${ wsUrl }?token=${ payload.url }`;
                 socket = new WebSocket(url);
             } else if(type === start) {
-                socket = new WebSocket(`${wsUrl}${payload}`);
+                socket = new WebSocket(`${ wsUrl }${ payload.url }`);
             }
 
             if (socket) {

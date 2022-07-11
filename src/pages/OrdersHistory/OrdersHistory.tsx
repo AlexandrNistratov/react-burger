@@ -43,7 +43,7 @@ const OrdersHistory: FC = () => {
     const closeModalDetails = () => {
         dispatch(deleteOrdersDetails());
         closePopup();
-        history.push('/feed')
+        history.push('/profile/orders')
     };
 
     return (
