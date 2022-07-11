@@ -29,7 +29,7 @@ const TotalFeedOrders: FC = () => {
                         <div className={ styles.list }>
                             {pendingOrders && pendingOrders.length !== 0 &&
                                 pendingOrders.map(item => {
-                                    return <p className={ clsx(styles.text, styles.text__green, 'text_type_digits-default')} key={ item._id }>{ item.number }</p>
+                                    return <p className={ clsx(styles.text, 'text_type_digits-default')} key={ item._id }>{ item.number }</p>
                                 })
                             }
                         </div>
