@@ -1,0 +1,67 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 120px;
+    max-width: 640px;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:0;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.title {
+    margin: 0;
+}
+
+.subtitle {
+    margin: 20px 0 0;
+}
+
+.status {
+    margin: 20px 0 0;
+    color: #00CCCC;
+}
+
+.structure {
+    margin: 60px 0 24px 0;
+}
+
+.list {
+    max-height: 320px;
+    overflow-y: scroll;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.date {
+    margin: 0;
+}
+
+.total {
+    display: flex;
+    align-items: center;
+}
+
+.price {
+    margin: 0 10px 0 0 ;
+}
+
+.icon {
+    width: 22px;
+    height: 22px;
+}

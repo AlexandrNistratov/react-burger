@@ -8,10 +8,39 @@ import clsx from "clsx";
 type IModal = {
     isOpen: boolean;
     closePopup: () => void;
-    header?: string;
+    header?: string | number;
+    isOrders?: boolean;
 }
 
-const Modal: FC<IModal> = ({ children, isOpen, closePopup, header }) => {
+const ModalIngredients: FC<IModal> = ({ children, header, closePopup }) => {
+    return (
+        <section className={ styles.main }>
+            <div className={ styles.header }>
+                <h1 className={ clsx(styles.title, 'text_type_main-large') }>{ header }</h1>
+                <div className={ styles.icon }>
+                    <CloseIcon type="primary" onClick={ closePopup }/>
+                </div>
+            </div>
+            { children }
+        </section>
+    );
+}
+
+const ModalOrderInfo: FC<IModal> = ({ children, header, closePopup }) => {
+    return (
+      <section className={ clsx(styles.main, styles.main__orders) }>
+          <div className={ styles.header }>
+              <h1 className={ clsx(styles.title, 'text_type_digits-default') }>{ `#${ header }` }</h1>
+              <div className={ styles.icon }>
+                  <CloseIcon type="primary" onClick={ closePopup }/>
+              </div>
+          </div>
+          { children }
+      </section>
+    );
+}
+
+const Modal: FC<IModal> = ({ isOrders, children, isOpen, closePopup, header }) => {
     const reactModals: any = document.getElementById('modals');
 
     const closePopupEsc: (e: KeyboardEvent) => void = (e) => {
@@ -29,15 +58,11 @@ const Modal: FC<IModal> = ({ children, isOpen, closePopup, header }) => {
     return ReactDOM.createPortal(
         <>
             <ModalOverlay isOpen={ isOpen } closePopup={ closePopup } />
-            <section className={ styles.main }>
-                <div className={ styles.header }>
-                    <h1 className={ clsx(styles.title, 'text_type_main-large') }>{ header }</h1>
-                    <div className={ styles.icon }>
-                        <CloseIcon type="primary" onClick={ closePopup }/>
-                    </div>
-                </div>
-                { children }
-            </section>
+            {isOrders ?
+                <ModalOrderInfo isOpen={ isOpen } closePopup={ closePopup } header={ header } children={ children } />
+                :
+                <ModalIngredients isOpen={ isOpen } closePopup={ closePopup } header={ header } children={children}/>
+            }
         </>, reactModals
         )
 };

@@ -2,7 +2,7 @@ import React, { useRef, FC } from 'react';
 import styles from './constructorItem.module.css';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag, useDrop } from "react-dnd";
-import { TData } from "../../utils/types";
+import { TData } from "../../types/types";
 
 type TConstructorItem = {
     item: TData;

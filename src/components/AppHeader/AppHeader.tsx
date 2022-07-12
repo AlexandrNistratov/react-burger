@@ -3,11 +3,10 @@ import styles from './appHeader.module.css';
 import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import clsx from "clsx";
 import { Link } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector } from '../../types';
 
 const AppHeader: FC = () => {
-    // TODO типизировать на следующем спринте
-    const user = useSelector((state: any) => state.userReducer);
+    const user = useSelector(state => state.userReducer);
 
     const { isAuth, isUser } = user;
 
@@ -20,12 +19,14 @@ const AppHeader: FC = () => {
                             <BurgerIcon type="primary" />
                             <p className={ clsx(styles.text, 'text text_type_main-default ml-2') }>Конструктор</p>
                         </Link>
-                        <a href='#' className={ styles.item }>
+                        <Link to='/feed' className={ styles.item }>
                             <ListIcon type="secondary" />
                             <p className={ clsx('text text_type_main-default ml-2 text_color_inactive') }>Лента заказов</p>
-                        </a>
+                        </Link>
                     </nav>
-                    <Logo />
+                    <Link to='/'>
+                        <Logo />
+                    </Link>
                 </div>
                 <Link to='/profile' className={ styles.item }>
                     <ProfileIcon type="secondary" />

@@ -4,7 +4,7 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import { useModal } from "../../hooks/useModal";
 import clsx from "clsx";
 import { useDrag } from "react-dnd";
-import { useSelector } from "react-redux";
+import { useSelector } from '../../types';
 
 type TIngredientsItem = {
     data: {
@@ -13,7 +13,7 @@ type TIngredientsItem = {
         name: string;
         _id: string;
     },
-    onClick: (item: {}) => void;
+    onClick: (item: any) => void;
 }
 
 const IngredientsItem: FC<TIngredientsItem> = ({ data, onClick }) => {
@@ -26,8 +26,7 @@ const IngredientsItem: FC<TIngredientsItem> = ({ data, onClick }) => {
        item: data
    });
 
-    // TODO типизировать на следующем спринте
-    const allItems = useSelector( (state: any) => [state.constructorData.bun, state.constructorData.bun, ...state.constructorData.ingredients]);
+    const allItems = useSelector( state => [state.constructorData.bun, state.constructorData.bun, ...state.constructorData.ingredients]);
 
     //Счетчик добавленных ингредиентов
     const count = allItems.filter(item => item?._id === _id).length

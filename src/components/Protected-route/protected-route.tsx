@@ -1,6 +1,6 @@
 import React, { useEffect, useState, FC } from 'react';
 import { Route, Redirect, useLocation, RouteProps } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from '../../types';
 import { getUser } from "../../utils/Api";
 import { getCookie } from "../../utils/cookie";
 import { Location } from 'history';
@@ -9,11 +9,11 @@ export const ProtectedRoute: FC<RouteProps & { onlyUnAuth?: boolean }> = ({ only
     const location = useLocation<{ from: Location}>();
     const dispatch = useDispatch();
 
-    // TODO типизировать на следующем спринте
-    const isUser = useSelector(((state: any) => state.userReducer.isUser));
+    const isUser = useSelector((state => state.userReducer.isUser));
 
     const isToken = getCookie("accessToken");
     const [ isUserLoaded, setUserLoaded ] = useState(false);
+
 
     const init = () => {
         if(isUser) {
@@ -24,7 +24,7 @@ export const ProtectedRoute: FC<RouteProps & { onlyUnAuth?: boolean }> = ({ only
 
     useEffect(() => {
         init()
-    }, []);
+    }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     if (!isUserLoaded) {
         return null;

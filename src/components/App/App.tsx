@@ -10,24 +10,24 @@ import {
     ForgotPasswordPage,
     ResetPassword,
     Profile,
-    OrdersPage,
-    NotFoundPage
+    OrdersFeedPage,
+    NotFoundPage,
+    IngredientPage,
+    OrdersHistoryPage,
+    OrderDetailsPage
 } from '../../pages/pages';
 import { getData, getUser } from "../../utils/Api";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../types';
 import clsx from "clsx";
-import IngredientPage from "../../pages/IngredientPage/IngredientPage";
 import { Location } from 'history';
-
 
 const App: FC = () => {
     const dispatch = useDispatch();
 
-    // TODO типизировать на следующем спринте
-    const { ingredientsData, dataRequest, dataFailed } = useSelector((state: any) => state.data);
+    const { ingredientsData, dataRequest, dataFailed } = useSelector(state => state.data);
 
-    // TODO типизировать на следующем спринте
-    const user = useSelector((state: any) => state.userReducer.user);
+
+    const { isUser } = useSelector(state => state.userReducer);
 
     const location = useLocation<{ background : Location }>();
     const history = useHistory();
@@ -36,10 +36,10 @@ const App: FC = () => {
 
     useEffect(() => {
         dispatch(getData());
-        if(user.name !== '') {
+        if(isUser) {
             dispatch(getUser())
         }
-    }, [dispatch, user.name]);
+    }, [dispatch, isUser]);
 
     const onlyUnAuth = true;
 
@@ -70,11 +70,23 @@ const App: FC = () => {
                             <Profile />
                         </ProtectedRoute>
                         <ProtectedRoute path='/profile/orders' exact>
-                            <OrdersPage />
+                            <OrdersHistoryPage />
                         </ProtectedRoute>
+                        <ProtectedRoute path='profile/orders/:id' exact>
+                            <OrderDetailsPage/>
+                        </ProtectedRoute>
+                        <Route path='/feed' exact>
+                            <OrdersFeedPage />
+                        </Route>
                         <Route path='/ingredients/:id' exact>
                             <IngredientPage />
                         </Route>
+                        <Route path='/feed/:id' exact>
+                            <OrderDetailsPage/>
+                        </Route>
+                        <ProtectedRoute path='/profile/orders/:id'>
+                            <OrderDetailsPage/>
+                        </ProtectedRoute>
                         <Route>
                             <NotFoundPage />
                         </Route>

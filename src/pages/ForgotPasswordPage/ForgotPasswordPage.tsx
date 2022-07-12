@@ -4,7 +4,7 @@ import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import FormLink from "../../components/UI/FormLink/FormLink";
 import { useHistory, useLocation } from 'react-router-dom';
 import { forgotPassword } from "../../utils/Api";
-import { useSelector } from "react-redux";
+import { useSelector } from '../../types';
 
 const ForgotPasswordPage: FC = () => {
     const history = useHistory();
@@ -16,8 +16,7 @@ const ForgotPasswordPage: FC = () => {
         setValue({ ...value, [e.target.name]: e.target.value });
     }
 
-    // TODO типизировать на следующем спринте
-    const data = useSelector((state: any) => state.userReducer);
+    const data = useSelector(state => state.userReducer);
     const { isAuth } = data
 
     const handleSubmit: (e: SyntheticEvent) => void = (e) => {

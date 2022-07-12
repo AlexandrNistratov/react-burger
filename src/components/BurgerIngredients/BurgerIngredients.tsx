@@ -1,4 +1,4 @@
-import React, {useState, FC, SyntheticEvent} from 'react';
+import React, {useState, FC } from 'react';
 import styles from './burgerIngredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsList from "../IngredientsList/IngredientsList";
@@ -6,25 +6,28 @@ import clsx from "clsx";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useModal } from "../../hooks/useModal";
-import { useDispatch } from "react-redux";
-import { getDetailsAction, deleteDetailsAction } from "../../services/actions/details";
+import { useDispatch } from '../../types';
+import { detailsActionCreator } from "../../store/details/details.actions";
 import { useHistory } from "react-router-dom";
+import { TIngredientDetails } from "../../types/types";
 
 const BurgerIngredients: FC = () => {
     const { isOpen, closePopup, openPopup} = useModal();
     const [ current, setCurrent ] = useState<string>('Булки');
 
+    const { getDetails, deleteDetails } = detailsActionCreator;
+
     const history = useHistory();
 
     const dispatch = useDispatch();
 
-    const clickIngredients: (item: object) => void  = (item) => {
-        dispatch(getDetailsAction(item));
+    const clickIngredients: (item: TIngredientDetails) => void  = (item) => {
+        dispatch(getDetails(item));
         openPopup();
     };
 
     const closeModalDetails = () => {
-        dispatch(deleteDetailsAction());
+        dispatch(deleteDetails());
         closePopup();
         history.push('/')
     };
@@ -35,7 +38,6 @@ const BurgerIngredients: FC = () => {
         element && element.scrollIntoView({behavior: 'smooth'});
     };
 
-    // TODO типизировать на следующем спринте
     const scrollHandler: (e: any) => void = (e) => {
         const target = e.target;
         const scroll = target.scrollTop;
@@ -58,7 +60,7 @@ const BurgerIngredients: FC = () => {
             </div>
             <IngredientsList onClick={ clickIngredients }  scrollHandler={ scrollHandler }/>
             {isOpen &&
-                <Modal isOpen={ isOpen }
+                <Modal  isOpen={ isOpen }
                        closePopup={ closeModalDetails }
                        header='Детали ингредиента'>
                     <IngredientDetails />

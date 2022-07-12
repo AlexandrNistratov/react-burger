@@ -4,10 +4,11 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 import { useModal } from "../../hooks/useModal";
 import clsx from "clsx";
 import Modal from "../Modal/Modal";
-import OrderDetails from "../OrderDetails/OrderDetails";
-import { getOrders } from "../../utils/Api";
-import { useDispatch, useSelector } from "react-redux";
+import OrderNumberDetails from "../OrderNumberDetails/OrderNumberDetails";
+import { getNumberOrders } from "../../utils/Api";
+import { useDispatch, useSelector } from '../../types';
 import { useHistory } from "react-router-dom";
+import {TData} from "../../types/types";
 
 
 const TotalConstructor: FC = () => {
@@ -16,14 +17,11 @@ const TotalConstructor: FC = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    // TODO типизировать на следующем спринте
-    const { bun, ingredients } = useSelector((state: any) => state.constructorData);
+    const { bun, ingredients } = useSelector(state => state.constructorData);
 
-    // TODO типизировать на следующем спринте
-    const allItems = useSelector( (state: any) => [state.constructorData.bun, state.constructorData.bun, ...state.constructorData.ingredients]);
+    const allItems = useSelector( state => [state.constructorData.bun, state.constructorData.bun, ...state.constructorData.ingredients]);
 
-    // TODO типизировать на следующем спринте
-    const isAuth = useSelector((state: any) => state.userReducer.isAuth)
+    const isAuth = useSelector(state => state.userReducer.isAuth)
 
     //Айдишки элементов в конструкторе
     const arrIdIngredients = allItems.map((item) => item?._id);
@@ -34,14 +32,14 @@ const TotalConstructor: FC = () => {
             history.push('login')
         }
         arrIdIngredients &&
-        dispatch(getOrders(arrIdIngredients))
+        dispatch(getNumberOrders(arrIdIngredients))
         openPopup();
     };
 
     // Считаем сумму заказа
-    const calculateTotalPrice: (buns: any, arr: any) => void = (buns, arr) => {
+    const calculateTotalPrice: (buns: any, arr: TData[]) => void = (buns, arr) => {
         const priceBuns = Number(buns?.price * 2);
-        const sum = arr?.reduce((acc: any, item: any) => {
+        const sum = arr?.reduce((acc, item) => {
             return Number(acc + item?.price)
         }, 0)
         if (buns && arr) {
@@ -71,7 +69,7 @@ const TotalConstructor: FC = () => {
                 </div>
             {isOpen &&
                 < Modal isOpen={ isOpen } closePopup={ closePopup }>
-                    <OrderDetails />
+                    <OrderNumberDetails />
                 </Modal>}
         </section>
     );

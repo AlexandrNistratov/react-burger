@@ -1,0 +1,14 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 74vh;
+    overflow-y: scroll;
+    max-width: 600px;
+}
+
+.link {
+    text-decoration: none;
+    color: #fff;
+    margin: 0 8px 18px 0;
+}

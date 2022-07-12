@@ -14,7 +14,11 @@
     top: 50%;
     left: 50%;
     transform:translateX(-50%)translateY(-50%)
+}
 
+.main__orders {
+    align-items: flex-start;
+    max-height: 716px;
 }
 
 .header {
@@ -33,5 +37,4 @@
 .icon {
     cursor: pointer;
 }
-
 

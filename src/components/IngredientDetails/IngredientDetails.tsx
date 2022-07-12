@@ -1,17 +1,15 @@
 import React, { FC } from 'react';
 import styles from './ingredientDetails.module.css';
 import clsx from "clsx";
-import { useSelector } from "react-redux";
-import { TData } from "../../utils/types";
+import { useSelector } from '../../types';
+import { TData } from "../../types/types";
 
 type TIngredientDetails = {
     details?: TData;
 }
 
 const IngredientDetails: FC<TIngredientDetails> = ({ details }) => {
-
-    // TODO типизировать на следующем спринте
-    const ingredients = useSelector((state: any) => state.details.ingredientsDetails);
+    const ingredients = useSelector(state => state.details.ingredientsDetails);
     const { image, name, calories, proteins, fat, carbohydrates } = ingredients;
 
     return (

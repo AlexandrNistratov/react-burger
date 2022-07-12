@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import styles from './constructorList.module.css';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from '../../types';
 import { useDrop } from "react-dnd";
 import clsx from "clsx";
-import { addBunsAction, addIngredientsAction, deleteIngredientsActions, moveIngredientsActions } from "../../services/actions/constructor";
+import { constructorActionCreator } from "../../store/constructor/constructor.actions";
 import { v4 as uuidv4 } from 'uuid';
 import ConstructorItem from "../ConstructorItem/ConstructorItem";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { TData } from "../../utils/types";
+import { TData } from "../../types/types";
 
 type TConstructorList = {
     item?: TData;
@@ -17,19 +17,20 @@ type TConstructorList = {
 const ConstructorList: FC<TConstructorList> = () => {
     const dispatch = useDispatch();
 
+    const { addBuns, addIngredients, deleteItems, move } = constructorActionCreator;
+
     const onDropHandler: (item: any) => void = (item) => {
         if(item.type === 'bun') {
-            dispatch(addBunsAction(item));
+            dispatch(addBuns(item));
         } else {
-            dispatch(addIngredientsAction({
+            dispatch(addIngredients({
                 ...item,
                 key: uuidv4()
             }));
         }
     };
 
-    // TODO типизировать на следующем спринте
-    const { bun, ingredients } = useSelector((state: any) => state.constructorData);
+    const { bun, ingredients } = useSelector(state => state.constructorData);
 
     const [, ref] = useDrop({
         accept: 'ingredients',
@@ -40,7 +41,7 @@ const ConstructorList: FC<TConstructorList> = () => {
 
     //Удаление ингридиента по клику на кнопку
     const deleteHandler: (item: TConstructorList) => void = (item) => {
-        dispatch(deleteIngredientsActions(item.key));
+        dispatch(deleteItems(item.key));
     };
 
     //Перетаскивание ингридиентов
@@ -50,7 +51,7 @@ const ConstructorList: FC<TConstructorList> = () => {
         newCards.splice(dragIndex, 1);
         newCards.splice(hoverIndex, 0, dragCard);
 
-        dispatch(moveIngredientsActions(newCards));
+        dispatch(move(newCards));
     };
 
 
@@ -70,8 +71,7 @@ const ConstructorList: FC<TConstructorList> = () => {
             }
             <div className={ styles.scroll }>
                 {ingredients.length > 0 ? (
-                        // TODO типизировать на следующем спринте
-                    ingredients.map((item: any, index: any) => {
+                    ingredients.map((item, index) => {
                         return <li className={ styles.item } key={ item?.key }>
                                     <ConstructorItem key={ item?.key } item={ item } index={ index } deleteHandler={ () => deleteHandler(item) } moveIngredients={ moveIngredients } isLocked={ false }/>
                         </li>})

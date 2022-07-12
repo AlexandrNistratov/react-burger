@@ -23,6 +23,7 @@ export const setCookie = (name: string, value: string, props?: any) => {
 
 export const getCookie = (name: string) => {
     const matches = document.cookie.match(
+        // eslint-disable-next-line
         new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
     );
     return matches ? decodeURIComponent(matches[1]) : undefined;
