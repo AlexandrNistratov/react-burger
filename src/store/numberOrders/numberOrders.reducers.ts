@@ -7,7 +7,7 @@ type TNumberOrderInitialState = {
     ordersNumber: TNumberOrder
 }
 
-const initialState: TNumberOrderInitialState = {
+export const initialState: TNumberOrderInitialState = {
     ordersNumberRequest: false,
     ordersNumberFailed: false,
     ordersNumber: {

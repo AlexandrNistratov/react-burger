@@ -8,7 +8,7 @@ type TSocketInitialState = {
     totalToday: number | null;
 }
 
-const initialState: TSocketInitialState = {
+export const initialState: TSocketInitialState = {
     connected: false,
     messages: null,
     total: null,

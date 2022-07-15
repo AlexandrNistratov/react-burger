@@ -10,7 +10,6 @@ import { url } from '../../utils/constants';
 const OrderDetailsPage: FC = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	console.log(history)
 
 	useEffect(() => {
 		 url && history.location.pathname.includes('profile') ?

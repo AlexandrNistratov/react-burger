@@ -1,0 +1,1 @@
+import { detailsReducer } from './details.reducers';

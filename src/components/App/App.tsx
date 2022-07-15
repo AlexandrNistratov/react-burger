@@ -26,7 +26,6 @@ const App: FC = () => {
 
     const { ingredientsData, dataRequest, dataFailed } = useSelector(state => state.data);
 
-
     const { isUser } = useSelector(state => state.userReducer);
 
     const location = useLocation<{ background : Location }>();
