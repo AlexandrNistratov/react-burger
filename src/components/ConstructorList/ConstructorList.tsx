@@ -56,7 +56,7 @@ const ConstructorList: FC<TConstructorList> = () => {
 
 
     return (
-        <ul className={ styles.main } ref={ ref }>
+        <ul className={ styles.main } ref={ ref } data-at='constructorBuns'>
             {bun ? (
                 <li className={ styles.item__top } key={ uuidv4() }>
                     <ConstructorElement
@@ -69,7 +69,7 @@ const ConstructorList: FC<TConstructorList> = () => {
                 </li>)
                 : (<p className={clsx(styles.text, 'text_type_main-medium')}>Тащи сюда свою булку</p>)
             }
-            <div className={ styles.scroll }>
+            <div className={ styles.scroll } data-at='constructorIngredient'>
                 {ingredients.length > 0 ? (
                     ingredients.map((item, index) => {
                         return <li className={ styles.item } key={ item?.key }>
@@ -80,7 +80,7 @@ const ConstructorList: FC<TConstructorList> = () => {
                 }
             </div>
             {bun && (
-                <li className={ styles.item__bottom } key={ uuidv4() }>
+                <li className={ styles.item__bottom } key={ uuidv4() } data-at='constructorBuns'>
                     <ConstructorElement
                         isLocked={ true }
                         type="bottom"
