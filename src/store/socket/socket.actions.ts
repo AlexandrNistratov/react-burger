@@ -47,5 +47,8 @@ export type TSocketAction =
 
 export const socketActionCreators = {
     start: (url: string): IWSStart => ({ type: RootSocketAction.start, payload: { url } }),
+    success: (): IWSSuccess => ({ type: RootSocketAction.success}),
+    error: (): IWSError => ({ type: RootSocketAction.error}),
     close: (): IWSClosed => ({ type: RootSocketAction.closed }),
+    message: (payload: TAllOrders): IWSGet => ({ type: RootSocketAction.message, payload})
 }

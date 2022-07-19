@@ -28,6 +28,7 @@ const IngredientsList: FC<TIngredientsList> = ({ onClick, scrollHandler }) => {
                     {
                         buns.map((item) => {
                             return <Link className={ styles.link }
+                                         data-at='ingredient'
                                          key={item._id}
                                          to={ { pathname: `ingredients/${item._id}`,
                                              state: { background: location }} }
@@ -43,6 +44,7 @@ const IngredientsList: FC<TIngredientsList> = ({ onClick, scrollHandler }) => {
                     {
                         sauce.map((item) => {
                             return <Link className={ styles.link }
+                                         data-at='ingredient'
                                          key={item._id}
                                          to={ { pathname: `ingredients/${item._id}`,
                                              state: { background: location }} }
@@ -57,6 +59,7 @@ const IngredientsList: FC<TIngredientsList> = ({ onClick, scrollHandler }) => {
                     {
                         main.map((item) => {
                             return <Link className={ styles.link }
+                                         data-at='ingredient'
                                          key={item._id}
                                          to={ { pathname: `ingredients/${item._id}`,
                                              state: { background: location }} }

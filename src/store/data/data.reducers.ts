@@ -7,7 +7,7 @@ type TDataInitialState = {
     dataFailed: boolean
 }
 
-const initialState: TDataInitialState = {
+export const initialState: TDataInitialState = {
     ingredientsData: [],
     dataRequest: false,
     dataFailed: false

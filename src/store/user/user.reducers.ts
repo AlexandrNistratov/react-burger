@@ -19,9 +19,9 @@ type TUserInitialState = {
     getUserFailed: boolean,
 
     userUpdateRequest: boolean,
-    useUpdateFailed: boolean,
+    userUpdateFailed: boolean,
 }
-const initialState: TUserInitialState = {
+export const initialState: TUserInitialState = {
     user: {
         name: '',
         email: '',
@@ -43,7 +43,7 @@ const initialState: TUserInitialState = {
     getUserFailed: false,
 
     userUpdateRequest: false,
-    useUpdateFailed: false,
+    userUpdateFailed: false,
 };
 
 export const userReducer = (state: TUserInitialState = initialState, action: TUserAction): TUserInitialState => {
@@ -90,7 +90,7 @@ export const userReducer = (state: TUserInitialState = initialState, action: TUs
             return {...state, userUpdateRequest: false,  user: action.payload, isUser: true}
         }
         case RootUserActions.USER_UPDATE_FAILED: {
-            return {...state, useUpdateFailed: true}
+            return {...state, userUpdateFailed: true}
         }
         //Изменение полей форм
         case RootUserActions.SET_EDIT: {

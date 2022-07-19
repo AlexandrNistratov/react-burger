@@ -5,7 +5,7 @@ type TDetailsInitialState = {
     ingredientsDetails: TIngredientDetails
 }
 
-const initialState: TDetailsInitialState = {
+export const initialState: TDetailsInitialState = {
     ingredientsDetails: {
         calories: 0,
         carbohydrates: 0,

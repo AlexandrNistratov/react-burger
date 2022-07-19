@@ -15,7 +15,7 @@ const Form: FC<TForm> = ({ text, children, textButton, onSubmit }) => {
             <h1 className={ clsx(styles.header, 'text_type_main-medium')}>{ text }</h1>
             { children }
             <div className={ clsx(styles.button, 'mb-20') }>
-                <Button type='primary' size='large'>{ textButton }</Button>
+                <Button type='primary' size='large' htmlType='submit'>{ textButton }</Button>
             </div>
         </form>
     );

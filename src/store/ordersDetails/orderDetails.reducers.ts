@@ -5,7 +5,7 @@ type TOrdersDetailsInitialState = {
     orderDetails: TOrders
 }
 
-const initialState: TOrdersDetailsInitialState = {
+export const initialState: TOrdersDetailsInitialState = {
    orderDetails: {
        ingredients: [],
        _id: '',
