@@ -1,4 +1,4 @@
-import {TAllOrders, TData, TNumberOrder, TOrders} from "../../types/types";
+import {TAllOrders, TData, TNumberOrder, TOrders, TIngredientDetails } from "../../types/types";
 
 const ingredientBun: TData = {
     calories: 420,
@@ -59,4 +59,12 @@ const user = {
     password: "qwerty",
 };
 
-export { ingredientBun, ingredient, numberOrder , orderDetails, ordersSocket, user }
+const ingredientDetails: TIngredientDetails = {
+    calories: 555,
+    carbohydrates: 555,
+    fat: 555,
+    image: '555',
+    name: '555',
+    proteins: 555
+};
+export { ingredientBun, ingredient, numberOrder , orderDetails, ordersSocket, user, ingredientDetails }

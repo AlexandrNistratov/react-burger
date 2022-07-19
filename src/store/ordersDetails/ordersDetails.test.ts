@@ -8,7 +8,7 @@ describe('OrdersDetails', () => {
         const result = ordersDetailsReducer(initialState, {} as TOrdersDetailsAction);
         expect(result).toEqual(initialState)
     });
-    it('Запросили детали заказа ', () => {
+    it('Запросили детали заказа', () => {
         const result = ordersDetailsReducer(initialState, getOrdersDetails(orderDetails));
         expect(result).toEqual({ ...initialState, orderDetails: orderDetails })
     });
