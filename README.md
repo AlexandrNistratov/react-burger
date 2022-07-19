@@ -1,6 +1,6 @@
 # Космическая бургерная
 
-## [Учебный проект](https://alexandrnistratov.github.io/react-burger/index.html) на курсе React разработчик от [Яндекс Практикум](https://practicum.yandex.ru/react/)
+## [Учебный проект](https://alexandrnistratov.github.io/react-burger/) на курсе React разработчик от [Яндекс Практикум](https://practicum.yandex.ru/react/)
 
 
 
